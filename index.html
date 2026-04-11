@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technisch Beleidsplan Jeugd — GHV Achilles</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+:root {
+  --red: #c0272d; --red-dark: #8f1a1e; --red-pale: #fbeaea; --red-light: #f2c2c3;
+  --black: #1a1a1a; --charcoal: #3d3d3d;
+  --gray-100: #f4f4f4; --gray-200: #e8e8e8; --gray-300: #d0d0d0;
+  --gray-500: #888; --gray-700: #555; --white: #ffffff; --off-white: #f7f7f7;
+  --green: #1e6b3a; --green-pale: #e6f4ec;
+  --amber: #8a5200; --amber-pale: #fff3dc;
+  --blue: #1a4a8a; --blue-pale: #e6eef8;
+  --r: 4px;
+}
+body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--off-white); color: var(--black); font-size: 14px; line-height: 1.65; }
+.topbar { background: var(--black); color: rgba(255,255,255,.5); font-size: 11px; padding: 5px 0; text-align: center; letter-spacing: .06em; text-transform: uppercase; }
+header { background: var(--white); border-bottom: 3px solid var(--red); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+.header-inner { max-width: 980px; margin: 0 auto; padding: 16px 20px; display: flex; align-items: center; gap: 20px; }
+.header-logo img { width: 80px; height: 80px; object-fit: contain; }
+.header-divider { width: 1px; height: 60px; background: var(--gray-200); flex-shrink: 0; }
+.header-text { flex: 1; }
+.header-club { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gray-500); margin-bottom: 4px; }
+.header-title { font-size: 22px; font-weight: 800; color: var(--black); line-height: 1.1; }
+.header-title span { color: var(--red); }
+.header-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+.header-tag { font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; border: 1px solid var(--gray-300); color: var(--gray-700); padding: 2px 8px; border-radius: 20px; }
+nav { background: var(--black); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,.35); }
+.nav-inner { max-width: 980px; margin: 0 auto; display: flex; overflow-x: auto; scrollbar-width: none; }
+.nav-inner::-webkit-scrollbar { display: none; }
+.nav-btn { font-family: inherit; font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: rgba(255,255,255,.55); background: none; border: none; border-bottom: 3px solid transparent; padding: 13px 18px 10px; cursor: pointer; white-space: nowrap; transition: color .15s, border-color .15s; }
+.nav-btn:hover { color: rgba(255,255,255,.9); }
+.nav-btn.active { color: var(--white); border-bottom-color: var(--red); }
+/* Hamburger */
+.hamburger { display: none; background: none; border: none; cursor: pointer; padding: 14px 16px; position: relative; z-index: 201; }
+.hamburger span { display: block; width: 22px; height: 2px; background: var(--white); margin: 5px 0; border-radius: 2px; transition: transform .2s, opacity .2s; }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.nav-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,.95); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 6px; }
+.nav-overlay.open { display: flex; }
+.nav-overlay .nav-btn-mobile { font-family: inherit; font-size: 16px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: rgba(255,255,255,.6); background: none; border: none; padding: 12px 20px; cursor: pointer; transition: color .15s; width: 100%; text-align: center; }
+.nav-overlay .nav-btn-mobile:hover, .nav-overlay .nav-btn-mobile.active { color: var(--white); }
+.nav-overlay .nav-btn-mobile.active { border-left: 3px solid var(--red); background: rgba(255,255,255,.05); }
+@media(max-width:680px){
+  .hamburger { display: block; }
+  .nav-inner { display: none; }
+  .schema-desktop { display: none; }
+}
+.schema-mobile { display: none; }
+@media(max-width:680px){ .schema-mobile { display: block; } }
+.schema-card { border: 1px solid var(--gray-200); border-radius: var(--r); overflow: hidden; margin-bottom: 12px; }
+.sc-header { padding: 10px 14px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.sc-header small { color: var(--gray-500); font-weight: 400; }
+.sc-green .sc-header { background: var(--green-pale); }
+.sc-blue .sc-header { background: var(--blue-pale); }
+.sc-amber .sc-header { background: var(--amber-pale); }
+.sc-red .sc-header { background: var(--red-pale); }
+.sc-section { padding: 8px 14px; border-top: 1px solid var(--gray-200); }
+.sc-section h3 { font-size: 10px; margin-bottom: 5px; color: var(--gray-700); }
+.breadcrumb { background: var(--white); border-bottom: 1px solid var(--gray-200); padding: 7px 0; }
+.breadcrumb-inner { max-width: 980px; margin: 0 auto; padding: 0 20px; font-size: 12px; color: var(--gray-500); }
+.breadcrumb-inner strong { color: var(--red); }
+.page-layout { max-width: 980px; margin: 0 auto; padding: 24px 16px 60px; display: grid; grid-template-columns: 1fr 210px; gap: 22px; align-items: start; }
+@media(max-width:680px){ .page-layout { grid-template-columns: 1fr; } .sidebar { display: none; } }
+section { display: none; }
+section.active { display: block; animation: fi .22s ease; }
+@keyframes fi { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
+.content-box { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--r); overflow: hidden; }
+.content-header { background: var(--black); padding: 14px 20px; display: flex; align-items: center; gap: 10px; }
+.content-header h1 { font-size: 17px; font-weight: 800; color: var(--white); }
+.ch-badge { background: var(--red); color: var(--white); font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 20px; letter-spacing: .05em; text-transform: uppercase; margin-left: auto; white-space: nowrap; }
+.content-body { padding: 20px; }
+.age-banner { background: var(--black); padding: 16px 20px; display: flex; align-items: center; gap: 18px; }
+.age-letter { width: 64px; height: 64px; border-radius: 50%; border: 3px solid var(--red); display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 900; color: var(--red); flex-shrink: 0; }
+.age-info h1 { font-size: 20px; font-weight: 900; color: var(--white); }
+.age-info p { font-size: 11px; font-weight: 700; color: rgba(255,255,255,.5); text-transform: uppercase; letter-spacing: .07em; margin: 0; }
+h2 { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; color: var(--black); border-bottom: 2px solid var(--red); display: inline-block; padding-bottom: 5px; margin: 22px 0 10px; }
+h2:first-child { margin-top: 0; }
+h3 { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: var(--black); margin: 0 0 7px; }
+p { font-size: 14px; color: var(--charcoal); margin-bottom: 10px; line-height: 1.7; }
+ul { padding-left: 18px; margin-bottom: 10px; }
+li { font-size: 14px; color: var(--charcoal); margin-bottom: 3px; line-height: 1.65; }
+strong { color: var(--black); font-weight: 700; }
+em { color: var(--gray-700); font-style: italic; }
+.ib { border-radius: var(--r); padding: 14px 16px; margin-bottom: 12px; border-left: 3px solid transparent; }
+.ib-red   { background: var(--red-pale);   border-color: var(--red);   }
+.ib-green { background: var(--green-pale); border-color: var(--green); }
+.ib-amber { background: var(--amber-pale); border-color: var(--amber); }
+.ib-blue  { background: var(--blue-pale);  border-color: var(--blue);  }
+.ib-gray  { background: var(--gray-100);   border-color: var(--gray-300); }
+.ib-red h3   { color: var(--red-dark); }
+.ib-green h3 { color: var(--green); }
+.ib-amber h3 { color: var(--amber); }
+.ib-blue h3  { color: var(--blue); }
+.ib-gray h3  { color: var(--gray-700); }
+.ib-red li, .ib-red p     { color: #7a1518; }
+.ib-green li, .ib-green p { color: #144d29; }
+.ib-amber li, .ib-amber p { color: #6b3d00; }
+.ib-blue li, .ib-blue p   { color: #133570; }
+.trainer-box { background: var(--black); border-radius: var(--r); padding: 16px 20px; margin: 14px 0; }
+.tb-label { font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--red); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.tb-label::after { content:''; flex:1; height:1px; background: rgba(192,39,45,.3); }
+.trainer-box li { color: rgba(255,255,255,.85); font-size: 13.5px; line-height: 1.65; margin-bottom: 5px; }
+.trainer-box li strong { color: #ff9a9d; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+@media(max-width:520px){ .grid-2 { grid-template-columns: 1fr; } }
+.table-wrap { overflow-x: auto; margin: 12px 0 20px; border-radius: var(--r); border: 1px solid var(--gray-200); }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+thead th { background: var(--black); color: var(--white); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; padding: 10px 12px; text-align: left; }
+tbody td { padding: 9px 12px; border-bottom: 1px solid var(--gray-200); vertical-align: top; line-height: 1.5; color: var(--charcoal); }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:nth-child(even) td { background: var(--gray-100); }
+.phase-pill { display: inline-block; background: var(--red); color: var(--white); font-size: 10px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; padding: 2px 8px; border-radius: 20px; white-space: nowrap; }
+.block-div { display: flex; align-items: center; gap: 10px; margin: 24px 0 12px; }
+.block-title { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: var(--black); white-space: nowrap; }
+.block-line { flex:1; height:1px; background: var(--gray-200); }
+.block-badge { background: var(--black); color: var(--white); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+.wb-list { border-radius: var(--r); overflow: hidden; border: 1px solid var(--gray-200); margin: 10px 0 20px; }
+.wb-row { display: flex; border-bottom: 1px solid var(--gray-200); }
+.wb-row:last-child { border-bottom: none; }
+.wb-time { background: var(--red); color: var(--white); font-size: 11px; font-weight: 800; min-width: 82px; padding: 10px; display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.3; flex-shrink: 0; }
+.wb-content { background: var(--white); padding: 9px 14px; font-size: 13.5px; color: var(--charcoal); display: flex; align-items: center; line-height: 1.5; }
+.wb-row:nth-child(even) .wb-content { background: var(--gray-100); }
+.asm-stack { display: flex; flex-direction: column; gap: 8px; margin: 12px 0 20px; }
+.asm-row { display: flex; border-radius: var(--r); overflow: hidden; border: 1px solid var(--gray-200); }
+.asm-num { background: var(--red); color: var(--white); font-size: 30px; font-weight: 900; min-width: 52px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.asm-body { padding: 12px 16px; }
+.asm-row:nth-child(1) .asm-body { background: var(--green-pale); }
+.asm-row:nth-child(2) .asm-body { background: var(--blue-pale); }
+.asm-row:nth-child(3) .asm-body { background: var(--amber-pale); }
+.asm-body h4 { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: var(--black); margin-bottom: 3px; }
+.asm-body p { font-size: 13px; margin: 0; color: var(--charcoal); }
+.tag { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 20px; margin: 2px 2px 2px 0; }
+.tag-red   { background: var(--red-pale); color: var(--red-dark); }
+.tag-green { background: var(--green-pale); color: var(--green); }
+.tag-amber { background: var(--amber-pale); color: var(--amber); }
+.tag-blue  { background: var(--blue-pale); color: var(--blue); }
+.tag-gray  { background: var(--gray-200); color: var(--gray-700); }
+.sb-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--r); overflow: hidden; margin-bottom: 14px; }
+.sb-head { background: var(--black); color: var(--white); font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 8px 14px; border-bottom: 2px solid var(--red); }
+.sb-body { padding: 10px 14px; }
+.sb-link { display: flex; align-items: center; gap: 8px; padding: 7px 0; border-bottom: 1px solid var(--gray-200); cursor: pointer; font-size: 13px; font-weight: 600; color: var(--black); transition: color .15s; }
+.sb-link:last-child { border-bottom: none; }
+.sb-link:hover { color: var(--red); }
+.sb-dot { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; flex-shrink: 0; }
+.sd-red   { background: var(--red); color: var(--white); }
+.sd-green { background: var(--green-pale); color: var(--green); }
+.sd-blue  { background: var(--blue-pale); color: var(--blue); }
+.sd-amber { background: var(--amber-pale); color: var(--amber); }
+.sd-coral { background: #fdeae5; color: #8b2e1a; }
+.sd-black { background: var(--black); color: var(--white); }
+.sb-kv { display: flex; justify-content: space-between; font-size: 12px; padding: 5px 0; border-bottom: 1px solid var(--gray-200); }
+.sb-kv:last-child { border-bottom: none; }
+.sb-kv span:first-child { color: var(--gray-500); }
+.sb-kv span:last-child { font-weight: 700; color: var(--black); }
+footer { background: var(--black); border-top: 3px solid var(--red); padding: 24px 0; margin-top: 40px; }
+.footer-inner { max-width: 980px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+.footer-logo-wrap { display: flex; align-items: center; gap: 14px; }
+.footer-logo-wrap img { width: 48px; height: 48px; object-fit: contain; }
+.footer-name { font-size: 15px; font-weight: 800; color: var(--white); }
+.footer-sub { font-size: 11px; color: rgba(255,255,255,.4); margin-top: 2px; }
+.footer-meta { font-size: 11px; color: rgba(255,255,255,.35); text-align: right; line-height: 1.8; }
+
+/* —— GALLERY & TRAINING SPECIFICS —— */
+.gallery-hero {
+  background: var(--black);
+  border-radius: var(--r) var(--r) 0 0;
+  padding: 28px 24px;
+  text-align: center;
+}
+.gallery-hero h1 { font-size: 22px; font-weight: 900; color: var(--white); margin-bottom: 6px; }
+.gallery-hero p { color: rgba(255,255,255,.6); font-size: 13px; margin: 0 0 20px; }
+
+.gallery-login-box {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--r);
+  padding: 20px 24px;
+  max-width: 380px;
+  margin: 0 auto 20px;
+  text-align: left;
+}
+.login-row { margin-bottom: 12px; }
+.login-label { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--gray-500); margin-bottom: 4px; }
+.login-value { font-size: 14px; font-weight: 600; color: var(--black); padding: 8px 10px; background: var(--gray-100); border-radius: var(--r); border: 1px solid var(--gray-200); }
+.login-pw { display: flex; align-items: center; gap: 8px; }
+.login-pw .login-value { flex: 1; letter-spacing: .2em; color: var(--gray-500); font-size: 16px; }
+.pw-toggle { font-size: 11px; font-weight: 700; color: var(--red); cursor: pointer; white-space: nowrap; background: none; border: none; font-family: inherit; text-transform: uppercase; letter-spacing: .04em; }
+
+.btn-gallery {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--red);
+  color: var(--white);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  padding: 12px 28px;
+  border-radius: var(--r);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background .15s;
+  letter-spacing: .04em;
+}
+.btn-gallery:hover { background: var(--red-dark); }
+.btn-gallery svg { flex-shrink: 0; }
+
+.copy-notice {
+  font-size: 11px;
+  color: rgba(255,255,255,.5);
+  margin-top: 10px;
+  display: none;
+}
+.copy-notice.show { display: block; }
+
+.channel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
+@media(max-width:520px){ .channel-grid { grid-template-columns: 1fr; } }
+
+.channel-card {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--r);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color .15s, box-shadow .15s;
+  text-decoration: none;
+}
+.channel-card:hover { border-color: var(--red); box-shadow: 0 2px 8px rgba(192,39,45,.12); }
+.channel-icon {
+  width: 36px; height: 36px;
+  border-radius: var(--r);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.ci-yt  { background: #ffe0e0; }
+.ci-web { background: var(--blue-pale); }
+.ci-nhv { background: var(--amber-pale); }
+.channel-name { font-size: 13px; font-weight: 700; color: var(--black); line-height: 1.2; }
+.channel-desc { font-size: 12px; color: var(--gray-700); line-height: 1.4; }
+.channel-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 20px; margin-top: 2px; text-transform: uppercase; letter-spacing: .04em; }
+.ct-yt  { background: #ffe0e0; color: #c00; }
+.ct-web { background: var(--blue-pale); color: var(--blue); }
+.ct-nhv { background: var(--amber-pale); color: var(--amber); }
+.ct-free { background: var(--green-pale); color: var(--green); }
+
+@media print {
+  nav, .topbar, footer, .sidebar { display: none; }
+  .page-layout { grid-template-columns: 1fr; }
+  section { display: block !important; page-break-before: always; }
+  section:first-child { page-break-before: avoid; }
+}
+
+/* —— MOBILE OVERHAUL ———————————————————————————————— */
+
+/* Header: stack logo + text on small screens */
+@media(max-width:600px){
+  .header-inner { flex-direction: column; align-items: flex-start; gap: 12px; padding: 14px 16px; }
+  .header-divider { display: none; }
+  .header-logo img { width: 60px; height: 60px; }
+  .header-title { font-size: 17px; }
+  .header-club { font-size: 10px; }
+}
+
+/* Nav: always scrollable, bigger tap targets */
+@media(max-width:680px){
+  .nav-inner { padding: 0; }
+  .nav-btn { font-size: 12px; padding: 13px 13px 10px; letter-spacing: .02em; }
+  .breadcrumb-inner { font-size: 11px; }
+}
+
+/* Page layout: full padding reduction */
+@media(max-width:680px){
+  .page-layout { padding: 14px 10px 48px; gap: 14px; }
+  .sidebar { display: none; }
+  .content-body { padding: 14px 12px; }
+  .content-header { padding: 12px 14px; }
+  .content-header h1 { font-size: 15px; }
+  .ch-badge { font-size: 10px; padding: 2px 8px; }
+}
+
+/* Grid 2: stack earlier */
+@media(max-width:640px){
+  .grid-2 { grid-template-columns: 1fr; }
+  .channel-grid { grid-template-columns: 1fr; }
+}
+
+/* Age banner: stack on tiny screens */
+@media(max-width:420px){
+  .age-banner { flex-direction: column; align-items: flex-start; gap: 10px; padding: 14px; }
+  .age-letter { width: 50px; height: 50px; font-size: 24px; }
+  .age-info h1 { font-size: 17px; }
+}
+
+/* Tables: ensure scroll, reduce font */
+@media(max-width:680px){
+  .table-wrap { margin: 10px -2px 16px; border-radius: 4px; }
+  table { font-size: 12px; }
+  thead th { padding: 8px 8px; font-size: 10px; }
+  tbody td { padding: 7px 8px; }
+}
+
+/* Training week blocks */
+@media(max-width:480px){
+  .wb-time { min-width: 64px; font-size: 10px; padding: 8px 6px; }
+  .wb-content { font-size: 12.5px; padding: 8px 10px; }
+}
+
+/* Block dividers */
+@media(max-width:480px){
+  .block-title { font-size: 11px; }
+  .block-badge { font-size: 10px; padding: 2px 8px; }
+}
+
+/* Gallery & YSP login box */
+@media(max-width:680px){
+  .gallery-hero { padding: 20px 14px; }
+  .gallery-hero h1 { font-size: 18px; }
+  .gallery-login-box { padding: 14px; margin-bottom: 14px; }
+  .login-value { font-size: 13px; padding: 6px 8px; }
+  .btn-gallery { width: 100%; justify-content: center; font-size: 13px; padding: 11px 16px; }
+}
+
+/* ASM stack */
+@media(max-width:640px){
+  .asm-row { flex-direction: row; }
+  .asm-num { min-width: 40px; font-size: 22px; }
+  .asm-body { padding: 10px 12px; }
+  .asm-body p { font-size: 12.5px; }
+}
+
+/* Info blocks */
+@media(max-width:680px){
+  .ib { padding: 12px 12px; }
+  .trainer-box { padding: 14px 14px; }
+}
+
+/* Channel cards */
+@media(max-width:640px){
+  .channel-card { padding: 12px 14px; }
+  .channel-name { font-size: 13px; }
+  .channel-desc { font-size: 11.5px; }
+}
+
+/* Footer */
+@media(max-width:600px){
+  .footer-inner { flex-direction: column; gap: 10px; padding: 0 16px; }
+  .footer-meta { text-align: left; }
+  .footer-name { font-size: 14px; }
+  .footer-logo-wrap img { width: 38px; height: 38px; }
+}
+
+/* Topbar: shorter on mobile */
+@media(max-width:500px){
+  .topbar { font-size: 10px; padding: 4px 8px; }
+}
+
+/* YSP direct links grid */
+@media(max-width:640px){
+  .channel-grid .channel-icon { width: 30px; height: 30px; font-size: 16px; }
+}
+
+/* Phase pills don't overflow */
+@media(max-width:680px){
+  .phase-pill { font-size: 9px; padding: 2px 6px; }
+}
+
+/* Tags wrap cleanly */
+.header-tags { flex-wrap: wrap; }
+
+/* Prevent horizontal overflow on whole page */
+@media(max-width:680px){
+  body { overflow-x: hidden; }
+  .content-box { border-radius: 4px; }
+  h2 { font-size: 12px; }
+  h3 { font-size: 11px; }
+  p, li { font-size: 13.5px; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="topbar">Gorinchem &nbsp;&middot;&nbsp; Handbalvereniging &nbsp;&middot;&nbsp; Technisch Beleidsplan Jeugd 2026–2027</div>
+
+<header>
+  <div class="header-inner">
+    <div class="header-logo"><img src="data:image/webp;base64,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" alt="GHV Achilles"></div>
+    <div class="header-divider"></div>
+    <div class="header-text">
+      <div class="header-club">GHV Achilles &nbsp;&middot;&nbsp; Gorinchem</div>
+      <div class="header-title">Technisch Beleidsplan <span>Jeugd</span></div>
+      <div class="header-tags">
+        <span class="header-tag">Breedtesport</span>
+        <span class="header-tag">Athletic Skills Model</span>
+        <span class="header-tag">F &middot; E &middot; D &middot; C jeugd</span>
+        <span class="header-tag">Versie 1.0</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  <div class="nav-inner">
+    <button class="nav-btn active" onclick="show('visie',this)">Spelopvatting</button>
+    <button class="nav-btn" onclick="show('asm',this)">ASM-kader</button>
+    <button class="nav-btn" onclick="show('schema',this)">Vaardighedenschema</button>
+    <button class="nav-btn" onclick="show('f',this)">F-jeugd</button>
+    <button class="nav-btn" onclick="show('e',this)">E-jeugd</button>
+    <button class="nav-btn" onclick="show('d',this)">D-jeugd</button>
+    <button class="nav-btn" onclick="show('c',this)">C-jeugd</button>
+    <button class="nav-btn" onclick="show('gallery',this)">ASM Gallery</button>
+    <button class="nav-btn" onclick="show('training',this)">Trainingsmateriaal</button>
+    <button class="nav-btn" onclick="show('ysp',this)">YourSportPlanner</button>
+    <button class="nav-btn" onclick="show('borging',this)">Borging</button>
+  </div>
+</nav>
+<div class="nav-overlay" id="nav-overlay">
+  <button class="nav-btn-mobile active" onclick="mobileNav('visie',this)">Spelopvatting</button>
+  <button class="nav-btn-mobile" onclick="mobileNav('asm',this)">ASM-kader</button>
+  <button class="nav-btn-mobile" onclick="mobileNav('schema',this)">Vaardighedenschema</button>
+  <button class="nav-btn-mobile" onclick="mobileNav('f',this)">F-jeugd</button>
+  <button class="nav-btn-mobile" onclick="mobileNav('e',this)">E-jeugd</button>
+  <button class="nav-btn-mobile" onclick="mobileNav('d',this)">D-jeugd</button>
+  <button class="nav-btn-mobile" onclick="mobileNav('c',this)">C-jeugd</button>
+  <button class="nav-btn-mobile" onclick="mobileNav('gallery',this)">ASM Gallery</button>
+  <button class="nav-btn-mobile" onclick="mobileNav('training',this)">Trainingsmateriaal</button>
+  <button class="nav-btn-mobile" onclick="mobileNav('ysp',this)">YourSportPlanner</button>
+  <button class="nav-btn-mobile" onclick="mobileNav('borging',this)">Borging</button>
+</div>
+
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">GHV Achilles &rsaquo; Technisch beleid &rsaquo; <strong id="bc">Spelopvatting</strong></div>
+</div>
+
+<div class="page-layout">
+<div id="mc">
+
+<section id="sec-visie" class="active">
+  <div class="content-box">
+    <div class="content-header"><h1>Spelopvatting</h1><span class="ch-badge">Breedtesport</span></div>
+    <div class="content-body">
+      <div class="ib ib-red"><h3>Kerngedachte</h3><p>Handbal bij GHV Achilles is spelbeleving op de eerste plaats. Wij geloven dat kinderen het meeste leren als ze plezier hebben, uitgedaagd worden en zich veilig voelen. Technische ontwikkeling volgt vanzelf als de omgeving klopt. Wij bouwen aan spelers die bewegen <em>vanuit inzicht</em>, niet vanuit instructie.</p></div>
+      <h2>Hoe willen wij spelen?</h2>
+      <p>Achilles speelt aanvallend, dynamisch en als team. De principes hieronder gelden voor alle leeftijden – de complexiteit groeit, de kern blijft.</p>
+      <div class="grid-2">
+        <div class="ib ib-red" style="margin:0"><h3>Aanval</h3><ul><li>Bal snel en breed spelen</li><li>Doorlopen na afspelen (speel-en-loop)</li><li>Ruimte creëren voor elkaar</li><li>Durf en initiatief belonen</li><li>Samenspel boven individuele actie</li></ul></div>
+        <div class="ib ib-gray" style="margin:0"><h3>Verdediging</h3><ul><li>Offensief verdedigen: gretig naar de bal</li><li>Verdediging is de eerste fase van de aanval</li><li>Interceptie stimuleren – risico hoort erbij</li><li>Iedereen verdedigt mee, altijd</li><li>Snel terug na balverlies</li><li>Richting: van man-dekking (F) naar 3-2-1 (C)</li></ul></div>
+      </div>
+      <h2>Breedtesport als uitgangspunt</h2>
+      <div class="ib ib-green"><p>Niet elke speler wordt topsporter – en dat hoeft ook niet. Ons doel is dat <strong>alle</strong> kinderen met plezier sporten, motorisch groeien, sociale vaardigheden opdoen en lang actief blijven bij Achilles.</p><p style="margin:0">Winnen is leuk, maar niet de maatstaf voor succes. Onze succesindicatoren: <strong>inzet, groei, samenwerking en plezier.</strong></p></div>
+      <h2>De rol van de trainer</h2>
+      <p>Trainers bij Achilles zijn geen leraren die instrueren, maar <strong>coaches die begeleiden</strong>. Een goede training voelt als gestructureerd spelen. De trainer zorgt voor uitdaging, veiligheid en enthousiasme.</p>
+      <p>Omdat niet alle trainers dezelfde handbalervaring hebben, is dit beleidsplan een gemeenschappelijk kader. Oud-spelers brengen technische diepgang, andere trainers brengen pedagogisch inzicht en enthousiasme. Dat is een kracht.</p>
+      <div class="ib ib-amber"><h3>Plaatje – Praatje – Daadje</h3><p>Handbal is een visuele sport. Goed <strong>voordoen</strong> (plaatje) werkt beter dan lang uitleggen (praatje). Oud-spelers doen de techniek voor, de assistent observeert en geeft korte, positieve feedback (daadje).</p></div>
+      <div class="grid-2">
+        <div class="ib ib-green" style="margin:0"><h3>Correctie-optimum</h3><ul><li>Geef feedback op 3 tot 7 van de 10 pogingen – niet op alles</li><li>Focus per oefening op <strong>één kernpunt</strong></li><li>Te veel correcties leiden tot verwarring</li><li>Benoem wat goed gaat, stuur bij op één ding</li></ul></div>
+        <div class="ib ib-blue" style="margin:0"><h3>Zelfsturing stimuleren</h3><ul><li>Stel vragen in plaats van antwoorden te geven</li><li>"Wat zag je gebeuren?" werkt beter dan "Dat was fout"</li><li>Spelers die zelf nadenken, handelen sneller in het veld</li><li>Dit past bij de Achilles-stijl: spelen vanuit inzicht</li></ul></div>
+      </div>
+      <div class="trainer-box"><div class="tb-label">Samenwerking tussen trainers</div><ul>
+        <li>Bespreek maandelijks wat de groep nodig heeft</li>
+        <li>Gebruik dit beleid als gedeelde taal en referentiepunt</li>
+        <li>Wijs per categorie een <strong>"inhoudelijk trekker"</strong> aan – bij voorkeur de oud-speler</li>
+        <li>Trainers zonder handbalervaring focussen op organisatie, veiligheid en sfeer</li>
+        <li>Evalueer elk blok van 10 weken kort: wat gaat goed, wat mag anders?</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="sec-asm">
+  <div class="content-box">
+    <div class="content-header"><h1>Athletic Skills Model</h1><span class="ch-badge">Methodisch kader</span></div>
+    <div class="content-body">
+      <p>Het <strong>Athletic Skills Model (ASM)</strong> van René Wormhoudt stelt brede motorische ontwikkeling centraal. In plaats van zo vroeg mogelijk handbalspecifiek te trainen, bouwt Achilles aan een stevig bewegingsfundament.</p>
+      <h2>De drie lagen van ASM</h2>
+      <div class="asm-stack">
+        <div class="asm-row"><div class="asm-num">1</div><div class="asm-body"><h4>Bewegingsfundament</h4><p>Rennen, springen, vallen, klimmen, gooien, vangen, rollen. Basisvaardigheden voor elk kind – los van welke sport dan ook.</p></div></div>
+        <div class="asm-row"><div class="asm-num">2</div><div class="asm-body"><h4>Sportvaardigheden</h4><p>Handbalspecifiek bewegen: passen, schieten, dribbelen, verdedigen. Gebouwd op laag 1 – werkt niet zonder een stevig fundament.</p></div></div>
+        <div class="asm-row"><div class="asm-num">3</div><div class="asm-body"><h4>Performancevaardigheden</h4><p>Tactiek, beslissingsvermogen, samenspel, mentale weerbaarheid. Relevant voor C-jeugd en ouder.</p></div></div>
+      </div>
+      <h2>ASM per leeftijdscategorie</h2>
+      <div class="table-wrap"><table><thead><tr><th>Categorie</th><th>Leeftijd</th><th>ASM-nadruk</th><th>Handbaltoepassing</th></tr></thead><tbody>
+        <tr><td><span class="tag tag-green">F-jeugd</span></td><td>6–8 jaar</td><td>Laag 1 – breed motorisch fundament</td><td>Bewegen ís het spelletje zelf</td></tr>
+        <tr><td><span class="tag tag-blue">E-jeugd</span></td><td>8–10 jaar</td><td>Laag 1 + begin laag 2</td><td>Eerste handbalvormen, veel variatie</td></tr>
+        <tr><td><span class="tag tag-amber">D-jeugd</span></td><td>10–12 jaar</td><td>Laag 2 – sportvaardigheden centraal</td><td>Technieken leren in spelvormen</td></tr>
+        <tr><td><span class="tag tag-red">C-jeugd</span></td><td>12–14 jaar</td><td>Laag 2 + intro laag 3</td><td>Samenspel en tactisch inzicht</td></tr>
+      </tbody></table></div>
+      <h2>De Schijf van 10 in de handbal</h2>
+      <p>De tien grondvormen van bewegen, vertaald naar de handbaltraining. Gebruik dit als inspiratie om variatie in je oefenstof te brengen – ook als je geen handbalachtergrond hebt.</p>
+      <div class="table-wrap"><table><thead><tr><th>Grondvorm</th><th>Waarom voor handbal?</th><th>Voorbeeldoefening</th></tr></thead><tbody>
+        <tr><td><strong>Balanceren & Vallen</strong></td><td>Stabiliteit in duels, veilig vallen bij valworp</td><td>Stoeivormen op matten; eenbenig bal vangen</td></tr>
+        <tr><td><strong>Lopen & Gaan</strong></td><td>Versnellen en richting veranderen</td><td>Loopscholing: knieheffen, hakken-billen</td></tr>
+        <tr><td><strong>Springen & Landen</strong></td><td>Sprongworp en blokkeren</td><td>Bankspringen; tweebenige landing oefenen</td></tr>
+        <tr><td><strong>Rollen & Draaien</strong></td><td>Oriëntatie na val of contact</td><td>Koprol + bal vangen combineren</td></tr>
+        <tr><td><strong>Gooien & Vangen</strong></td><td>De technische kern van de sport</td><td>Werpen op pionnen; eenhandig vangen</td></tr>
+        <tr><td><strong>Trappen & Schieten</strong></td><td>Oog-voet coördinatie (keepers!)</td><td>Voetbalvormen als warming-up</td></tr>
+        <tr><td><strong>Klimmen & Klauteren</strong></td><td>Krachtontwikkeling en durf</td><td>Parcours met banken en kasten</td></tr>
+        <tr><td><strong>Zwaaien & Slingeren</strong></td><td>Mobiliteit schoudergordel</td><td>Werpbeweging vanuit rotatie</td></tr>
+        <tr><td><strong>Stoeien & Vechten</strong></td><td>Fysiek contact accepteren, duelkracht</td><td>Matball-games; trek/duw in tweetallen</td></tr>
+        <tr><td><strong>Bewegen op ritme</strong></td><td>Timing van de 3-pas en looplijnen</td><td>Ritmisch huppelen; passen op de maat</td></tr>
+      </tbody></table></div>
+      <div class="grid-2">
+        <div class="ib ib-green" style="margin:0"><h3>Doe meer van dit</h3><ul><li>Afwisselende bewegingsvormen</li><li>Ballen in allerlei maten en gewichten</li><li>Tik-, achtervolg- en afpakspelen</li><li>Meerzijdige belasting (springen, rollen)</li><li>Fouten als leermomenten behandelen</li></ul></div>
+        <div class="ib ib-red" style="margin:0"><h3>Doe minder van dit</h3><ul><li>Vroeg specialiseren op één positie</li><li>Lange rijen en wachttijd</li><li>Correctieve instructie tijdens het spelen</li><li>Selectie op basis van resultaat jong</li><li>Dezelfde oefening zonder variatie</li></ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sec-schema">
+  <div class="content-box">
+    <div class="content-header"><h1>Vaardighedenschema</h1><span class="ch-badge">F · E · D · C</span></div>
+    <div class="content-body">
+      <p>Kernvaardigheden per categorie. Geen harde checklist – plezier en betrokkenheid wegen even zwaar als technische beheersing.</p>
+      <!-- Desktop: tabel -->
+      <div class="table-wrap schema-desktop"><table><thead><tr><th>Categorie</th><th>Technische vaardigheden</th><th>Motorisch / fysiek</th><th>Sociaal / mentaal</th></tr></thead><tbody>
+        <tr><td><span class="tag tag-green">F-jeugd</span><br><small style="color:var(--gray-500)">6–8 jaar</small></td><td><span class="tag tag-gray">Bal oppakken</span> <span class="tag tag-gray">Gooien op doel (vrij)</span> <span class="tag tag-gray">Vangen (grote bal)</span> <span class="tag tag-gray">Doelconcept begrijpen</span></td><td><span class="tag tag-gray">Rennen en stoppen</span> <span class="tag tag-gray">Springen op 1 been</span> <span class="tag tag-gray">Richtingsverandering</span> <span class="tag tag-gray">Links én rechts gooien</span></td><td><span class="tag tag-gray">Luisteren bij uitleg</span> <span class="tag tag-gray">Groepsspel deelnemen</span> <span class="tag tag-gray">Wachten op beurt</span> <span class="tag tag-gray">Plezier ervaren</span></td></tr>
+        <tr><td><span class="tag tag-blue">E-jeugd</span><br><small style="color:var(--gray-500)">8–10 jaar</small></td><td><span class="tag tag-gray">Standhouderpas (beide handen)</span> <span class="tag tag-gray">Sprong- of stootschot (basis)</span> <span class="tag tag-gray">Dribbelen (vrij)</span> <span class="tag tag-gray">Keeper: basishouding</span></td><td><span class="tag tag-gray">Coördinatie pas-en-loop</span> <span class="tag tag-gray">Ruimtelijk inzicht</span> <span class="tag tag-gray">Vallen en opstaan</span> <span class="tag tag-gray">Basisconditie full game</span></td><td><span class="tag tag-gray">Feedback accepteren</span> <span class="tag tag-gray">Afspraken nakomen</span> <span class="tag tag-gray">Ploeggenoten aanmoedigen</span> <span class="tag tag-gray">Verliezen verwerken</span></td></tr>
+        <tr><td><span class="tag tag-amber">D-jeugd</span><br><small style="color:var(--gray-500)">10–12 jaar</small></td><td><span class="tag tag-gray">Sprong- en valschot</span> <span class="tag tag-gray">Omhaalschot (intro)</span> <span class="tag tag-gray">Man-op-man verdediging</span> <span class="tag tag-gray">Snelheid in de pas</span> <span class="tag tag-gray">Keeper: hoektechniek</span></td><td><span class="tag tag-gray">Explosiviteit (sprint)</span> <span class="tag tag-gray">Kracht in schot</span> <span class="tag tag-gray">Wendbaarheid</span> <span class="tag tag-gray">Wedstrijduithoudingsvermogen</span></td><td><span class="tag tag-gray">Posities kennen</span> <span class="tag tag-gray">Communiceren op veld</span> <span class="tag tag-gray">Afspraken in samenspel</span> <span class="tag tag-gray">Omgaan met druk</span></td></tr>
+        <tr><td><span class="tag tag-red">C-jeugd</span><br><small style="color:var(--gray-500)">12–14 jaar</small></td><td><span class="tag tag-gray">Alle schoten in spel</span> <span class="tag tag-gray">Opbouwen vanuit keeper</span> <span class="tag tag-gray">3-2-1 verdediging (basis)</span> <span class="tag tag-gray">Keeper: actief met voeten</span></td><td><span class="tag tag-gray">Kracht + snelheid gecombineerd</span> <span class="tag tag-gray">Wedstrijdconditie 2x25 min</span> <span class="tag tag-gray">Blessurepreventie basis</span></td><td><span class="tag tag-gray">Tactisch medenken</span> <span class="tag tag-gray">Leiderschap in groep</span> <span class="tag tag-gray">Eigen fouten analyseren</span> <span class="tag tag-gray">Samenwerken onder druk</span></td></tr>
+      </tbody></table></div>
+      <!-- Mobile: kaarten -->
+      <div class="schema-mobile">
+        <div class="schema-card sc-green"><div class="sc-header"><span class="tag tag-green">F-jeugd</span> <small>6–8 jaar</small></div>
+          <div class="sc-section"><h3>Technisch</h3><span class="tag tag-gray">Bal oppakken</span> <span class="tag tag-gray">Gooien op doel (vrij)</span> <span class="tag tag-gray">Vangen (grote bal)</span> <span class="tag tag-gray">Doelconcept begrijpen</span></div>
+          <div class="sc-section"><h3>Motorisch / fysiek</h3><span class="tag tag-gray">Rennen en stoppen</span> <span class="tag tag-gray">Springen op 1 been</span> <span class="tag tag-gray">Richtingsverandering</span> <span class="tag tag-gray">Links én rechts gooien</span></div>
+          <div class="sc-section"><h3>Sociaal / mentaal</h3><span class="tag tag-gray">Luisteren bij uitleg</span> <span class="tag tag-gray">Groepsspel deelnemen</span> <span class="tag tag-gray">Wachten op beurt</span> <span class="tag tag-gray">Plezier ervaren</span></div>
+        </div>
+        <div class="schema-card sc-blue"><div class="sc-header"><span class="tag tag-blue">E-jeugd</span> <small>8–10 jaar</small></div>
+          <div class="sc-section"><h3>Technisch</h3><span class="tag tag-gray">Standhouderpas (beide handen)</span> <span class="tag tag-gray">Sprong- of stootschot (basis)</span> <span class="tag tag-gray">Dribbelen (vrij)</span> <span class="tag tag-gray">Keeper: basishouding</span></div>
+          <div class="sc-section"><h3>Motorisch / fysiek</h3><span class="tag tag-gray">Coördinatie pas-en-loop</span> <span class="tag tag-gray">Ruimtelijk inzicht</span> <span class="tag tag-gray">Vallen en opstaan</span> <span class="tag tag-gray">Basisconditie full game</span></div>
+          <div class="sc-section"><h3>Sociaal / mentaal</h3><span class="tag tag-gray">Feedback accepteren</span> <span class="tag tag-gray">Afspraken nakomen</span> <span class="tag tag-gray">Ploeggenoten aanmoedigen</span> <span class="tag tag-gray">Verliezen verwerken</span></div>
+        </div>
+        <div class="schema-card sc-amber"><div class="sc-header"><span class="tag tag-amber">D-jeugd</span> <small>10–12 jaar</small></div>
+          <div class="sc-section"><h3>Technisch</h3><span class="tag tag-gray">Sprong- en valschot</span> <span class="tag tag-gray">Omhaalschot (intro)</span> <span class="tag tag-gray">Man-op-man verdediging</span> <span class="tag tag-gray">Snelheid in de pas</span> <span class="tag tag-gray">Keeper: hoektechniek</span></div>
+          <div class="sc-section"><h3>Motorisch / fysiek</h3><span class="tag tag-gray">Explosiviteit (sprint)</span> <span class="tag tag-gray">Kracht in schot</span> <span class="tag tag-gray">Wendbaarheid</span> <span class="tag tag-gray">Wedstrijduithoudingsvermogen</span></div>
+          <div class="sc-section"><h3>Sociaal / mentaal</h3><span class="tag tag-gray">Posities kennen</span> <span class="tag tag-gray">Communiceren op veld</span> <span class="tag tag-gray">Afspraken in samenspel</span> <span class="tag tag-gray">Omgaan met druk</span></div>
+        </div>
+        <div class="schema-card sc-red"><div class="sc-header"><span class="tag tag-red">C-jeugd</span> <small>12–14 jaar</small></div>
+          <div class="sc-section"><h3>Technisch</h3><span class="tag tag-gray">Alle schoten in spel</span> <span class="tag tag-gray">Opbouwen vanuit keeper</span> <span class="tag tag-gray">3-2-1 verdediging (basis)</span> <span class="tag tag-gray">Keeper: actief met voeten</span></div>
+          <div class="sc-section"><h3>Motorisch / fysiek</h3><span class="tag tag-gray">Kracht + snelheid gecombineerd</span> <span class="tag tag-gray">Wedstrijdconditie 2x25 min</span> <span class="tag tag-gray">Blessurepreventie basis</span></div>
+          <div class="sc-section"><h3>Sociaal / mentaal</h3><span class="tag tag-gray">Tactisch medenken</span> <span class="tag tag-gray">Leiderschap in groep</span> <span class="tag tag-gray">Eigen fouten analyseren</span> <span class="tag tag-gray">Samenwerken onder druk</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sec-f">
+  <div class="content-box">
+    <div class="age-banner"><div class="age-letter">F</div><div class="age-info"><h1>F-jeugd</h1><p>6–8 jaar &nbsp;·&nbsp; ASM Laag 1 &nbsp;·&nbsp; Kennismakingsfase</p></div></div>
+    <div class="content-body">
+      <div class="ib ib-red"><h3>Accent van deze fase</h3><p>De F-jeugd is de kennismakingsfase. Kinderen leren wat handbal is – maar bovenal leren ze bewegen. Elke training is een feestje. Er wordt weinig uitgelegd en veel gespeeld.</p><p style="margin:0">Sociaal leren kinderen in een groep functioneren, afspraken begrijpen en plezier delen. Vriendschappen die hier gesmeed worden, houden kinderen jarenlang bij de sport.</p></div>
+      <div class="grid-2">
+        <div class="ib ib-green" style="margin:0"><h3>Technisch accent</h3><ul><li>Gooien en vangen in alle vormen</li><li>Rennen met en zonder bal</li><li>Op doel gooien (klein doel, dichtbij)</li><li>Links en rechts uitproberen – allebei goed!</li><li>Geen correctie op techniek – laat ze ontdekken</li></ul></div>
+        <div class="ib ib-blue" style="margin:0"><h3>Sociaal accent</h3><ul><li>Plezier boven resultaat – altijd</li><li>Iedereen doet mee, niemand lang aan de kant</li><li>Positieve bekrachtiging: "Goed geprobeerd!"</li><li>Leren omgaan met kleine teleurstellingen</li><li>Lachen mag – ook als iets mislukt</li></ul></div>
+      </div>
+      <div class="trainer-box"><div class="tb-label">Wat vraagt dit van de trainer?</div><ul>
+        <li><strong>Energie en enthousiasme</strong> zijn de voornaamste instrumenten. Als jij plezier uitstraalt, straalt de groep dat terug.</li>
+        <li>Houd uitleg kort – maximaal 30 seconden, dan beginnen. Demonstreer liever dan verklaren.</li>
+        <li>Let op dat niemand wordt buitengesloten – grijp direct in maar blijf luchtig.</li>
+        <li>Wissel activiteiten snel af: elke 8–10 minuten iets anders.</li>
+        <li>Geen wedstrijdstand bijhouden of nadruk op winnen/verliezen.</li>
+      </ul></div>
+      <h2>Jaarplanning – 40 weken</h2>
+      <div class="block-div"><span class="block-title">Blok 1 – Binnen</span><div class="block-line"></div><span class="block-badge">Wk 1–20 · Sept–Jan</span></div>
+      <div class="table-wrap"><table><thead><tr><th>Fase</th><th>Weken</th><th>Thema</th><th>Voorbeeldoefeningen</th></tr></thead><tbody>
+        <tr><td><span class="phase-pill">Intro</span></td><td>1–4</td><td>Kennismaken, veiligheid, regels van de zaal</td><td>Tikspel, balgewenning, "wie ben ik"-spel</td></tr>
+        <tr><td><span class="phase-pill">Gooien</span></td><td>5–9</td><td>Gooien op doel, vangen, bal vasthouden</td><td>Gooien op mini-doel, ballenregen, estafettes</td></tr>
+        <tr><td><span class="phase-pill">Bewegen</span></td><td>10–14</td><td>Rennen, springen, vallen – ASM laag 1</td><td>Parcours, springspelen, schieten na sprint</td></tr>
+        <tr><td><span class="phase-pill">Spelen</span></td><td>15–20</td><td>Speelvorm 3v3 klein veld, eerste wedstrijdjes</td><td>Mini-handbal, doortikspel, afsluitend spelletje</td></tr>
+      </tbody></table></div>
+      <div class="block-div"><span class="block-title">Blok 2 – Buiten</span><div class="block-line"></div><span class="block-badge">Wk 21–40 · Feb–Juni</span></div>
+      <div class="table-wrap"><table><thead><tr><th>Fase</th><th>Weken</th><th>Thema</th><th>Voorbeeldoefeningen</th></tr></thead><tbody>
+        <tr><td><span class="phase-pill">Herhaling</span></td><td>21–24</td><td>Terug in het ritme, blok 1 opfrissen</td><td>Favoriete spelen uit blok 1 herhalen</td></tr>
+        <tr><td><span class="phase-pill">Buiten</span></td><td>25–29</td><td>Buitensporten, meer ruimte, gooien ver</td><td>Gooien over afstand, tikspelen groot veld</td></tr>
+        <tr><td><span class="phase-pill">Samenspel</span></td><td>30–34</td><td>Twee spelen samen: passen en lopen</td><td>2v1-speeltjes, geef-en-loop</td></tr>
+        <tr><td><span class="phase-pill">Feest</span></td><td>35–40</td><td>Afsluiting, toernooi, plezier centraal</td><td>Mini-toernooi, hindernisbaan, diploma-uitreiking</td></tr>
+      </tbody></table></div>
+      <h2>Trainingsindeling – 60 minuten</h2>
+      <div class="wb-list">
+        <div class="wb-row"><div class="wb-time">0–10 min</div><div class="wb-content">Warming-up als spelletje – tikspel, balletje-over. Geen statisch rekken.</div></div>
+        <div class="wb-row"><div class="wb-time">10–25 min</div><div class="wb-content">Kern 1: beweegactiviteit (rennen, springen, gooien) – hoog tempo, weinig wachten</div></div>
+        <div class="wb-row"><div class="wb-time">25–45 min</div><div class="wb-content">Kern 2: handbalgericht spel (schieten op doel, 2v1, mini-wedstrijdje)</div></div>
+        <div class="wb-row"><div class="wb-time">45–55 min</div><div class="wb-content">Afsluitend spel: iets wat altijd lukt en energie geeft</div></div>
+        <div class="wb-row"><div class="wb-time">55–60 min</div><div class="wb-content">Afsluiting: even samen zitten, iets vertellen, positief afsluiten</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sec-e">
+  <div class="content-box">
+    <div class="age-banner"><div class="age-letter">E</div><div class="age-info"><h1>E-jeugd</h1><p>8–10 jaar &nbsp;·&nbsp; ASM Laag 1 + intro Laag 2 &nbsp;·&nbsp; Ontwikkelingsfase</p></div></div>
+    <div class="content-body">
+      <div class="ib ib-blue"><h3>Accent van deze fase</h3><p>In de E-jeugd begint handbal er echt uit te zien als handbal. Kinderen snappen spelregels beter en begrijpen het idee van samenspelen. Techniek wordt nu iets meer benoemd – altijd vanuit spelen.</p><p style="margin:0">Sociaal leren kinderen dat sport samen beter is. Het begin van echte teambinding.</p></div>
+      <div class="grid-2">
+        <div class="ib ib-blue" style="margin:0"><h3>Technisch accent</h3><ul><li>Standhouder- en schouderpass (beide handen)</li><li>Gooien op doel met aanloop (vrij schot)</li><li>Eerste sprong- of stootschot (introductie)</li><li>Dribbelen (maar niet te veel: handbal is passen!)</li><li>Keeper: simpele positie, lef opbouwen</li></ul></div>
+        <div class="ib ib-amber" style="margin:0"><h3>Sociaal accent</h3><ul><li>Communiceren op het veld ("vrij!" roepen)</li><li>Aanmoedigen van ploeggenoten is een skill</li><li>Feedback geven en ontvangen op goede manier</li><li>Rol van de keeper waarderen (roterende keeper!)</li><li>Eerlijk spel en sportiviteit belonen</li></ul></div>
+      </div>
+      <div class="trainer-box"><div class="tb-label">Wat vraagt dit van de trainer?</div><ul>
+        <li><strong>Positief coachen:</strong> benoem wat goed gaat, corrigeer door een alternatief te tonen ("probeer het zo").</li>
+        <li>Geef kleine hints tijdens het spel – haal niemand eruit voor een lange uitleg.</li>
+        <li>Zorg dat iedereen aan de beurt komt als keeper – ook wie dat niet wil. Maak het leuk.</li>
+        <li>Wees alert op sociale uitsluiting – vriendschapsdynamieken worden intensiever.</li>
+        <li>Maak fouten bespreekbaar maar normaal: "Dat overkomt iedereen, ook mij."</li>
+      </ul></div>
+      <h2>Jaarplanning – 40 weken</h2>
+      <div class="block-div"><span class="block-title">Blok 1 – Binnen</span><div class="block-line"></div><span class="block-badge">Wk 1–20 · Sept–Jan</span></div>
+      <div class="table-wrap"><table><thead><tr><th>Fase</th><th>Weken</th><th>Thema</th><th>Voorbeeldoefeningen</th></tr></thead><tbody>
+        <tr><td><span class="phase-pill">Basis</span></td><td>1–5</td><td>Passen, vangen, positie kiezen</td><td>Dribbel-tikspel, pass-en-loop, driehoekspassen</td></tr>
+        <tr><td><span class="phase-pill">Schieten</span></td><td>6–10</td><td>Stoot- en springschot, keeper aanspreken</td><td>Opbouw naar doel, 2v0 doelpuntenschot</td></tr>
+        <tr><td><span class="phase-pill">Samenspel</span></td><td>11–15</td><td>2v1 en 3v2 spelvormen, ruimte benutten</td><td>2v1-circuit, 3v2 op klein veld</td></tr>
+        <tr><td><span class="phase-pill">Wedstrijd</span></td><td>16–20</td><td>4v4 of 5v5, basisregels volledig toepassen</td><td>Mini-competitie in de groep</td></tr>
+      </tbody></table></div>
+      <div class="block-div"><span class="block-title">Blok 2 – Buiten</span><div class="block-line"></div><span class="block-badge">Wk 21–40 · Feb–Juni</span></div>
+      <div class="table-wrap"><table><thead><tr><th>Fase</th><th>Weken</th><th>Thema</th><th>Voorbeeldoefeningen</th></tr></thead><tbody>
+        <tr><td><span class="phase-pill">Buiten</span></td><td>21–25</td><td>Gooien over grotere afstand, buiten aanpassen</td><td>Snelle break, gooien over 8–10 m</td></tr>
+        <tr><td><span class="phase-pill">Keeper</span></td><td>26–30</td><td>Iedereen in het doel – lef en positie</td><td>1v1 keeper-schutter, duo-training</td></tr>
+        <tr><td><span class="phase-pill">Teamspel</span></td><td>31–35</td><td>Afspraken in de aanval, minder vrij</td><td>"Eerst passen"-afspraak, aanval via buitenspeler</td></tr>
+        <tr><td><span class="phase-pill">Afsluiting</span></td><td>36–40</td><td>Toernooi, feest, reflectie op het jaar</td><td>Mini-toernooi, spelersbeoordeling door henzelf</td></tr>
+      </tbody></table></div>
+      <h2>Trainingsindeling – 75 minuten</h2>
+      <div class="wb-list">
+        <div class="wb-row"><div class="wb-time">0–10 min</div><div class="wb-content">Warming-up met bal: pass-kring, tikspel met bal, activerende vorm</div></div>
+        <div class="wb-row"><div class="wb-time">10–30 min</div><div class="wb-content">Technische kern: weekthema in kleine groepjes (passen, schieten, keeper)</div></div>
+        <div class="wb-row"><div class="wb-time">30–60 min</div><div class="wb-content">Speelvorm: toepassen in spel – 3v3 of 4v4 op klein veld</div></div>
+        <div class="wb-row"><div class="wb-time">60–70 min</div><div class="wb-content">Afsluitend spel of competitietje – hoog energie, plezier</div></div>
+        <div class="wb-row"><div class="wb-time">70–75 min</div><div class="wb-content">Korte evaluatie: één ding dat goed ging, één punt voor volgende week</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sec-d">
+  <div class="content-box">
+    <div class="age-banner"><div class="age-letter">D</div><div class="age-info"><h1>D-jeugd</h1><p>10–12 jaar &nbsp;·&nbsp; ASM Laag 2 &nbsp;·&nbsp; Technische leerfase</p></div></div>
+    <div class="content-body">
+      <div class="ib ib-amber"><h3>Accent van deze fase</h3><p>De D-jeugd is de technische leerfase bij uitstek. Kinderen zijn motorisch rijp voor herhaling en bewuste techniekopbouw. Zwaartepunt: passnauwkeurigheid, schottechniek en basisverdediging.</p><p style="margin:0">Sociaal leren kinderen samenwerken mét druk erop. Rollen ontstaan, vriendschappen worden hechter maar ook spannender.</p></div>
+      <div class="grid-2">
+        <div class="ib ib-amber" style="margin:0"><h3>Technisch accent</h3><ul><li>Sprong- en valschot technisch correct</li><li>Omhaalschot introductie</li><li>Snelheid in de pass (geen statisch passen)</li><li>Man-op-man verdediging basisprincipes</li><li>Aanvalslopen: doorlopen, blok, kruising (intro)</li><li>Keeper: hoektechniek en uitworp</li></ul></div>
+        <div class="ib ib-blue" style="margin:0"><h3>Sociaal accent</h3><ul><li>Communicatie in het veld – luid en duidelijk</li><li>Positieverdeling begrijpen en respecteren</li><li>Kritiek geven op een manier die motiveert</li><li>Omgaan met een mindere wedstrijd of blunder</li><li>Teamverantwoordelijkheid: jij bent er voor de groep</li></ul></div>
+      </div>
+      <div class="trainer-box"><div class="tb-label">Wat vraagt dit van de trainer?</div><ul>
+        <li>Nu mag je meer uitleggen – maar houd instructies compact (max 1–2 min). Demonstreren werkt beter dan vertellen.</li>
+        <li><strong>Oud-spelers hebben hier de meeste impact:</strong> laat ze techniek voordoen.</li>
+        <li>Geef ook niet-technische kinderen een positieve rol: leider, keeper, organisator.</li>
+        <li><strong>"Hoe had jij het anders kunnen doen?"</strong> werkt beter dan "Dat was fout."</li>
+        <li>Introduceer lichte wedstrijddruk – maar bewaak sportiviteit actief.</li>
+      </ul></div>
+      <h2>Jaarplanning – 40 weken</h2>
+      <div class="block-div"><span class="block-title">Blok 1 – Binnen</span><div class="block-line"></div><span class="block-badge">Wk 1–20 · Sept–Jan</span></div>
+      <div class="table-wrap"><table><thead><tr><th>Fase</th><th>Weken</th><th>Thema</th><th>Voorbeeldoefeningen</th></tr></thead><tbody>
+        <tr><td><span class="phase-pill">Techniek</span></td><td>1–5</td><td>Schottechnieken herhalen en verfijnen</td><td>Springschot-circuit, valschot-oefenrij</td></tr>
+        <tr><td><span class="phase-pill">Verdedigen</span></td><td>6–10</td><td>Man-op-man, positie en timing</td><td>1v1 verdedigen, schaduw-oefening, 2v2-duel</td></tr>
+        <tr><td><span class="phase-pill">Samenspel</span></td><td>11–15</td><td>Aanvalslopen, kruising, 2-mans combinaties</td><td>Geef-en-loop, 2v1, kruising op cirkel</td></tr>
+        <tr><td><span class="phase-pill">Tactiek</span></td><td>16–20</td><td>Eenvoudig aanvalssysteem, vrij positioneren</td><td>5v5 met positieopdracht, aanval via buitenspeler</td></tr>
+      </tbody></table></div>
+      <div class="block-div"><span class="block-title">Blok 2 – Buiten</span><div class="block-line"></div><span class="block-badge">Wk 21–40 · Feb–Juni</span></div>
+      <div class="table-wrap"><table><thead><tr><th>Fase</th><th>Weken</th><th>Thema</th><th>Voorbeeldoefeningen</th></tr></thead><tbody>
+        <tr><td><span class="phase-pill">Toepassing</span></td><td>21–26</td><td>Alles uit blok 1 toepassen in speelvorm</td><td>6v6 met coachingspunten, wedstrijdscenario's</td></tr>
+        <tr><td><span class="phase-pill">Conditie</span></td><td>27–31</td><td>Lopen, explosiviteit, coördinatie</td><td>Sprints, hindernisbaan, balladder</td></tr>
+        <tr><td><span class="phase-pill">Omhaal</span></td><td>32–35</td><td>Technische uitdaging: omhaalschot opbouw</td><td>Stap-voor-stap opbouw omhaalschot</td></tr>
+        <tr><td><span class="phase-pill">Afsluiting</span></td><td>36–40</td><td>Toernooi, evaluatie, seizoensafsluiting</td><td>Intern toernooi, individueel spelersgesprek</td></tr>
+      </tbody></table></div>
+      <h2>Trainingsindeling – 75–90 minuten</h2>
+      <div class="wb-list">
+        <div class="wb-row"><div class="wb-time">0–12 min</div><div class="wb-content">Warming-up: activerend (loopvormen, coördinatie, tikspel met handbalelement)</div></div>
+        <div class="wb-row"><div class="wb-time">12–35 min</div><div class="wb-content">Technische blok: gericht op weekthema, kleine groepen, hoge herhaling</div></div>
+        <div class="wb-row"><div class="wb-time">35–65 min</div><div class="wb-content">Speelvorm: 4v4 of 5v5 met coachingspunt</div></div>
+        <div class="wb-row"><div class="wb-time">65–80 min</div><div class="wb-content">Wedstrijdvorm: 6v6 of volledig veld, minder instructie, eigen verantwoordelijkheid</div></div>
+        <div class="wb-row"><div class="wb-time">80–90 min</div><div class="wb-content">Nabespreking: wat werkte? Eén verbeterpunt voor volgende week</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sec-c">
+  <div class="content-box">
+    <div class="age-banner"><div class="age-letter">C</div><div class="age-info"><h1>C-jeugd</h1><p>12–14 jaar &nbsp;·&nbsp; ASM Laag 2 + intro Laag 3 &nbsp;·&nbsp; Consolidatiefase</p></div></div>
+    <div class="content-body">
+      <div class="ib ib-red"><h3>Accent van deze fase</h3><p>De C-jeugd markeert de overgang naar serieuzer handbal. Drie pijlers: techniek consolideren, tactisch bewustzijn, teamcultuur bouwen.</p><p style="margin:0">Sociaal: pubertijdseffecten zijn voelbaar. Motivatie kan wisselend zijn. De trainer heeft hier ook een pedagogische rol als vertrouwenspersoon.</p></div>
+      <div class="grid-2">
+        <div class="ib ib-red" style="margin:0"><h3>Technisch accent</h3><ul><li>Alle schottechnieken vloeiend en snel</li><li>Opbouwspel vanuit keeper (aftrap, snelle break)</li><li>Verdedigingssystemen: 3-2-1 of 6-0 basisvorm</li><li>Aanvalssysteem: cirkelloop, buitenspel</li><li>Keeper: actief meespelen, gerichte uitworp</li><li>Positiespecialisatie begint (niet verplicht)</li></ul></div>
+        <div class="ib ib-blue" style="margin:0"><h3>Sociaal accent</h3><ul><li>Leiderschap ontwikkelen (aanvoerder, initiatiefnemer)</li><li>Eigen fouten analyseren en benoemen</li><li>Wedstrijdmentaliteit: inzet is altijd 100%</li><li>Omgaan met spanning voor en tijdens wedstrijden</li><li>Respect voor tegenstander, scheidsrechter en trainer</li></ul></div>
+      </div>
+      <div class="trainer-box"><div class="tb-label">Wat vraagt dit van de trainer?</div><ul>
+        <li><strong>Behandel hen als bijna-volwassenen.</strong> Betrek hen bij keuzes: "Hoe willen jullie de aanval spelen?"</li>
+        <li>Leg altijd het <strong>waarom</strong> uit: "We verdedigen man-op-man omdat..." – begrip verhoogt motivatie.</li>
+        <li>Puberteit maakt inzet ongelijkmatig – wees consistent en geduldig.</li>
+        <li>Signaleer als iemand zich terugtrekt uit de groep – als trainer zie je het het vroegst.</li>
+        <li>Geef positieve feedback openlijk. Kritiek zo mogelijk onder vier ogen.</li>
+      </ul></div>
+      <h2>Jaarplanning – 40 weken</h2>
+      <div class="block-div"><span class="block-title">Blok 1 – Binnen</span><div class="block-line"></div><span class="block-badge">Wk 1–20 · Sept–Jan</span></div>
+      <div class="table-wrap"><table><thead><tr><th>Fase</th><th>Weken</th><th>Thema</th><th>Voorbeeldoefeningen</th></tr></thead><tbody>
+        <tr><td><span class="phase-pill">Techniek</span></td><td>1–5</td><td>Alle schoten snel en nauwkeurig herhalen</td><td>Schot-circuit, 2v1, keeper-focus ronde</td></tr>
+        <tr><td><span class="phase-pill">Verdediging</span></td><td>6–10</td><td>3-2-1 systeem basisvorm, communicatie</td><td>6v6 met verdedigingsopdracht, positiespel</td></tr>
+        <tr><td><span class="phase-pill">Aanvalsspel</span></td><td>11–15</td><td>Opbouw, cirkelopeningen, buitenspel</td><td>Aanvalscombinaties 2-3-1, schot na passcombo</td></tr>
+        <tr><td><span class="phase-pill">Tactisch</span></td><td>16–20</td><td>Wedstrijdvormen met coachingspunten</td><td>Gesimuleerde wedstrijdsituaties, time-outs bespreken</td></tr>
+      </tbody></table></div>
+      <div class="block-div"><span class="block-title">Blok 2 – Buiten</span><div class="block-line"></div><span class="block-badge">Wk 21–40 · Feb–Juni</span></div>
+      <div class="table-wrap"><table><thead><tr><th>Fase</th><th>Weken</th><th>Thema</th><th>Voorbeeldoefeningen</th></tr></thead><tbody>
+        <tr><td><span class="phase-pill">Conditie</span></td><td>21–25</td><td>Wedstrijdconditie, explosiviteit, herstel</td><td>Interval loopvormen, 4x4 hoog intensief</td></tr>
+        <tr><td><span class="phase-pill">Samenspel</span></td><td>26–31</td><td>Combinaties vanuit keeper, omschakelen</td><td>Break-situaties, snelle counter, keeper-spelmaker</td></tr>
+        <tr><td><span class="phase-pill">Leiderschap</span></td><td>32–35</td><td>Aanvoerderschap, druksituaties</td><td>Wedstrijd met eigen time-outs door spelers</td></tr>
+        <tr><td><span class="phase-pill">Afsluiting</span></td><td>36–40</td><td>Toernooi, evaluatiegesprekken, volgend jaar</td><td>Seizoensafsluiter, individuele voortgangsgesprekken</td></tr>
+      </tbody></table></div>
+      <h2>Trainingsindeling – 90 minuten</h2>
+      <div class="wb-list">
+        <div class="wb-row"><div class="wb-time">0–15 min</div><div class="wb-content">Warming-up + kort inleidend gesprek over het thema van de week</div></div>
+        <div class="wb-row"><div class="wb-time">15–35 min</div><div class="wb-content">Technische blok: gerichte herhaling weekthema, hoge intensiteit, weinig wachten</div></div>
+        <div class="wb-row"><div class="wb-time">35–55 min</div><div class="wb-content">Tactische speelvorm: 5v5 of 6v6 met specifieke opdracht</div></div>
+        <div class="wb-row"><div class="wb-time">55–80 min</div><div class="wb-content">Wedstrijdvorm: volledig veld, eigen beslissingen, trainer coacht van de kant</div></div>
+        <div class="wb-row"><div class="wb-time">80–90 min</div><div class="wb-content">Nabespreking: trainer + spelers benoemen 2–3 verbeterpunten voor volgende week</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- —— ASM GALLERY —— -->
+<section id="sec-gallery">
+  <div class="content-box">
+    <div class="gallery-hero">
+      <h1>ASM Gallery</h1>
+      <p>Meer dan 15.000 gelabelde oefenvideo's op het Athletic Skills Platform</p>
+      <div class="gallery-login-box">
+        <div class="login-row">
+          <div class="login-label">E-mailadres</div>
+          <div class="login-value">robin.oostdam@hotmail.com</div>
+        </div>
+        <div class="login-row">
+          <div class="login-label">Wachtwoord</div>
+          <div class="login-value">Cupcake22!</div>
+        </div>
+      </div>
+      <button class="btn-gallery" onclick="window.open('https://gallery.athleticskillsmodel.nl/login?login_hint=robin.oostdam%40hotmail.com','_blank')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Open ASM Gallery
+      </button>
+      <div class="copy-notice" id="copy-notice">Wachtwoord gekopieerd naar klembord – plak het in het wachtwoordveld</div>
+    </div>
+    <div class="content-body">
+      <h2>Wat vind je in de Gallery?</h2>
+      <div class="grid-2">
+        <div class="ib ib-green" style="margin:0"><h3>Bewegingsvormen (laag 1)</h3><ul><li>Tikspelen, springvormen, klimmen, rollen</li><li>Coördinatieoefeningen</li><li>Materiaalspelen met zachte ballen</li><li>Fundamentele 10 (Schijf van 10!)</li></ul></div>
+        <div class="ib ib-blue" style="margin:0"><h3>Sportvormen (laag 2)</h3><ul><li>Handbal-specifieke spelvormen per leeftijd</li><li>Schot- en pashechnieken</li><li>Keeper-specifieke oefeningen</li><li>Verdediging en positiespel</li></ul></div>
+      </div>
+      <div class="ib ib-amber"><h3>Tip voor trainers</h3><p>Filter in de gallery op <strong>sport: handbal</strong> of op de <strong>Fundamentele 10</strong> grondvorm die jij die week wilt aanspreken. Elk filmpje is kort (1–3 min) en direct inzetbaar als demonstratie op de telefoon tijdens de training.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- —— TRAININGSMATERIAAL —— -->
+<section id="sec-training">
+  <div class="content-box">
+    <div class="content-header"><h1>Trainingsmateriaal</h1><span class="ch-badge">Video &amp; Online</span></div>
+    <div class="content-body">
+
+      <h2>YouTube-kanalen – handbal techniek</h2>
+      <p>Geselecteerde kanalen met bruikbare oefenvideo's voor jeugdtrainers. Gebruik ze als inspiratie of laat ze zien op de telefoon tijdens de training.</p>
+
+      <div class="channel-grid">
+        <a class="channel-card" href="https://www.youtube.com/channel/UC_8fy5TKsIjC8LpsxAV_EhA" target="_blank">
+          <div class="channel-icon ci-yt">&#9654;</div>
+          <div class="channel-name">HANDBALL 4ALL</div>
+          <div class="channel-desc">Breed aanbod trainingsvormen voor alle posities en leeftijden. Actief kanaal met 100K+ abonnees.</div>
+          <span class="channel-tag ct-yt">YouTube</span>
+          <span class="channel-tag ct-free">Gratis</span>
+        </a>
+        <a class="channel-card" href="https://www.youtube.com/channel/UC4N2ViKII_4WML4E4LntpTA" target="_blank">
+          <div class="channel-icon ci-yt">&#9654;</div>
+          <div class="channel-name">Absolut Handball</div>
+          <div class="channel-desc">Coach Benny Daser (25 jaar ervaring): schieten, passen, kreisläufer, verdedigen. Engels en Duits.</div>
+          <span class="channel-tag ct-yt">YouTube</span>
+          <span class="channel-tag ct-free">Gratis</span>
+        </a>
+        <a class="channel-card" href="https://www.youtube.com/icoachhandball" target="_blank">
+          <div class="channel-icon ci-yt">&#9654;</div>
+          <div class="channel-name">iCoachHandball</div>
+          <div class="channel-desc">34K abonnees. Stap-voor-stap trainingstechnieken per positie. Duits. Groot archief, geen nieuwe uploads meer.</div>
+          <span class="channel-tag ct-yt">YouTube</span>
+          <span class="channel-tag ct-free">Gratis</span>
+        </a>
+
+      </div>
+
+      <h2>Nederlandse bronnen</h2>
+      <div class="channel-grid">
+        <a class="channel-card" href="https://handbalnltv.vhx.tv/handbalnl-trainingen" target="_blank">
+          <div class="channel-icon ci-web">&#127381;</div>
+          <div class="channel-name">HandbalNL Trainingen</div>
+          <div class="channel-desc">Nederlands trainingsplatform met video-oefeningen per categorie (F t/m senioren).</div>
+          <span class="channel-tag ct-nhv">NL platform</span>
+        </a>
+
+        <a class="channel-card" href="https://handbal.nl/opleidingen/" target="_blank">
+          <div class="channel-icon ci-nhv">&#127386;</div>
+          <div class="channel-name">NHV – Opleidingen &amp; Bijscholing</div>
+          <div class="channel-desc">HT1 t/m HT5 trainersopleidingen, bijscholingen met licentiepunten en opleidingsdocumenten.</div>
+          <span class="channel-tag ct-nhv">NHV officieel</span>
+          <span class="channel-tag ct-free">Gratis</span>
+        </a>
+        <a class="channel-card" href="https://dsc-handbal.nl/inspiratie-voor-trainers/" target="_blank">
+          <div class="channel-icon ci-web">&#128279;</div>
+          <div class="channel-name">DSC Handbal – Inspiratiepagina</div>
+          <div class="channel-desc">Curated lijst van kanalen, websites en Instagram-accounts voor handbaltrainers.</div>
+          <span class="channel-tag ct-web">Website</span>
+          <span class="channel-tag ct-free">Gratis</span>
+        </a>
+
+
+    </div>
+  </div>
+</section>
+
+<section id="sec-ysp">
+  <div class="content-box">
+    <div class="gallery-hero">
+      <h1>YourSportPlanner</h1>
+      <p>Honderden kant-en-klare handbal-oefeningen per leeftijdscategorie – inclusief schematische uitleg en varianten</p>
+      <div class="gallery-login-box">
+        <div class="login-row">
+          <div class="login-label">E-mailadres</div>
+          <div class="login-value">bestuur.achilles@gmail.com</div>
+        </div>
+        <div class="login-row">
+          <div class="login-label">Wachtwoord</div>
+          <div class="login-value">@chilles1969</div>
+        </div>
+      </div>
+      <button class="btn-gallery" onclick="yspLogin()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Open YourSportPlanner
+      </button>
+      <div class="copy-notice" id="ysp-copy-notice">Wachtwoord gekopieerd naar klembord – plak het in het wachtwoordveld</div>
+    </div>
+    <div class="content-body">
+
+      <h2>Wat vind je in YourSportPlanner?</h2>
+      <p>YourSportPlanner heeft een uitgebreide handbal-oefeningen database met schematische tekeningen, stappenplannen en varianten. Handig als je een training voorbereidt en snel een oefening wil opzoeken per thema of leeftijdscategorie.</p>
+
+      <div class="grid-2">
+        <div class="ib ib-green" style="margin:0">
+          <h3>F- en E-jeugd</h3>
+          <ul>
+            <li>Balgewenning en gooien/vangen</li>
+            <li>Tikspelen met handbalelement</li>
+            <li>Mini-spelvormen 2v1 en 3v2</li>
+            <li>Warming-up varianten</li>
+          </ul>
+        </div>
+        <div class="ib ib-blue" style="margin:0">
+          <h3>D- en C-jeugd</h3>
+          <ul>
+            <li>Schottechnieken stap voor stap</li>
+            <li>Aanvalslopen en combinaties</li>
+            <li>Man-op-man verdediging</li>
+            <li>Keeper-specifieke oefeningen</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>Handige zoekfilters</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Filter</th><th>Gebruik je voor</th><th>Tip</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Leeftijdscategorie</strong></td><td>Direct de juiste moeilijkheidsgraad</td><td>Begin hier – kies F, E, D of C</td></tr>
+            <tr><td><strong>Techniek</strong></td><td>Specifiek thema: passen, schieten, verdedigen</td><td>Combineer met leeftijdsfilter</td></tr>
+            <tr><td><strong>Aantal spelers</strong></td><td>Aanpassen aan groepsgrootte</td><td>Handig als je kleine groepen hebt</td></tr>
+            <tr><td><strong>Materiaal</strong></td><td>Oefeningen passend bij wat je hebt</td><td>Selecteer wat aanwezig is in de zaal</td></tr>
+            <tr><td><strong>Duur</strong></td><td>Oefeningen passend in je trainingsblok</td><td>Zoek op 10&ndash;15 min voor kernblokken</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<section id="sec-borging">
+  <div class="content-box">
+    <div class="content-header"><h1>Implementatie & Borging</h1><span class="ch-badge">Structuur</span></div>
+    <div class="content-body">
+      <div class="ib ib-red"><h3>Van plan naar praktijk</h3><p>Een beleidsplan werkt alleen als het leeft op de vloer. Om dit plan te laten slagen, voert Achilles een aantal structurele maatregelen in die ervoor zorgen dat de leerlijn geborgd blijft – ook bij wisselingen van trainers.</p></div>
+
+      <h2>Vaste structuur</h2>
+      <div class="asm-stack">
+        <div class="asm-row"><div class="asm-num">1</div><div class="asm-body"><h4>Trainersoverleg</h4><p>Elke 6 weken komen de hoofdtrainers per categorie samen met de assistenten. Doel: voortgang leerlijn bespreken, oefenstof uitwisselen en knelpunten delen.</p></div></div>
+        <div class="asm-row"><div class="asm-num">2</div><div class="asm-body"><h4>Mentor-systeem</h4><p>Elke nieuwe trainer wordt gekoppeld aan een ervaren oud-speler. Die fungeert als klankbord voor technische vragen en coaching-dilemma's.</p></div></div>
+        <div class="asm-row"><div class="asm-num">3</div><div class="asm-body"><h4>D-Day (Pupillendag)</h4><p>Jaarlijks evenement voor de D-jeugd: een toets op handbaltechniek en ASM-vaardigheden. Spelers behalen een diploma – goed voor trots en clubbinding.</p></div></div>
+      </div>
+
+      <h2>Opleiding & ontwikkeling</h2>
+      <div class="ib ib-green"><p>Achilles stimuleert trainers om de <strong>HT1 of HT2 opleiding</strong> van het NHV te volgen. De vereniging dekt de kosten. Een getrainde trainer is een betere trainer – en dat merken de kinderen direct.</p></div>
+
+      <div class="grid-2">
+        <div class="ib ib-blue" style="margin:0"><h3>Wat we wel doen</h3><ul><li>Gedeelde oefenstofbibliotheek (ASM Gallery + YSP)</li><li>Evaluatie per blok van 10 weken</li><li>Oud-spelers als technisch klankbord</li><li>Opleidingskosten dekken voor trainers</li></ul></div>
+        <div class="ib ib-amber" style="margin:0"><h3>Wat we bewaken</h3><ul><li>Continuïteit bij trainerswisselingen</li><li>Eenduidige handbaltaal door de club</li><li>Balans tussen plezier en ontwikkeling</li><li>Zichtbare progressie voor spelers</li></ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<aside class="sidebar">
+  <div class="sb-card">
+    <div class="sb-head">Navigatie</div>
+    <div class="sb-body" id="sb-nav">
+      <div class="sb-link" data-key="visie"><span class="sb-dot sd-red">&#9654;</span> Spelopvatting</div>
+      <div class="sb-link" data-key="asm"><span class="sb-dot sd-red">&#9654;</span> ASM-kader</div>
+      <div class="sb-link" data-key="schema"><span class="sb-dot sd-red">&#9654;</span> Vaardighedenschema</div>
+      <div class="sb-link" data-key="f"><span class="sb-dot sd-green">F</span> F-jeugd (6–8 jr)</div>
+      <div class="sb-link" data-key="e"><span class="sb-dot sd-blue">E</span> E-jeugd (8–10 jr)</div>
+      <div class="sb-link" data-key="d"><span class="sb-dot sd-amber">D</span> D-jeugd (10–12 jr)</div>
+      <div class="sb-link" data-key="c"><span class="sb-dot sd-coral">C</span> C-jeugd (12–14 jr)</div>
+      <div class="sb-link" data-key="gallery"><span class="sb-dot sd-black">&#9654;</span> ASM Gallery</div>
+      <div class="sb-link" data-key="training"><span class="sb-dot sd-black">&#9654;</span> Trainingsmateriaal</div>
+      <div class="sb-link" data-key="ysp"><span class="sb-dot sd-black">&#9654;</span> YourSportPlanner</div>
+      <div class="sb-link" data-key="borging"><span class="sb-dot sd-red">&#9654;</span> Borging</div>
+    </div>
+  </div>
+  <div class="sb-card">
+    <div class="sb-head">Beleidsinfo</div>
+    <div class="sb-body">
+      <div class="sb-kv"><span>Versie</span><span>1.0</span></div>
+      <div class="sb-kv"><span>Methode</span><span>ASM</span></div>
+      <div class="sb-kv"><span>Trainingen</span><span>40 weken</span></div>
+      <div class="sb-kv"><span>Blokken</span><span>2 x 20 wk</span></div>
+      <div class="sb-kv"><span>Frequentie</span><span>1x per week</span></div>
+      <div class="sb-kv"><span>Duur</span><span>60–90 min</span></div>
+    </div>
+  </div>
+</aside>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo-wrap">
+      <img src="data:image/webp;base64,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" alt="GHV Achilles">
+      <div><div class="footer-name">GHV Achilles</div><div class="footer-sub">Gorinchem &middot; Handbalvereniging</div></div>
+    </div>
+    <div class="footer-meta">Technisch Beleidsplan Jeugd &middot; Versie 1.0<br>Breedtesport &middot; Athletic Skills Model</div>
+  </div>
+</footer>
+
+<script>
+const labels={visie:'Spelopvatting',asm:'ASM-kader',schema:'Vaardighedenschema',f:'F-jeugd',e:'E-jeugd',d:'D-jeugd',c:'C-jeugd',gallery:'ASM Gallery',training:'Trainingsmateriaal',ysp:'YourSportPlanner',borging:'Implementatie & Borging'};
+const keys=['visie','asm','schema','f','e','d','c','gallery','training','ysp','borging'];
+
+function show(id,btn){
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  var el=document.getElementById('sec-'+id);
+  if(el){el.classList.add('active');}
+  if(btn)btn.classList.add('active');
+  document.getElementById('bc').textContent=labels[id]||id;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleMenu(){
+  document.getElementById('hamburger').classList.toggle('open');
+  document.getElementById('nav-overlay').classList.toggle('open');
+  document.body.style.overflow=document.getElementById('nav-overlay').classList.contains('open')?'hidden':'';
+}
+function mobileNav(id,btn){
+  document.querySelectorAll('.nav-btn-mobile').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  var idx=keys.indexOf(id);
+  show(id,document.querySelectorAll('.nav-btn')[idx]);
+  toggleMenu();
+}
+
+document.querySelectorAll('#sb-nav .sb-link').forEach(function(el,i){
+  el.addEventListener('click',function(){show(keys[i],document.querySelectorAll('.nav-btn')[i]);});
+});
+
+function yspLogin(){
+  var w=window.open('','_blank');
+  w.document.write('<html><body><form id="f" action="https://www.yoursportplanner.com/en/login/login.php" method="post">'+
+    '<input type="hidden" name="login" value="1">'+
+    '<input type="hidden" name="user_name" value="bestuur.achilles@gmail.com">'+
+    '<input type="hidden" name="user_password" value="@chilles1969">'+
+    '</form><script>document.getElementById("f").submit()<\/script></body></html>');
+}
+</script>
+</body>
+</html>
