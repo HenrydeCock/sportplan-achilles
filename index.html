@@ -3,6 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a1a1a">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.webp" type="image/webp">
 <title>Technisch Beleidsplan Jeugd — GHV Achilles</title>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -46,9 +50,10 @@ nav { background: var(--black); position: sticky; top: 0; z-index: 100; box-shad
 .nav-overlay .nav-btn-mobile { font-family: inherit; font-size: 16px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: rgba(255,255,255,.6); background: none; border: none; padding: 12px 20px; cursor: pointer; transition: color .15s; width: 100%; text-align: center; }
 .nav-overlay .nav-btn-mobile:hover, .nav-overlay .nav-btn-mobile.active { color: var(--white); }
 .nav-overlay .nav-btn-mobile.active { border-left: 3px solid var(--red); background: rgba(255,255,255,.05); }
+.hamburger { display: block; }
+.nav-inner { display: none; }
+nav { min-height: auto; padding: 0; }
 @media(max-width:680px){
-  .hamburger { display: block; }
-  .nav-inner { display: none; }
   .schema-desktop { display: none; }
 }
 .schema-mobile { display: none; }
@@ -141,6 +146,9 @@ tbody tr:nth-child(even) td { background: var(--gray-100); }
 .tag-amber { background: var(--amber-pale); color: var(--amber); }
 .tag-blue  { background: var(--blue-pale); color: var(--blue); }
 .tag-gray  { background: var(--gray-200); color: var(--gray-700); }
+/* ASM-markering: items uit de Schijf van 10 / Athletic Skills Model */
+.asm { text-decoration: underline; text-decoration-style: dotted; text-decoration-color: var(--green); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.phase-pill.asm { text-decoration-color: rgba(255,255,255,.85); }
 .sb-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--r); overflow: hidden; margin-bottom: 14px; }
 .sb-head { background: var(--black); color: var(--white); font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 8px 14px; border-bottom: 2px solid var(--red); }
 .sb-body { padding: 10px 14px; }
@@ -419,6 +427,7 @@ footer { background: var(--black); border-top: 3px solid var(--red); padding: 24
     <button class="nav-btn" onclick="show('e',this)">E-jeugd</button>
     <button class="nav-btn" onclick="show('d',this)">D-jeugd</button>
     <button class="nav-btn" onclick="show('c',this)">C-jeugd</button>
+    <button class="nav-btn" onclick="show('keeper',this)">Keeper</button>
     <button class="nav-btn" onclick="show('gallery',this)">ASM Gallery</button>
     <button class="nav-btn" onclick="show('training',this)">Trainingsmateriaal</button>
     <button class="nav-btn" onclick="show('ysp',this)">YourSportPlanner</button>
@@ -433,6 +442,7 @@ footer { background: var(--black); border-top: 3px solid var(--red); padding: 24
   <button class="nav-btn-mobile" onclick="mobileNav('e',this)">E-jeugd</button>
   <button class="nav-btn-mobile" onclick="mobileNav('d',this)">D-jeugd</button>
   <button class="nav-btn-mobile" onclick="mobileNav('c',this)">C-jeugd</button>
+  <button class="nav-btn-mobile" onclick="mobileNav('keeper',this)">Keeper</button>
   <button class="nav-btn-mobile" onclick="mobileNav('gallery',this)">ASM Gallery</button>
   <button class="nav-btn-mobile" onclick="mobileNav('training',this)">Trainingsmateriaal</button>
   <button class="nav-btn-mobile" onclick="mobileNav('ysp',this)">YourSportPlanner</button>
@@ -498,6 +508,7 @@ footer { background: var(--black); border-top: 3px solid var(--red); padding: 24
       </tbody></table></div>
       <h2>De Schijf van 10 in de handbal</h2>
       <p>De tien grondvormen van bewegen, vertaald naar de handbaltraining. Gebruik dit als inspiratie om variatie in je oefenstof te brengen – ook als je geen handbalachtergrond hebt.</p>
+      <p style="font-size:13px;color:var(--gray-700)">Door de hele site herken je ASM-grondvormen aan een <span class="asm">groene stippellijn</span>.</p>
       <div class="table-wrap"><table><thead><tr><th>Grondvorm</th><th>Waarom voor handbal?</th><th>Voorbeeldoefening</th></tr></thead><tbody>
         <tr><td><strong>Balanceren & Vallen</strong></td><td>Stabiliteit in duels, veilig vallen bij valworp</td><td>Stoeivormen op matten; eenbenig bal vangen</td></tr>
         <tr><td><strong>Lopen & Gaan</strong></td><td>Versnellen en richting veranderen</td><td>Loopscholing: knieheffen, hakken-billen</td></tr>
@@ -525,27 +536,27 @@ footer { background: var(--black); border-top: 3px solid var(--red); padding: 24
       <p>Kernvaardigheden per categorie. Geen harde checklist – plezier en betrokkenheid wegen even zwaar als technische beheersing.</p>
       <!-- Desktop: tabel -->
       <div class="table-wrap schema-desktop"><table><thead><tr><th>Categorie</th><th>Technische vaardigheden</th><th>Motorisch / fysiek</th><th>Sociaal / mentaal</th></tr></thead><tbody>
-        <tr><td><span class="tag tag-green">F-jeugd</span><br><small style="color:var(--gray-500)">6–8 jaar</small></td><td><span class="tag tag-gray">Bal oppakken</span> <span class="tag tag-gray">Gooien op doel (vrij)</span> <span class="tag tag-gray">Vangen (grote bal)</span> <span class="tag tag-gray">Doelconcept begrijpen</span></td><td><span class="tag tag-gray">Rennen en stoppen</span> <span class="tag tag-gray">Springen op 1 been</span> <span class="tag tag-gray">Richtingsverandering</span> <span class="tag tag-gray">Links én rechts gooien</span></td><td><span class="tag tag-gray">Luisteren bij uitleg</span> <span class="tag tag-gray">Groepsspel deelnemen</span> <span class="tag tag-gray">Wachten op beurt</span> <span class="tag tag-gray">Plezier ervaren</span></td></tr>
-        <tr><td><span class="tag tag-blue">E-jeugd</span><br><small style="color:var(--gray-500)">8–10 jaar</small></td><td><span class="tag tag-gray">Standhouderpas (beide handen)</span> <span class="tag tag-gray">Sprong- of stootschot (basis)</span> <span class="tag tag-gray">Dribbelen (vrij)</span> <span class="tag tag-gray">Keeper: basishouding</span></td><td><span class="tag tag-gray">Coördinatie pas-en-loop</span> <span class="tag tag-gray">Ruimtelijk inzicht</span> <span class="tag tag-gray">Vallen en opstaan</span> <span class="tag tag-gray">Basisconditie full game</span></td><td><span class="tag tag-gray">Feedback accepteren</span> <span class="tag tag-gray">Afspraken nakomen</span> <span class="tag tag-gray">Ploeggenoten aanmoedigen</span> <span class="tag tag-gray">Verliezen verwerken</span></td></tr>
-        <tr><td><span class="tag tag-amber">D-jeugd</span><br><small style="color:var(--gray-500)">10–12 jaar</small></td><td><span class="tag tag-gray">Sprong- en valschot</span> <span class="tag tag-gray">Omhaalschot (intro)</span> <span class="tag tag-gray">Man-op-man verdediging</span> <span class="tag tag-gray">Snelheid in de pas</span> <span class="tag tag-gray">Keeper: hoektechniek</span></td><td><span class="tag tag-gray">Explosiviteit (sprint)</span> <span class="tag tag-gray">Kracht in schot</span> <span class="tag tag-gray">Wendbaarheid</span> <span class="tag tag-gray">Wedstrijduithoudingsvermogen</span></td><td><span class="tag tag-gray">Posities kennen</span> <span class="tag tag-gray">Communiceren op veld</span> <span class="tag tag-gray">Afspraken in samenspel</span> <span class="tag tag-gray">Omgaan met druk</span></td></tr>
+        <tr><td><span class="tag tag-green">F-jeugd</span><br><small style="color:var(--gray-500)">6–8 jaar</small></td><td><span class="tag tag-gray">Bal oppakken</span> <span class="tag tag-gray">Gooien op doel (vrij)</span> <span class="tag tag-gray">Vangen (grote bal)</span> <span class="tag tag-gray">Doelconcept begrijpen</span></td><td><span class="tag tag-gray asm">Rennen, springen, landen</span> <span class="tag tag-gray asm">Rollen & klimmen</span> <span class="tag tag-gray asm">Stoeien & balanceren</span> <span class="tag tag-gray asm">Links én rechts gooien</span></td><td><span class="tag tag-gray">Luisteren bij uitleg</span> <span class="tag tag-gray">Groepsspel deelnemen</span> <span class="tag tag-gray">Wachten op beurt</span> <span class="tag tag-gray">Plezier ervaren</span></td></tr>
+        <tr><td><span class="tag tag-blue">E-jeugd</span><br><small style="color:var(--gray-500)">8–10 jaar</small></td><td><span class="tag tag-gray">Gooien uit stand (beide handen)</span> <span class="tag tag-gray">Loop- en springschot (basis)</span> <span class="tag tag-gray">Mikken op hoek</span> <span class="tag tag-gray">Voetenwerk: side-steps, sprint-stop</span> <span class="tag tag-gray">Keeper: basishouding</span></td><td><span class="tag tag-gray asm">Coördinatie pas-en-loop</span> <span class="tag tag-gray asm">Tweebenig landen</span> <span class="tag tag-gray">Ruimtelijk inzicht</span> <span class="tag tag-gray asm">Vallen en opstaan</span> <span class="tag tag-gray">Basisconditie full game</span></td><td><span class="tag tag-gray">Feedback accepteren</span> <span class="tag tag-gray">Afspraken nakomen</span> <span class="tag tag-gray">Ploeggenoten aanmoedigen</span> <span class="tag tag-gray">Posities (intro)</span> <span class="tag tag-gray">Spelregels basis</span> <span class="tag tag-gray">Verliezen verwerken</span></td></tr>
+        <tr><td><span class="tag tag-amber">D-jeugd</span><br><small style="color:var(--gray-500)">10–12 jaar</small></td><td><span class="tag tag-gray">Sprong- en valschot</span> <span class="tag tag-gray">Heupschot (intro)</span> <span class="tag tag-gray">Schijnbeweging</span> <span class="tag tag-gray">Voetenwerk: pivoteren</span> <span class="tag tag-gray">Verdediging: blokkeren & afvangen</span> <span class="tag tag-gray">Snelheid in de pas</span> <span class="tag tag-gray">Keeper: hoektechniek</span></td><td><span class="tag tag-gray asm">Explosiviteit (sprint)</span> <span class="tag tag-gray">Kracht in schot</span> <span class="tag tag-gray asm">Wendbaarheid</span> <span class="tag tag-gray">Wedstrijduithoudingsvermogen</span></td><td><span class="tag tag-gray">Posities kennen</span> <span class="tag tag-gray">Communiceren op veld</span> <span class="tag tag-gray">"Lezen" van het spel (intro)</span> <span class="tag tag-gray">Afspraken in samenspel</span> <span class="tag tag-gray">Omgaan met druk</span></td></tr>
         <tr><td><span class="tag tag-red">C-jeugd</span><br><small style="color:var(--gray-500)">12–14 jaar</small></td><td><span class="tag tag-gray">Alle schoten in spel</span> <span class="tag tag-gray">Opbouwen vanuit keeper</span> <span class="tag tag-gray">3-2-1 verdediging (basis)</span> <span class="tag tag-gray">Keeper: actief met voeten</span></td><td><span class="tag tag-gray">Kracht + snelheid gecombineerd</span> <span class="tag tag-gray">Wedstrijdconditie 2x25 min</span> <span class="tag tag-gray">Blessurepreventie basis</span></td><td><span class="tag tag-gray">Tactisch medenken</span> <span class="tag tag-gray">Leiderschap in groep</span> <span class="tag tag-gray">Eigen fouten analyseren</span> <span class="tag tag-gray">Samenwerken onder druk</span></td></tr>
       </tbody></table></div>
       <!-- Mobile: kaarten -->
       <div class="schema-mobile">
         <div class="schema-card sc-green"><div class="sc-header"><span class="tag tag-green">F-jeugd</span> <small>6–8 jaar</small></div>
           <div class="sc-section"><h3>Technisch</h3><span class="tag tag-gray">Bal oppakken</span> <span class="tag tag-gray">Gooien op doel (vrij)</span> <span class="tag tag-gray">Vangen (grote bal)</span> <span class="tag tag-gray">Doelconcept begrijpen</span></div>
-          <div class="sc-section"><h3>Motorisch / fysiek</h3><span class="tag tag-gray">Rennen en stoppen</span> <span class="tag tag-gray">Springen op 1 been</span> <span class="tag tag-gray">Richtingsverandering</span> <span class="tag tag-gray">Links én rechts gooien</span></div>
+          <div class="sc-section"><h3>Motorisch / fysiek</h3><span class="tag tag-gray asm">Rennen, springen, landen</span> <span class="tag tag-gray asm">Rollen & klimmen</span> <span class="tag tag-gray asm">Stoeien & balanceren</span> <span class="tag tag-gray asm">Links én rechts gooien</span></div>
           <div class="sc-section"><h3>Sociaal / mentaal</h3><span class="tag tag-gray">Luisteren bij uitleg</span> <span class="tag tag-gray">Groepsspel deelnemen</span> <span class="tag tag-gray">Wachten op beurt</span> <span class="tag tag-gray">Plezier ervaren</span></div>
         </div>
         <div class="schema-card sc-blue"><div class="sc-header"><span class="tag tag-blue">E-jeugd</span> <small>8–10 jaar</small></div>
-          <div class="sc-section"><h3>Technisch</h3><span class="tag tag-gray">Standhouderpas (beide handen)</span> <span class="tag tag-gray">Sprong- of stootschot (basis)</span> <span class="tag tag-gray">Dribbelen (vrij)</span> <span class="tag tag-gray">Keeper: basishouding</span></div>
-          <div class="sc-section"><h3>Motorisch / fysiek</h3><span class="tag tag-gray">Coördinatie pas-en-loop</span> <span class="tag tag-gray">Ruimtelijk inzicht</span> <span class="tag tag-gray">Vallen en opstaan</span> <span class="tag tag-gray">Basisconditie full game</span></div>
-          <div class="sc-section"><h3>Sociaal / mentaal</h3><span class="tag tag-gray">Feedback accepteren</span> <span class="tag tag-gray">Afspraken nakomen</span> <span class="tag tag-gray">Ploeggenoten aanmoedigen</span> <span class="tag tag-gray">Verliezen verwerken</span></div>
+          <div class="sc-section"><h3>Technisch</h3><span class="tag tag-gray">Gooien uit stand (beide handen)</span> <span class="tag tag-gray">Loop- en springschot (basis)</span> <span class="tag tag-gray">Mikken op hoek</span> <span class="tag tag-gray">Voetenwerk: side-steps, sprint-stop</span> <span class="tag tag-gray">Keeper: basishouding</span></div>
+          <div class="sc-section"><h3>Motorisch / fysiek</h3><span class="tag tag-gray asm">Coördinatie pas-en-loop</span> <span class="tag tag-gray asm">Tweebenig landen</span> <span class="tag tag-gray">Ruimtelijk inzicht</span> <span class="tag tag-gray asm">Vallen en opstaan</span> <span class="tag tag-gray">Basisconditie full game</span></div>
+          <div class="sc-section"><h3>Sociaal / mentaal</h3><span class="tag tag-gray">Feedback accepteren</span> <span class="tag tag-gray">Afspraken nakomen</span> <span class="tag tag-gray">Ploeggenoten aanmoedigen</span> <span class="tag tag-gray">Posities (intro)</span> <span class="tag tag-gray">Spelregels basis</span> <span class="tag tag-gray">Verliezen verwerken</span></div>
         </div>
         <div class="schema-card sc-amber"><div class="sc-header"><span class="tag tag-amber">D-jeugd</span> <small>10–12 jaar</small></div>
-          <div class="sc-section"><h3>Technisch</h3><span class="tag tag-gray">Sprong- en valschot</span> <span class="tag tag-gray">Omhaalschot (intro)</span> <span class="tag tag-gray">Man-op-man verdediging</span> <span class="tag tag-gray">Snelheid in de pas</span> <span class="tag tag-gray">Keeper: hoektechniek</span></div>
-          <div class="sc-section"><h3>Motorisch / fysiek</h3><span class="tag tag-gray">Explosiviteit (sprint)</span> <span class="tag tag-gray">Kracht in schot</span> <span class="tag tag-gray">Wendbaarheid</span> <span class="tag tag-gray">Wedstrijduithoudingsvermogen</span></div>
-          <div class="sc-section"><h3>Sociaal / mentaal</h3><span class="tag tag-gray">Posities kennen</span> <span class="tag tag-gray">Communiceren op veld</span> <span class="tag tag-gray">Afspraken in samenspel</span> <span class="tag tag-gray">Omgaan met druk</span></div>
+          <div class="sc-section"><h3>Technisch</h3><span class="tag tag-gray">Sprong- en valschot</span> <span class="tag tag-gray">Heupschot (intro)</span> <span class="tag tag-gray">Schijnbeweging</span> <span class="tag tag-gray">Voetenwerk: pivoteren</span> <span class="tag tag-gray">Verdediging: blokkeren & afvangen</span> <span class="tag tag-gray">Snelheid in de pas</span> <span class="tag tag-gray">Keeper: hoektechniek</span></div>
+          <div class="sc-section"><h3>Motorisch / fysiek</h3><span class="tag tag-gray asm">Explosiviteit (sprint)</span> <span class="tag tag-gray">Kracht in schot</span> <span class="tag tag-gray asm">Wendbaarheid</span> <span class="tag tag-gray">Wedstrijduithoudingsvermogen</span></div>
+          <div class="sc-section"><h3>Sociaal / mentaal</h3><span class="tag tag-gray">Posities kennen</span> <span class="tag tag-gray">Communiceren op veld</span> <span class="tag tag-gray">"Lezen" van het spel (intro)</span> <span class="tag tag-gray">Afspraken in samenspel</span> <span class="tag tag-gray">Omgaan met druk</span></div>
         </div>
         <div class="schema-card sc-red"><div class="sc-header"><span class="tag tag-red">C-jeugd</span> <small>12–14 jaar</small></div>
           <div class="sc-section"><h3>Technisch</h3><span class="tag tag-gray">Alle schoten in spel</span> <span class="tag tag-gray">Opbouwen vanuit keeper</span> <span class="tag tag-gray">3-2-1 verdediging (basis)</span> <span class="tag tag-gray">Keeper: actief met voeten</span></div>
@@ -574,24 +585,29 @@ footer { background: var(--black); border-top: 3px solid var(--red); padding: 24
         <li>Geen wedstrijdstand bijhouden of nadruk op winnen/verliezen.</li>
       </ul></div>
       <h2>Jaarplanning – 40 weken</h2>
-      <div class="block-div"><span class="block-title">Blok 1 – Binnen</span><div class="block-line"></div><span class="block-badge">Wk 1–20 · Sept–Jan</span></div>
+      <div class="block-div"><span class="block-title">Blok 1 – Veld Najaar</span><div class="block-line"></div><span class="block-badge">Wk 1–6 · Sept–half Okt</span></div>
       <div class="table-wrap"><table><thead><tr><th>Fase</th><th>Weken</th><th>Thema</th><th>Voorbeeldoefeningen</th></tr></thead><tbody>
-        <tr><td><span class="phase-pill">Intro</span></td><td>1–4</td><td>Kennismaken, veiligheid, regels van de zaal</td><td>Tikspel, balgewenning, "wie ben ik"-spel</td></tr>
-        <tr><td><span class="phase-pill">Gooien</span></td><td>5–9</td><td>Gooien op doel, vangen, bal vasthouden</td><td>Gooien op mini-doel, ballenregen, estafettes</td></tr>
-        <tr><td><span class="phase-pill">Bewegen</span></td><td>10–14</td><td>Rennen, springen, vallen – ASM laag 1</td><td>Parcours, springspelen, schieten na sprint</td></tr>
-        <tr><td><span class="phase-pill">Spelen</span></td><td>15–20</td><td>Speelvorm 3v3 klein veld, eerste wedstrijdjes</td><td>Mini-handbal, doortikspel, afsluitend spelletje</td></tr>
+        <tr><td><span class="phase-pill">Intro</span></td><td>1–3</td><td>Kennismaken, lopen & rennen, balgewenning</td><td>Tikspel, "wie ben ik", balletje rollen en vangen</td></tr>
+        <tr><td><span class="phase-pill">Gooien</span></td><td>4–6</td><td>Gooien & vangen – grote bewegingen, veel ruimte</td><td>Estafettes, gooien over afstand, mikken op pion</td></tr>
       </tbody></table></div>
-      <div class="block-div"><span class="block-title">Blok 2 – Buiten</span><div class="block-line"></div><span class="block-badge">Wk 21–40 · Feb–Juni</span></div>
+      <div class="block-div"><span class="block-title">Blok 2 – Zaal (hoofdseizoen)</span><div class="block-line"></div><span class="block-badge">Wk 7–28 · half Okt–half Mrt</span></div>
       <div class="table-wrap"><table><thead><tr><th>Fase</th><th>Weken</th><th>Thema</th><th>Voorbeeldoefeningen</th></tr></thead><tbody>
-        <tr><td><span class="phase-pill">Herhaling</span></td><td>21–24</td><td>Terug in het ritme, blok 1 opfrissen</td><td>Favoriete spelen uit blok 1 herhalen</td></tr>
-        <tr><td><span class="phase-pill">Buiten</span></td><td>25–29</td><td>Buitensporten, meer ruimte, gooien ver</td><td>Gooien over afstand, tikspelen groot veld</td></tr>
-        <tr><td><span class="phase-pill">Samenspel</span></td><td>30–34</td><td>Twee spelen samen: passen en lopen</td><td>2v1-speeltjes, geef-en-loop</td></tr>
-        <tr><td><span class="phase-pill">Feest</span></td><td>35–40</td><td>Afsluiting, toernooi, plezier centraal</td><td>Mini-toernooi, hindernisbaan, diploma-uitreiking</td></tr>
+        <tr><td><span class="phase-pill asm">Gooien & Vangen</span></td><td>7–11</td><td>Bal beheersen, mikken op doel, links én rechts</td><td>Gooien op mini-doel, ballenregen, vangen uit de lucht</td></tr>
+        <tr><td><span class="phase-pill asm">Springen & Landen</span></td><td>12–15</td><td>Bankspringen, hindernissen, tweebenig landen</td><td>Hindernisbaan, schieten na sprong, springspelen</td></tr>
+        <tr><td><span class="phase-pill asm">Rollen & Klimmen</span></td><td>16–19</td><td>Koprol, klimmen op kasten, vallen zonder angst</td><td>Klim-parcours, koprol + bal vangen, mat-spelen</td></tr>
+        <tr><td><span class="phase-pill asm">Stoeien & Balanceren</span></td><td>20–23</td><td>Trekken/duwen, hanengevecht, contact accepteren</td><td>Matball, eenbenig staan + bal vangen, duwspel</td></tr>
+        <tr><td><span class="phase-pill">Regels & Spelen</span></td><td>24–28</td><td>Speelvorm 3v3 + simpele regels: niet met bal lopen, niet in cirkel</td><td>Mini-handbal met regel-uitleg al spelend, doortikspel</td></tr>
+      </tbody></table></div>
+      <div class="block-div"><span class="block-title">Blok 3 – Veld Voorjaar</span><div class="block-line"></div><span class="block-badge">Wk 29–40 · Apr–Juni</span></div>
+      <div class="table-wrap"><table><thead><tr><th>Fase</th><th>Weken</th><th>Thema</th><th>Voorbeeldoefeningen</th></tr></thead><tbody>
+        <tr><td><span class="phase-pill">Herhaling</span></td><td>29–32</td><td>Favorieten uit de zaal, nu buiten op groot veld</td><td>Favoriete spelen herhalen, ritmevormen (huppelen)</td></tr>
+        <tr><td><span class="phase-pill asm">Ritme & Loop</span></td><td>33–36</td><td>Lopen op ritme, sprint-stop, gooien in beweging</td><td>Loopscholing met klap, sprintjes, gooien tijdens loop</td></tr>
+        <tr><td><span class="phase-pill">Feest</span></td><td>37–40</td><td>Afsluiting, toernooi, plezier centraal</td><td>Mini-toernooi, hindernisbaan, diploma-uitreiking</td></tr>
       </tbody></table></div>
       <h2>Trainingsindeling – 60 minuten</h2>
       <div class="wb-list">
-        <div class="wb-row"><div class="wb-time">0–10 min</div><div class="wb-content">Warming-up als spelletje – tikspel, balletje-over. Geen statisch rekken.</div></div>
-        <div class="wb-row"><div class="wb-time">10–25 min</div><div class="wb-content">Kern 1: beweegactiviteit (rennen, springen, gooien) – hoog tempo, weinig wachten</div></div>
+        <div class="wb-row"><div class="wb-time">0–10 min</div><div class="wb-content">Warming-up als spelletje – <span class="asm">tikspel, balletje-over</span>. Geen statisch rekken.</div></div>
+        <div class="wb-row"><div class="wb-time">10–25 min</div><div class="wb-content">Kern 1: <span class="asm">beweegactiviteit (rennen, springen, gooien)</span> – hoog tempo, weinig wachten</div></div>
         <div class="wb-row"><div class="wb-time">25–45 min</div><div class="wb-content">Kern 2: handbalgericht spel (schieten op doel, 2v1, mini-wedstrijdje)</div></div>
         <div class="wb-row"><div class="wb-time">45–55 min</div><div class="wb-content">Afsluitend spel: iets wat altijd lukt en energie geeft</div></div>
         <div class="wb-row"><div class="wb-time">55–60 min</div><div class="wb-content">Afsluiting: even samen zitten, iets vertellen, positief afsluiten</div></div>
@@ -606,7 +622,7 @@ footer { background: var(--black); border-top: 3px solid var(--red); padding: 24
     <div class="content-body">
       <div class="ib ib-blue"><h3>Accent van deze fase</h3><p>In de E-jeugd begint handbal er echt uit te zien als handbal. Kinderen snappen spelregels beter en begrijpen het idee van samenspelen. Techniek wordt nu iets meer benoemd – altijd vanuit spelen.</p><p style="margin:0">Sociaal leren kinderen dat sport samen beter is. Het begin van echte teambinding.</p></div>
       <div class="grid-2">
-        <div class="ib ib-blue" style="margin:0"><h3>Technisch accent</h3><ul><li>Standhouder- en schouderpass (beide handen)</li><li>Gooien op doel met aanloop (vrij schot)</li><li>Eerste sprong- of stootschot (introductie)</li><li>Dribbelen (maar niet te veel: handbal is passen!)</li><li>Keeper: simpele positie, lef opbouwen</li></ul></div>
+        <div class="ib ib-blue" style="margin:0"><h3>Technisch accent</h3><ul><li>Gooien uit stand (beide handen)</li><li>Gooien op doel met aanloop (vrij schot)</li><li>Eerste sprong- of loopschot (introductie)</li><li>Dribbelen (maar niet te veel: handbal is passen!)</li><li>Keeper: simpele positie, lef opbouwen</li></ul></div>
         <div class="ib ib-amber" style="margin:0"><h3>Sociaal accent</h3><ul><li>Communiceren op het veld ("vrij!" roepen)</li><li>Aanmoedigen van ploeggenoten is een skill</li><li>Feedback geven en ontvangen op goede manier</li><li>Rol van de keeper waarderen (roterende keeper!)</li><li>Eerlijk spel en sportiviteit belonen</li></ul></div>
       </div>
       <div class="trainer-box"><div class="tb-label">Wat vraagt dit van de trainer?</div><ul>
@@ -617,27 +633,32 @@ footer { background: var(--black); border-top: 3px solid var(--red); padding: 24
         <li>Maak fouten bespreekbaar maar normaal: "Dat overkomt iedereen, ook mij."</li>
       </ul></div>
       <h2>Jaarplanning – 40 weken</h2>
-      <div class="block-div"><span class="block-title">Blok 1 – Binnen</span><div class="block-line"></div><span class="block-badge">Wk 1–20 · Sept–Jan</span></div>
+      <div class="block-div"><span class="block-title">Blok 1 – Veld Najaar</span><div class="block-line"></div><span class="block-badge">Wk 1–6 · Sept–half Okt</span></div>
       <div class="table-wrap"><table><thead><tr><th>Fase</th><th>Weken</th><th>Thema</th><th>Voorbeeldoefeningen</th></tr></thead><tbody>
-        <tr><td><span class="phase-pill">Basis</span></td><td>1–5</td><td>Passen, vangen, positie kiezen</td><td>Dribbel-tikspel, pass-en-loop, driehoekspassen</td></tr>
-        <tr><td><span class="phase-pill">Schieten</span></td><td>6–10</td><td>Stoot- en springschot, keeper aanspreken</td><td>Opbouw naar doel, 2v0 doelpuntenschot</td></tr>
-        <tr><td><span class="phase-pill">Samenspel</span></td><td>11–15</td><td>2v1 en 3v2 spelvormen, ruimte benutten</td><td>2v1-circuit, 3v2 op klein veld</td></tr>
-        <tr><td><span class="phase-pill">Wedstrijd</span></td><td>16–20</td><td>4v4 of 5v5, basisregels volledig toepassen</td><td>Mini-competitie in de groep</td></tr>
+        <tr><td><span class="phase-pill">Basis</span></td><td>1–3</td><td>Gooien uit stand (links én rechts), pass-en-loop</td><td>Driehoekspassen, dribbel-tikspel, vangen uit lucht</td></tr>
+        <tr><td><span class="phase-pill asm">Loop & Sprint</span></td><td>4–6</td><td>Loopscholing, sprint-stop, gooien in beweging</td><td>Knieheffen, sprintjes, gooien over afstand</td></tr>
       </tbody></table></div>
-      <div class="block-div"><span class="block-title">Blok 2 – Buiten</span><div class="block-line"></div><span class="block-badge">Wk 21–40 · Feb–Juni</span></div>
+      <div class="block-div"><span class="block-title">Blok 2 – Zaal (hoofdseizoen)</span><div class="block-line"></div><span class="block-badge">Wk 7–28 · half Okt–half Mrt</span></div>
       <div class="table-wrap"><table><thead><tr><th>Fase</th><th>Weken</th><th>Thema</th><th>Voorbeeldoefeningen</th></tr></thead><tbody>
-        <tr><td><span class="phase-pill">Buiten</span></td><td>21–25</td><td>Gooien over grotere afstand, buiten aanpassen</td><td>Snelle break, gooien over 8–10 m</td></tr>
-        <tr><td><span class="phase-pill">Keeper</span></td><td>26–30</td><td>Iedereen in het doel – lef en positie</td><td>1v1 keeper-schutter, duo-training</td></tr>
-        <tr><td><span class="phase-pill">Teamspel</span></td><td>31–35</td><td>Afspraken in de aanval, minder vrij</td><td>"Eerst passen"-afspraak, aanval via buitenspeler</td></tr>
-        <tr><td><span class="phase-pill">Afsluiting</span></td><td>36–40</td><td>Toernooi, feest, reflectie op het jaar</td><td>Mini-toernooi, spelersbeoordeling door henzelf</td></tr>
+        <tr><td><span class="phase-pill">Voetenwerk</span></td><td>7–10</td><td>Side-steps, sprint-stop, tweebenig landen</td><td>Loopladder, schaduwspel, side-step parcours</td></tr>
+        <tr><td><span class="phase-pill">Schieten</span></td><td>11–15</td><td>Loop- en springschot, mikken op hoek</td><td>Schot-rij, 2v0 op doel, mikken op pion in hoek</td></tr>
+        <tr><td><span class="phase-pill">Samenspel</span></td><td>16–20</td><td>2v1 en 3v2 spelvormen, ruimte benutten</td><td>2v1-circuit, 3v2 op klein veld, geef-en-loop</td></tr>
+        <tr><td><span class="phase-pill">Keeper</span></td><td>21–24</td><td>Iedereen in het doel – lef en basishouding</td><td>1v1 keeper-schutter, duo-training, hoekschoten</td></tr>
+        <tr><td><span class="phase-pill">Regels & Posities</span></td><td>25–28</td><td>3-stappenregel, dubbelstuit, cirkellijn + posities (opbouwer/hoek/cirkel/vleugel)</td><td>Spelvorm met regel-stops, posities aanwijzen op veld</td></tr>
       </tbody></table></div>
-      <h2>Trainingsindeling – 75 minuten</h2>
+      <div class="block-div"><span class="block-title">Blok 3 – Veld Voorjaar</span><div class="block-line"></div><span class="block-badge">Wk 29–40 · Apr–Juni</span></div>
+      <div class="table-wrap"><table><thead><tr><th>Fase</th><th>Weken</th><th>Thema</th><th>Voorbeeldoefeningen</th></tr></thead><tbody>
+        <tr><td><span class="phase-pill">Teamspel</span></td><td>29–33</td><td>Afspraken in de aanval, samenspel buiten</td><td>"Eerst passen"-afspraak, aanval via buitenspeler</td></tr>
+        <tr><td><span class="phase-pill">Buiten</span></td><td>34–37</td><td>Snelle break, gooien over grotere afstand</td><td>Snelle break, gooien over 8–10 m</td></tr>
+        <tr><td><span class="phase-pill">Afsluiting</span></td><td>38–40</td><td>Toernooi, feest, reflectie op het jaar</td><td>Mini-toernooi, spelersbeoordeling door henzelf</td></tr>
+      </tbody></table></div>
+      <h2>Trainingsindeling – 60 minuten</h2>
       <div class="wb-list">
-        <div class="wb-row"><div class="wb-time">0–10 min</div><div class="wb-content">Warming-up met bal: pass-kring, tikspel met bal, activerende vorm</div></div>
-        <div class="wb-row"><div class="wb-time">10–30 min</div><div class="wb-content">Technische kern: weekthema in kleine groepjes (passen, schieten, keeper)</div></div>
-        <div class="wb-row"><div class="wb-time">30–60 min</div><div class="wb-content">Speelvorm: toepassen in spel – 3v3 of 4v4 op klein veld</div></div>
-        <div class="wb-row"><div class="wb-time">60–70 min</div><div class="wb-content">Afsluitend spel of competitietje – hoog energie, plezier</div></div>
-        <div class="wb-row"><div class="wb-time">70–75 min</div><div class="wb-content">Korte evaluatie: één ding dat goed ging, één punt voor volgende week</div></div>
+        <div class="wb-row"><div class="wb-time">0–8 min</div><div class="wb-content">Warming-up met bal: pass-kring, <span class="asm">tikspel met bal, loopvormen</span></div></div>
+        <div class="wb-row"><div class="wb-time">8–22 min</div><div class="wb-content">Technische kern: weekthema in kleine groepjes (passen, schieten, keeper)</div></div>
+        <div class="wb-row"><div class="wb-time">22–45 min</div><div class="wb-content">Speelvorm: toepassen in spel – 3v3 of 4v4 op klein veld</div></div>
+        <div class="wb-row"><div class="wb-time">45–55 min</div><div class="wb-content">Afsluitend spel of competitietje – hoog energie, plezier</div></div>
+        <div class="wb-row"><div class="wb-time">55–60 min</div><div class="wb-content">Korte evaluatie: één ding dat goed ging, één punt voor volgende week</div></div>
       </div>
     </div>
   </div>
@@ -648,8 +669,9 @@ footer { background: var(--black); border-top: 3px solid var(--red); padding: 24
     <div class="age-banner"><div class="age-letter">D</div><div class="age-info"><h1>D-jeugd</h1><p>10–12 jaar &nbsp;·&nbsp; ASM Laag 2 &nbsp;·&nbsp; Technische leerfase</p></div></div>
     <div class="content-body">
       <div class="ib ib-amber"><h3>Accent van deze fase</h3><p>De D-jeugd is de technische leerfase bij uitstek. Kinderen zijn motorisch rijp voor herhaling en bewuste techniekopbouw. Zwaartepunt: passnauwkeurigheid, schottechniek en basisverdediging.</p><p style="margin:0">Sociaal leren kinderen samenwerken mét druk erop. Rollen ontstaan, vriendschappen worden hechter maar ook spannender.</p></div>
+      <div class="ib ib-blue" style="font-size:13px"><strong>Keepers:</strong> kinderen die kiezen voor de keeperrol krijgen aparte techniektraining – zie het tabblad <strong>Keeper-leerlijn</strong> voor specifieke oefenstof (hoektechniek, positiekeuze, lange uitworp).</div>
       <div class="grid-2">
-        <div class="ib ib-amber" style="margin:0"><h3>Technisch accent</h3><ul><li>Sprong- en valschot technisch correct</li><li>Omhaalschot introductie</li><li>Snelheid in de pass (geen statisch passen)</li><li>Man-op-man verdediging basisprincipes</li><li>Aanvalslopen: doorlopen, blok, kruising (intro)</li><li>Keeper: hoektechniek en uitworp</li></ul></div>
+        <div class="ib ib-amber" style="margin:0"><h3>Technisch accent</h3><ul><li>Sprong- en valschot technisch correct</li><li>Heupschot introductie</li><li>Snelheid in de pass (geen statisch passen)</li><li>Man-op-man verdediging basisprincipes</li><li>Aanvalslopen: doorlopen, blok, kruising (intro)</li><li>Keeper: hoektechniek en uitworp</li></ul></div>
         <div class="ib ib-blue" style="margin:0"><h3>Sociaal accent</h3><ul><li>Communicatie in het veld – luid en duidelijk</li><li>Positieverdeling begrijpen en respecteren</li><li>Kritiek geven op een manier die motiveert</li><li>Omgaan met een mindere wedstrijd of blunder</li><li>Teamverantwoordelijkheid: jij bent er voor de groep</li></ul></div>
       </div>
       <div class="trainer-box"><div class="tb-label">Wat vraagt dit van de trainer?</div><ul>
@@ -660,26 +682,40 @@ footer { background: var(--black); border-top: 3px solid var(--red); padding: 24
         <li>Introduceer lichte wedstrijddruk – maar bewaak sportiviteit actief.</li>
       </ul></div>
       <h2>Jaarplanning – 40 weken</h2>
-      <div class="block-div"><span class="block-title">Blok 1 – Binnen</span><div class="block-line"></div><span class="block-badge">Wk 1–20 · Sept–Jan</span></div>
+      <div class="block-div"><span class="block-title">Blok 1 – Veld Najaar</span><div class="block-line"></div><span class="block-badge">Wk 1–6 · Sept–half Okt</span></div>
       <div class="table-wrap"><table><thead><tr><th>Fase</th><th>Weken</th><th>Thema</th><th>Voorbeeldoefeningen</th></tr></thead><tbody>
-        <tr><td><span class="phase-pill">Techniek</span></td><td>1–5</td><td>Schottechnieken herhalen en verfijnen</td><td>Springschot-circuit, valschot-oefenrij</td></tr>
-        <tr><td><span class="phase-pill">Verdedigen</span></td><td>6–10</td><td>Man-op-man, positie en timing</td><td>1v1 verdedigen, schaduw-oefening, 2v2-duel</td></tr>
-        <tr><td><span class="phase-pill">Samenspel</span></td><td>11–15</td><td>Aanvalslopen, kruising, 2-mans combinaties</td><td>Geef-en-loop, 2v1, kruising op cirkel</td></tr>
-        <tr><td><span class="phase-pill">Tactiek</span></td><td>16–20</td><td>Eenvoudig aanvalssysteem, vrij positioneren</td><td>5v5 met positieopdracht, aanval via buitenspeler</td></tr>
+        <tr><td><span class="phase-pill">Voetenwerk & Posities</span></td><td>1–3</td><td>Pivoteren, side-steps, tweebenigheid + posities benoemen (opbouwer/hoek/cirkel/midden)</td><td>Loopladder, pivot-oefening, posities aanwijzen op veld</td></tr>
+        <tr><td><span class="phase-pill">Pas & Break</span></td><td>4–6</td><td>Lange pass, snelle break, gooien in beweging</td><td>Geef-en-loop, 2v1 op groot veld, 1e/2e golf break</td></tr>
       </tbody></table></div>
-      <div class="block-div"><span class="block-title">Blok 2 – Buiten</span><div class="block-line"></div><span class="block-badge">Wk 21–40 · Feb–Juni</span></div>
+      <div class="block-div"><span class="block-title">Blok 2 – Zaal (hoofdseizoen)</span><div class="block-line"></div><span class="block-badge">Wk 7–28 · half Okt–half Mrt</span></div>
       <div class="table-wrap"><table><thead><tr><th>Fase</th><th>Weken</th><th>Thema</th><th>Voorbeeldoefeningen</th></tr></thead><tbody>
-        <tr><td><span class="phase-pill">Toepassing</span></td><td>21–26</td><td>Alles uit blok 1 toepassen in speelvorm</td><td>6v6 met coachingspunten, wedstrijdscenario's</td></tr>
-        <tr><td><span class="phase-pill">Conditie</span></td><td>27–31</td><td>Lopen, explosiviteit, coördinatie</td><td>Sprints, hindernisbaan, balladder</td></tr>
-        <tr><td><span class="phase-pill">Omhaal</span></td><td>32–35</td><td>Technische uitdaging: omhaalschot opbouw</td><td>Stap-voor-stap opbouw omhaalschot</td></tr>
-        <tr><td><span class="phase-pill">Afsluiting</span></td><td>36–40</td><td>Toernooi, evaluatie, seizoensafsluiting</td><td>Intern toernooi, individueel spelersgesprek</td></tr>
+        <tr><td><span class="phase-pill">Schiettechniek</span></td><td>7–11</td><td>Springschot, valschot, hoekschot – correct voetenwerk</td><td>Springschot over blok, valschot-rij, hoek-circuit</td></tr>
+        <tr><td><span class="phase-pill">Pas & Schijn</span></td><td>12–15</td><td>Snelle pass, schijnbeweging, dribbel-controle</td><td>Pass-circuit hoog tempo, schijnbeweging 1v1</td></tr>
+        <tr><td><span class="phase-pill">Verdedigen</span></td><td>16–20</td><td>Side-steps, pivoteren, blokkeren, afvangen pas</td><td>1v1 schaduw, 2v2-duel, blok-oefening</td></tr>
+        <tr><td><span class="phase-pill">Samenspel</span></td><td>21–24</td><td>Kruising, 2-mans combinaties, cirkelspel</td><td>Kruising op cirkel, 3v2 speelvorm</td></tr>
+        <tr><td><span class="phase-pill">Regels & 7m</span></td><td>25–26</td><td>Vrije worp, 7-meter techniek, scheidsrechtersgebaren, passieve speltijd</td><td>7m-techniek oefenen, vrije worp situaties, regels-quiz</td></tr>
+        <tr><td><span class="phase-pill">Tactiek</span></td><td>27–28</td><td>Aanvalssysteem, vrij positioneren, "lezen" van spel</td><td>5v5 met positieopdracht, aanval via buitenspeler</td></tr>
       </tbody></table></div>
-      <h2>Trainingsindeling – 75–90 minuten</h2>
+      <div class="block-div"><span class="block-title">Blok 3 – Veld Voorjaar</span><div class="block-line"></div><span class="block-badge">Wk 29–40 · Apr–Juni</span></div>
+      <div class="table-wrap"><table><thead><tr><th>Fase</th><th>Weken</th><th>Thema</th><th>Voorbeeldoefeningen</th></tr></thead><tbody>
+        <tr><td><span class="phase-pill">Toepassing</span></td><td>29–33</td><td>Zaaltechniek toepassen buiten in speelvorm</td><td>6v6 met coachingspunten, wedstrijdscenario's</td></tr>
+        <tr><td><span class="phase-pill">Conditie</span></td><td>34–37</td><td>Explosiviteit, coördinatie, heupschot</td><td>Sprints, hindernisbaan, opbouw heupschot</td></tr>
+        <tr><td><span class="phase-pill">Afsluiting</span></td><td>38–40</td><td>Toernooi, evaluatie, seizoensafsluiting</td><td>Intern toernooi, individueel spelersgesprek</td></tr>
+      </tbody></table></div>
+      <h2>Trainingsindeling – Zaal (60 min)</h2>
       <div class="wb-list">
-        <div class="wb-row"><div class="wb-time">0–12 min</div><div class="wb-content">Warming-up: activerend (loopvormen, coördinatie, tikspel met handbalelement)</div></div>
-        <div class="wb-row"><div class="wb-time">12–35 min</div><div class="wb-content">Technische blok: gericht op weekthema, kleine groepen, hoge herhaling</div></div>
-        <div class="wb-row"><div class="wb-time">35–65 min</div><div class="wb-content">Speelvorm: 4v4 of 5v5 met coachingspunt</div></div>
-        <div class="wb-row"><div class="wb-time">65–80 min</div><div class="wb-content">Wedstrijdvorm: 6v6 of volledig veld, minder instructie, eigen verantwoordelijkheid</div></div>
+        <div class="wb-row"><div class="wb-time">0–8 min</div><div class="wb-content">Warming-up: activerend (<span class="asm">loopvormen, coördinatie, tikspel</span> met handbalelement)</div></div>
+        <div class="wb-row"><div class="wb-time">8–22 min</div><div class="wb-content">Technische blok: gericht op weekthema, kleine groepen, hoge herhaling</div></div>
+        <div class="wb-row"><div class="wb-time">22–45 min</div><div class="wb-content">Speelvorm: 4v4 of 5v5 met coachingspunt</div></div>
+        <div class="wb-row"><div class="wb-time">45–55 min</div><div class="wb-content">Wedstrijdvorm: 6v6, minder instructie, eigen verantwoordelijkheid</div></div>
+        <div class="wb-row"><div class="wb-time">55–60 min</div><div class="wb-content">Nabespreking: wat werkte? Eén verbeterpunt voor volgende week</div></div>
+      </div>
+      <h2>Trainingsindeling – Veld (90 min)</h2>
+      <div class="wb-list">
+        <div class="wb-row"><div class="wb-time">0–12 min</div><div class="wb-content">Warming-up: <span class="asm">loopvormen, coördinatie, tikspel</span> met handbalelement</div></div>
+        <div class="wb-row"><div class="wb-time">12–30 min</div><div class="wb-content">Technische blok: weekthema, kleine groepen, hoge herhaling</div></div>
+        <div class="wb-row"><div class="wb-time">30–55 min</div><div class="wb-content">Speelvorm: 4v4 of 5v5 met coachingspunt</div></div>
+        <div class="wb-row"><div class="wb-time">55–80 min</div><div class="wb-content">Wedstrijdvorm: 6v6 volledig veld, eigen verantwoordelijkheid</div></div>
         <div class="wb-row"><div class="wb-time">80–90 min</div><div class="wb-content">Nabespreking: wat werkte? Eén verbeterpunt voor volgende week</div></div>
       </div>
     </div>
@@ -691,6 +727,7 @@ footer { background: var(--black); border-top: 3px solid var(--red); padding: 24
     <div class="age-banner"><div class="age-letter">C</div><div class="age-info"><h1>C-jeugd</h1><p>12–14 jaar &nbsp;·&nbsp; ASM Laag 2 + intro Laag 3 &nbsp;·&nbsp; Consolidatiefase</p></div></div>
     <div class="content-body">
       <div class="ib ib-red"><h3>Accent van deze fase</h3><p>De C-jeugd markeert de overgang naar serieuzer handbal. Drie pijlers: techniek consolideren, tactisch bewustzijn, teamcultuur bouwen.</p><p style="margin:0">Sociaal: pubertijdseffecten zijn voelbaar. Motivatie kan wisselend zijn. De trainer heeft hier ook een pedagogische rol als vertrouwenspersoon.</p></div>
+      <div class="ib ib-blue" style="font-size:13px"><strong>Keepers:</strong> in C kiezen spelers definitiever voor een rol – zie het tabblad <strong>Keeper-leerlijn</strong> voor specifieke oefenstof (1v1 onder druk, 7m, snelle uitworp als break-start).</div>
       <div class="grid-2">
         <div class="ib ib-red" style="margin:0"><h3>Technisch accent</h3><ul><li>Alle schottechnieken vloeiend en snel</li><li>Opbouwspel vanuit keeper (aftrap, snelle break)</li><li>Verdedigingssystemen: 3-2-1 of 6-0 basisvorm</li><li>Aanvalssysteem: cirkelloop, buitenspel</li><li>Keeper: actief meespelen, gerichte uitworp</li><li>Positiespecialisatie begint (niet verplicht)</li></ul></div>
         <div class="ib ib-blue" style="margin:0"><h3>Sociaal accent</h3><ul><li>Leiderschap ontwikkelen (aanvoerder, initiatiefnemer)</li><li>Eigen fouten analyseren en benoemen</li><li>Wedstrijdmentaliteit: inzet is altijd 100%</li><li>Omgaan met spanning voor en tijdens wedstrijden</li><li>Respect voor tegenstander, scheidsrechter en trainer</li></ul></div>
@@ -703,28 +740,86 @@ footer { background: var(--black); border-top: 3px solid var(--red); padding: 24
         <li>Geef positieve feedback openlijk. Kritiek zo mogelijk onder vier ogen.</li>
       </ul></div>
       <h2>Jaarplanning – 40 weken</h2>
-      <div class="block-div"><span class="block-title">Blok 1 – Binnen</span><div class="block-line"></div><span class="block-badge">Wk 1–20 · Sept–Jan</span></div>
+      <div class="block-div"><span class="block-title">Blok 1 – Veld Najaar</span><div class="block-line"></div><span class="block-badge">Wk 1–6 · Sept–half Okt</span></div>
       <div class="table-wrap"><table><thead><tr><th>Fase</th><th>Weken</th><th>Thema</th><th>Voorbeeldoefeningen</th></tr></thead><tbody>
-        <tr><td><span class="phase-pill">Techniek</span></td><td>1–5</td><td>Alle schoten snel en nauwkeurig herhalen</td><td>Schot-circuit, 2v1, keeper-focus ronde</td></tr>
-        <tr><td><span class="phase-pill">Verdediging</span></td><td>6–10</td><td>3-2-1 systeem basisvorm, communicatie</td><td>6v6 met verdedigingsopdracht, positiespel</td></tr>
-        <tr><td><span class="phase-pill">Aanvalsspel</span></td><td>11–15</td><td>Opbouw, cirkelopeningen, buitenspel</td><td>Aanvalscombinaties 2-3-1, schot na passcombo</td></tr>
-        <tr><td><span class="phase-pill">Tactisch</span></td><td>16–20</td><td>Wedstrijdvormen met coachingspunten</td><td>Gesimuleerde wedstrijdsituaties, time-outs bespreken</td></tr>
+        <tr><td><span class="phase-pill">Techniek</span></td><td>1–3</td><td>Alle schoten opfrissen, conditie opbouwen</td><td>Schot-circuit, loopvormen, snelle break</td></tr>
+        <tr><td><span class="phase-pill">Conditie</span></td><td>4–6</td><td>Wedstrijdconditie, explosiviteit, blessurepreventie (warming-up, core, knie/schouder)</td><td>Interval loopvormen, 4x4 hoog intensief, core-stability oefeningen</td></tr>
       </tbody></table></div>
-      <div class="block-div"><span class="block-title">Blok 2 – Buiten</span><div class="block-line"></div><span class="block-badge">Wk 21–40 · Feb–Juni</span></div>
+      <div class="block-div"><span class="block-title">Blok 2 – Zaal (hoofdseizoen)</span><div class="block-line"></div><span class="block-badge">Wk 7–28 · half Okt–half Mrt</span></div>
       <div class="table-wrap"><table><thead><tr><th>Fase</th><th>Weken</th><th>Thema</th><th>Voorbeeldoefeningen</th></tr></thead><tbody>
-        <tr><td><span class="phase-pill">Conditie</span></td><td>21–25</td><td>Wedstrijdconditie, explosiviteit, herstel</td><td>Interval loopvormen, 4x4 hoog intensief</td></tr>
-        <tr><td><span class="phase-pill">Samenspel</span></td><td>26–31</td><td>Combinaties vanuit keeper, omschakelen</td><td>Break-situaties, snelle counter, keeper-spelmaker</td></tr>
-        <tr><td><span class="phase-pill">Leiderschap</span></td><td>32–35</td><td>Aanvoerderschap, druksituaties</td><td>Wedstrijd met eigen time-outs door spelers</td></tr>
-        <tr><td><span class="phase-pill">Afsluiting</span></td><td>36–40</td><td>Toernooi, evaluatiegesprekken, volgend jaar</td><td>Seizoensafsluiter, individuele voortgangsgesprekken</td></tr>
+        <tr><td><span class="phase-pill">Techniek</span></td><td>7–11</td><td>Alle schoten snel en nauwkeurig</td><td>Schot-circuit, 2v1, keeper-focus ronde</td></tr>
+        <tr><td><span class="phase-pill">Verdediging</span></td><td>12–16</td><td>3-2-1 systeem basisvorm, communicatie</td><td>6v6 met verdedigingsopdracht, positiespel</td></tr>
+        <tr><td><span class="phase-pill">Aanvalsspel</span></td><td>17–22</td><td>Opbouw, cirkelopeningen, buitenspel</td><td>Aanvalscombinaties 2-3-1, schot na passcombo</td></tr>
+        <tr><td><span class="phase-pill">Tactisch</span></td><td>23–28</td><td>Wedstrijdvormen met coachingspunten</td><td>Gesimuleerde wedstrijdsituaties, time-outs bespreken</td></tr>
       </tbody></table></div>
-      <h2>Trainingsindeling – 90 minuten</h2>
+      <div class="block-div"><span class="block-title">Blok 3 – Veld Voorjaar</span><div class="block-line"></div><span class="block-badge">Wk 29–40 · Apr–Juni</span></div>
+      <div class="table-wrap"><table><thead><tr><th>Fase</th><th>Weken</th><th>Thema</th><th>Voorbeeldoefeningen</th></tr></thead><tbody>
+        <tr><td><span class="phase-pill">Samenspel</span></td><td>29–33</td><td>Combinaties vanuit keeper, omschakelen</td><td>Break-situaties, snelle counter, keeper-spelmaker</td></tr>
+        <tr><td><span class="phase-pill">Leiderschap</span></td><td>34–37</td><td>Aanvoerderschap, druksituaties</td><td>Wedstrijd met eigen time-outs door spelers</td></tr>
+        <tr><td><span class="phase-pill">Afsluiting</span></td><td>38–40</td><td>Toernooi, evaluatiegesprekken, volgend jaar</td><td>Seizoensafsluiter, individuele voortgangsgesprekken</td></tr>
+      </tbody></table></div>
+      <h2>Trainingsindeling – 60 minuten</h2>
       <div class="wb-list">
-        <div class="wb-row"><div class="wb-time">0–15 min</div><div class="wb-content">Warming-up + kort inleidend gesprek over het thema van de week</div></div>
-        <div class="wb-row"><div class="wb-time">15–35 min</div><div class="wb-content">Technische blok: gerichte herhaling weekthema, hoge intensiteit, weinig wachten</div></div>
-        <div class="wb-row"><div class="wb-time">35–55 min</div><div class="wb-content">Tactische speelvorm: 5v5 of 6v6 met specifieke opdracht</div></div>
-        <div class="wb-row"><div class="wb-time">55–80 min</div><div class="wb-content">Wedstrijdvorm: volledig veld, eigen beslissingen, trainer coacht van de kant</div></div>
-        <div class="wb-row"><div class="wb-time">80–90 min</div><div class="wb-content">Nabespreking: trainer + spelers benoemen 2–3 verbeterpunten voor volgende week</div></div>
+        <div class="wb-row"><div class="wb-time">0–10 min</div><div class="wb-content">Warming-up: <span class="asm">loopscholing, coördinatie, explosieve sprintjes</span> + kort inleidend gesprek over het weekthema</div></div>
+        <div class="wb-row"><div class="wb-time">10–22 min</div><div class="wb-content">Technische blok: gerichte herhaling weekthema, hoge intensiteit, weinig wachten</div></div>
+        <div class="wb-row"><div class="wb-time">22–38 min</div><div class="wb-content">Tactische speelvorm: 5v5 of 6v6 met specifieke opdracht</div></div>
+        <div class="wb-row"><div class="wb-time">38–53 min</div><div class="wb-content">Wedstrijdvorm: volledig veld, eigen beslissingen, trainer coacht van de kant</div></div>
+        <div class="wb-row"><div class="wb-time">53–60 min</div><div class="wb-content">Nabespreking: trainer + spelers benoemen 2–3 verbeterpunten voor volgende week</div></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="sec-keeper">
+  <div class="content-box">
+    <div class="content-header"><h1>Keeper-leerlijn</h1><span class="ch-badge">F · E · D · C</span></div>
+    <div class="content-body">
+      <div class="ib ib-red"><h3>Waarom een aparte leerlijn?</h3><p>De keeper is geen "speler in het doel" maar een eigen specialisme. Een goede keeper bouwt techniek én lef stap voor stap op. Bij Achilles roteren in F en E alle kinderen in het doel zodat iedereen het ervaart. Vanaf D mogen kinderen kiezen voor een keeper-rol.</p><p style="margin:0">Onthoud: <strong>een keeper is jouw belangrijkste verdediger én je eerste aanvaller</strong> (snelle uitworp = snelle break).</p></div>
+
+      <h2>Per categorie</h2>
+      <div class="schema-card sc-green"><div class="sc-header"><span class="tag tag-green">F-jeugd</span> <small>6–8 jaar · iedereen roteert</small></div>
+        <div class="sc-section"><h3>Doel</h3>Geen angst voor de bal, plezier in het doel</div>
+        <div class="sc-section"><h3>Oefeningen</h3>Zachte foamballen op doel, vangen op grond, "wie houdt er een?"-spel</div>
+        <div class="sc-section"><h3>Wat de trainer doet</h3>Iedereen 2–3 minuten in het doel, altijd positief: "Goed geprobeerd!" – nooit corrigeren op gemiste bal</div>
+      </div>
+
+      <div class="schema-card sc-blue"><div class="sc-header"><span class="tag tag-blue">E-jeugd</span> <small>8–10 jaar · iedereen roteert</small></div>
+        <div class="sc-section"><h3>Doel</h3>Basishouding, lef opbouwen, eerste hoekreflexen</div>
+        <div class="sc-section"><h3>Techniek</h3><span class="tag tag-gray">Basishouding (knieën gebogen, handen op heuphoogte)</span> <span class="tag tag-gray">Voet- en handreflex op lage schoten</span> <span class="tag tag-gray">Bal pakken na save</span></div>
+        <div class="sc-section"><h3>Oefeningen</h3>1v1 keeper-schutter (langzaam tempo), duo-training, schoten op verschillende hoeken</div>
+        <div class="sc-section"><h3>Wat de trainer doet</h3>Beloon elke poging, ook als de bal erin gaat. Roterend wisselen — niemand permanent in het doel.</div>
+      </div>
+
+      <div class="schema-card sc-amber"><div class="sc-header"><span class="tag tag-amber">D-jeugd</span> <small>10–12 jaar · keuze begint</small></div>
+        <div class="sc-section"><h3>Doel</h3>Hoektechniek, positiekeuze, eerste uitworp</div>
+        <div class="sc-section"><h3>Techniek</h3><span class="tag tag-gray">Hoektechniek (links/rechts boven/onder)</span> <span class="tag tag-gray">Positiekeuze t.o.v. schuttershoek</span> <span class="tag tag-gray">Lange uitworp na save</span> <span class="tag tag-gray">Voetenwerk: side-steps in doel</span></div>
+        <div class="sc-section"><h3>Oefeningen</h3>Hoek-circuit (4 hoeken na elkaar), break-out na save oefenen, 1v1 op snelheid</div>
+        <div class="sc-section"><h3>Wat de trainer doet</h3>Spelers die kiezen voor keeper krijgen extra aandacht. Specifieke oefenstof in trainingsblok bewaken.</div>
+      </div>
+
+      <div class="schema-card sc-red"><div class="sc-header"><span class="tag tag-red">C-jeugd</span> <small>12–14 jaar · specialisering</small></div>
+        <div class="sc-section"><h3>Doel</h3>Actief meespelen, keeper als eerste aanvaller, 1v1 onder druk</div>
+        <div class="sc-section"><h3>Techniek</h3><span class="tag tag-gray">Actief met voeten (lage schoten)</span> <span class="tag tag-gray">Uitkomen op cirkel (1v1 met aanvaller)</span> <span class="tag tag-gray">Snelle uitworp = break-start</span> <span class="tag tag-gray">Anticiperen op schuttershoek</span> <span class="tag tag-gray">7m verdedigen</span></div>
+        <div class="sc-section"><h3>Oefeningen</h3>1v1 cirkelspeler-keeper, snelle break vanuit save, 7m-serie, schot uit volle aanval</div>
+        <div class="sc-section"><h3>Wat de trainer doet</h3>Apart keeper-moment per training (5–10 min). Tactisch coachen: "Wat zag je bij die schutter?"</div>
+      </div>
+
+      <h2>Doorlopende lijn in één oogopslag</h2>
+      <div class="table-wrap"><table><thead><tr><th>Aspect</th><th>F</th><th>E</th><th>D</th><th>C</th></tr></thead><tbody>
+        <tr><td><strong>Houding</strong></td><td>—</td><td>Basishouding</td><td>+ Positiekeuze</td><td>+ Anticiperen</td></tr>
+        <tr><td><strong>Reflex</strong></td><td>Vangen op grond</td><td>Hand-/voetreflex</td><td>Hoektechniek</td><td>1v1 onder druk</td></tr>
+        <tr><td><strong>Voetenwerk</strong></td><td>—</td><td>Stappen in doel</td><td>Side-steps</td><td>Uitkomen op cirkel</td></tr>
+        <tr><td><strong>Uitworp</strong></td><td>—</td><td>—</td><td>Lange uitworp</td><td>Snelle break-start</td></tr>
+        <tr><td><strong>7m</strong></td><td>—</td><td>—</td><td>Intro</td><td>Verdedigen onder druk</td></tr>
+        <tr><td><strong>Mentaal</strong></td><td>Plezier</td><td>Lef</td><td>Verantwoordelijkheid</td><td>Leiderschap in verdediging</td></tr>
+      </tbody></table></div>
+
+      <div class="trainer-box"><div class="tb-label">Tips voor trainers zonder keeper-ervaring</div><ul>
+        <li>Een keeper-positie is <strong>nooit een straf</strong> ("jij staat erin omdat je niet kan handballen") – maak het een keuze of beurt</li>
+        <li>Beloon de save Ã©n de poging na een doelpunt: <strong>"Goed dat je ervoor ging"</strong></li>
+        <li>Vraag bij D/C altijd na: <em>"Wat zag je gebeuren bij die actie?"</em> – dit traint anticiperen</li>
+        <li>Twijfel je over keeper-techniek? Vraag een ervaren senior-keeper om incidenteel mee te doen</li>
+      </ul></div>
     </div>
   </div>
 </section>
@@ -928,6 +1023,7 @@ footer { background: var(--black); border-top: 3px solid var(--red); padding: 24
       <div class="sb-link" data-key="e"><span class="sb-dot sd-blue">E</span> E-jeugd (8–10 jr)</div>
       <div class="sb-link" data-key="d"><span class="sb-dot sd-amber">D</span> D-jeugd (10–12 jr)</div>
       <div class="sb-link" data-key="c"><span class="sb-dot sd-coral">C</span> C-jeugd (12–14 jr)</div>
+      <div class="sb-link" data-key="keeper"><span class="sb-dot sd-black">K</span> Keeper-leerlijn</div>
       <div class="sb-link" data-key="gallery"><span class="sb-dot sd-black">&#9654;</span> ASM Gallery</div>
       <div class="sb-link" data-key="training"><span class="sb-dot sd-black">&#9654;</span> Trainingsmateriaal</div>
       <div class="sb-link" data-key="ysp"><span class="sb-dot sd-black">&#9654;</span> YourSportPlanner</div>
@@ -940,9 +1036,9 @@ footer { background: var(--black); border-top: 3px solid var(--red); padding: 24
       <div class="sb-kv"><span>Versie</span><span>1.0</span></div>
       <div class="sb-kv"><span>Methode</span><span>ASM</span></div>
       <div class="sb-kv"><span>Trainingen</span><span>40 weken</span></div>
-      <div class="sb-kv"><span>Blokken</span><span>2 x 20 wk</span></div>
+      <div class="sb-kv"><span>Blokken</span><span>3 (veld-zaal-veld)</span></div>
       <div class="sb-kv"><span>Frequentie</span><span>1x per week</span></div>
-      <div class="sb-kv"><span>Duur</span><span>60–90 min</span></div>
+      <div class="sb-kv"><span>Duur</span><span>60 min (D veld: 90)</span></div>
     </div>
   </div>
 </aside>
@@ -960,8 +1056,8 @@ footer { background: var(--black); border-top: 3px solid var(--red); padding: 24
 </footer>
 
 <script>
-const labels={visie:'Spelopvatting',asm:'ASM-kader',schema:'Vaardighedenschema',f:'F-jeugd',e:'E-jeugd',d:'D-jeugd',c:'C-jeugd',gallery:'ASM Gallery',training:'Trainingsmateriaal',ysp:'YourSportPlanner',borging:'Implementatie & Borging'};
-const keys=['visie','asm','schema','f','e','d','c','gallery','training','ysp','borging'];
+const labels={visie:'Spelopvatting',asm:'ASM-kader',schema:'Vaardighedenschema',f:'F-jeugd',e:'E-jeugd',d:'D-jeugd',c:'C-jeugd',keeper:'Keeper-leerlijn',gallery:'ASM Gallery',training:'Trainingsmateriaal',ysp:'YourSportPlanner',borging:'Implementatie & Borging'};
+const keys=['visie','asm','schema','f','e','d','c','keeper','gallery','training','ysp','borging'];
 
 function show(id,btn){
   document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
