@@ -279,6 +279,7 @@ class Tactiekbord{
   constructor(container, data){
     this.data = data;
     this.heeftBal = this.data.fases.some(f => f.bal || (f.spelers||[]).some(s => s.heeft_bal));
+    this.kegels = Array.isArray(data.kegels) ? data.kegels : [];
     this.veld = { L: data.veld.lengte_m || 30, B: data.veld.breedte_m || 20, D: data.veld.doelgebied_m || 6 };
     this.pad = 1.4; // meter rand rond het veld (voor de doelen)
     this.snelheid = 1;
@@ -331,7 +332,8 @@ class Tactiekbord{
     leg.innerHTML = [...labels.entries()].map(([id,v]) =>
       '<span><span class="stip" style="background:'+(v.team==="aanval"?"#d7263d":"#2b2b30")+';border:1.5px solid #fff"></span>' +
       esc(id)+(v.label?" — "+esc(v.label):"")+"</span>").join("") +
-      (this.heeftBal ? '<span><span class="stip" style="background:#f2b705"></span>bal</span>' : '');
+      (this.heeftBal ? '<span><span class="stip" style="background:#f2b705"></span>bal</span>' : '') +
+      (this.kegels.length ? '<span><span class="stip" style="background:#e8731c"></span>kegel</span>' : '');
   }
 
   /* Tijdlijn: per fase eerst (vanaf fase 2) een korte overgang naar de
@@ -472,6 +474,16 @@ class Tactiekbord{
     ctx.fillStyle = "#d7263d";
     ctx.fillRect(this.X(0)-this.M(0.9), this.Y(B/2-1.5), this.M(0.9), this.M(3));
     ctx.fillRect(this.X(L), this.Y(B/2-1.5), this.M(0.9), this.M(3));
+
+    // kegels / pylonen (oranje driehoekjes)
+    for (const k of this.kegels){
+      const cx = this.X(k.x), cy = this.Y(k.y), s = this.M(0.5);
+      ctx.beginPath();
+      ctx.moveTo(cx, cy - s); ctx.lineTo(cx + s*0.75, cy + s*0.7); ctx.lineTo(cx - s*0.75, cy + s*0.7);
+      ctx.closePath();
+      ctx.fillStyle = "#e8731c"; ctx.fill();
+      ctx.lineWidth = Math.max(1, this.M(0.04)); ctx.strokeStyle = "rgba(60,25,0,.5)"; ctx.stroke();
+    }
 
     // geplande lijnen van de huidige fase (licht)
     const {index, seg} = this.faseBijTijd(Math.min(this.t, this.totaal-0.0001));

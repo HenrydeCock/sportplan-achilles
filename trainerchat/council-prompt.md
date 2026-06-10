@@ -79,13 +79,15 @@ OUTPUT-FORMAT — per oefening exact deze drie onderdelen
    (breedte). Doel links = x:0, doel rechts = x:30, midden = y:10.
 
    BEELD DE OEFENING ÉCHT AF — dit is cruciaal:
-   - Het AANTAL spelers op het bord sluit aan op het opgegeven aantal (zie
-     "Aantal spelers" in de invoer van de trainer). Gaat het over paren of rijen?
-     Verdeel ze in GELIJKE teams (evenveel aanval als verdediging) en verspreid ze
-     over het veld. Een 1-tegen-1? Toon dat duel duidelijk. Doen niet alle spelers
-     tegelijk mee (wachtrij/wissels)? Toon dan de actieve groep en benoem in
-     onderdeel 1 (OMSCHRIJVING) hoeveel er tegelijk actief zijn en wie er wisselt.
-     Houd het leesbaar: tot ~16 spelers in beeld.
+   - Het bord toont het OPGEGEVEN AANTAL spelers (zie "Aantal spelers" in de
+     invoer), zo veel als er tegelijk actief zijn. Doet iedereen tegelijk mee
+     (paren, duels, rijen)? Toon ze dan ALLEMAAL — geef GEEN voorbeeld-subset.
+     Reken het letterlijk uit: 14 spelers in paren = 7 paren = 7 aanval + 7
+     verdediging = 14 stippen. 12 spelers = 6 paren, enzovoort. Plaats ze allemaal,
+     gespreid over het veld in gelijke teams.
+     Alleen als de oefening écht met een wachtrij/wissels werkt (bijv. 1-tegen-1
+     naar het doel), toon je de actieve spelers én benoem je in onderdeel 1
+     (OMSCHRIJVING) hoeveel er tegelijk spelen en wie er wacht. Tot ~16 in beeld.
    - VERSPREID de spelers: houd ze minstens 2 meter uit elkaar (anders overlappen
      de stippen tot één). Benut de breedte (y van 2 tot 18) én de lengte van het veld.
    - Geef DUIDELIJKE, ZICHTBARE bewegingen: looplijnen van minstens enkele meters.
@@ -93,6 +95,13 @@ OUTPUT-FORMAT — per oefening exact deze drie onderdelen
      (opstelling → actie) zodat de beweging stap voor stap te volgen is.
    - Alleen een bal tekenen als de oefening er één heeft: zet dan "heeft_bal": true
      bij de baldrager en geef "bal": { "x": .., "y": .. }. Geen bal = geen bal-velden.
+   - MATERIAAL hoort óók in het filmpje. Staan er kegels/pylonen? Geef een top-level
+     "kegels": [ { "x": .., "y": .. }, ... ] met hun posities. Gaat het over een
+     SLALOM of parcours? Zet de kegels op een rij en laat de speler ER OMHEEN
+     zigzaggen door MEERDERE looplijn-segmenten achter elkaar te geven (heen en weer
+     langs weerszijden van de kegels). Eén rechte lijn = géén slalom.
+   - Bij PAREN: geef de twee spelers van een paar verschillende teams ("aanval" én
+     "verdediging"), zodat ze in verschillende kleuren te onderscheiden zijn.
 
    Lever de JSON in een ```json codeblok. Onderstaand voorbeeld toont een
    duel-in-zones-oefening met meerdere paren — pas het volledig aan jouw oefening aan:
@@ -137,3 +146,8 @@ OUTPUT-FORMAT — per oefening exact deze drie onderdelen
 
    type = "loop" (lopen), "dribbel" (met bal) of "pass". Houd alle posities binnen
    het veld (x 0–30, y 0–20).
+   Optioneel naast "veld" (top-level): "kegels": [ { "x": 15, "y": 5 }, { "x": 15,
+   "y": 9 }, { "x": 15, "y": 13 } ]. Een slalom toon je als opeenvolgende
+   looplijn-segmenten die om de kegels zigzaggen, bv. voor speler A1:
+   {"speler":"A1","naar":{"x":13,"y":5},"type":"loop"}, {"speler":"A1","naar":
+   {"x":17,"y":9},"type":"loop"}, {"speler":"A1","naar":{"x":13,"y":13},"type":"loop"}.
