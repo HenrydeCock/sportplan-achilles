@@ -62,27 +62,60 @@ OUTPUT-FORMAT — per oefening exact deze drie onderdelen
    Veld = 30 m lang × 20 m breed. Doelen op de korte zijden, gecentreerd.
    Doelgebied 6 m. Coördinaten in meters: x van 0–30 (lengte), y van 0–20
    (breedte). Doel links = x:0, doel rechts = x:30, midden = y:10.
-   Lever de JSON in een ```json codeblok, exact in dit formaat:
+
+   BEELD DE OEFENING ÉCHT AF — dit is cruciaal:
+   - Toon het JUISTE AANTAL spelers dat in de oefening voorkomt, niet één of twee
+     als symbool. Gaat het over paren of rijen? Teken dan meerdere paren (3–6),
+     verspreid over het veld. Een 1-tegen-1? Toon dat duel duidelijk. Houd het
+     leesbaar: maximaal ~12 spelers.
+   - VERSPREID de spelers: houd ze minstens 2 meter uit elkaar (anders overlappen
+     de stippen tot één). Benut de breedte (y van 2 tot 18) én de lengte van het veld.
+   - Geef DUIDELIJKE, ZICHTBARE bewegingen: looplijnen van minstens enkele meters.
+     Elke speler die beweegt krijgt een looplijn. Gebruik meerdere fases
+     (opstelling → actie) zodat de beweging stap voor stap te volgen is.
+   - Alleen een bal tekenen als de oefening er één heeft: zet dan "heeft_bal": true
+     bij de baldrager en geef "bal": { "x": .., "y": .. }. Geen bal = geen bal-velden.
+
+   Lever de JSON in een ```json codeblok. Onderstaand voorbeeld toont een
+   duel-in-zones-oefening met meerdere paren — pas het volledig aan jouw oefening aan:
 
    {
      "veld": { "lengte_m": 30, "breedte_m": 20, "doelgebied_m": 6 },
      "fases": [
        {
-         "naam": "Beginopstelling",
-         "toelichting": "korte uitleg van wat hier gebeurt",
+         "naam": "Opstelling — paren in zones",
+         "toelichting": "Elk paar staat tegenover elkaar in een eigen zone",
          "duur_sec": 3,
          "spelers": [
-           { "id": "A1", "team": "aanval", "label": "opbouw", "x": 15, "y": 10, "heeft_bal": true },
-           { "id": "V1", "team": "verdediging", "label": "verdediger", "x": 8, "y": 10, "heeft_bal": false }
+           { "id": "A1", "team": "aanval", "label": "", "x": 13, "y": 4,  "heeft_bal": false },
+           { "id": "V1", "team": "verdediging", "label": "", "x": 17, "y": 4,  "heeft_bal": false },
+           { "id": "A2", "team": "aanval", "label": "", "x": 13, "y": 10, "heeft_bal": false },
+           { "id": "V2", "team": "verdediging", "label": "", "x": 17, "y": 10, "heeft_bal": false },
+           { "id": "A3", "team": "aanval", "label": "", "x": 13, "y": 16, "heeft_bal": false },
+           { "id": "V3", "team": "verdediging", "label": "", "x": 17, "y": 16, "heeft_bal": false }
          ],
-         "bal": { "x": 15, "y": 10 },
+         "looplijnen": []
+       },
+       {
+         "naam": "Het duel",
+         "toelichting": "Iedereen duwt de tegenstander met lichaamshouding uit de zone",
+         "duur_sec": 4,
+         "spelers": [
+           { "id": "A1", "team": "aanval", "label": "", "x": 13, "y": 4,  "heeft_bal": false },
+           { "id": "V1", "team": "verdediging", "label": "", "x": 17, "y": 4,  "heeft_bal": false },
+           { "id": "A2", "team": "aanval", "label": "", "x": 13, "y": 10, "heeft_bal": false },
+           { "id": "V2", "team": "verdediging", "label": "", "x": 17, "y": 10, "heeft_bal": false },
+           { "id": "A3", "team": "aanval", "label": "", "x": 13, "y": 16, "heeft_bal": false },
+           { "id": "V3", "team": "verdediging", "label": "", "x": 17, "y": 16, "heeft_bal": false }
+         ],
          "looplijnen": [
-           { "speler": "A1", "naar": { "x": 11, "y": 7 }, "type": "loop" },
-           { "speler": "A1", "naar": { "x": 8, "y": 6 }, "type": "pass" }
+           { "speler": "V1", "naar": { "x": 19, "y": 4 },  "type": "loop" },
+           { "speler": "V2", "naar": { "x": 11, "y": 10 }, "type": "loop" },
+           { "speler": "V3", "naar": { "x": 19, "y": 16 }, "type": "loop" }
          ]
        }
      ]
    }
 
-   type = "loop" (lopen), "dribbel", of "pass". Gebruik meerdere fases om de
-   beweging in stappen te tonen. Houd posities realistisch binnen het veld.
+   type = "loop" (lopen), "dribbel" (met bal) of "pass". Houd alle posities binnen
+   het veld (x 0–30, y 0–20).
