@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trainerchat — Sportplan GHV Achilles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --zwart:#141417; --paneel:#1d1d23; --paneel-licht:#26262d;
+    --rood:#d7263d; --rood-donker:#a31c2e;
+    --tekst:#efede6; --tekst-zacht:#a9a7a0; --lijn:#34343c;
+    --vloer:#d9b98c; --vloer-donker:#c8a371; --bal:#f2b705;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:var(--zwart); color:var(--tekst);
+    font-family:'Inter',system-ui,sans-serif; font-size:15px; line-height:1.55;
+    display:flex; flex-direction:column;
+  }
+  h1,h2,.display{font-family:'Saira Condensed',sans-serif; text-transform:uppercase; letter-spacing:.04em}
+
+  /* ── Kop ─────────────────────────── */
+  header{
+    border-bottom:3px solid var(--rood);
+    background:var(--paneel);
+    padding:10px 18px; display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;
+  }
+  header h1{font-size:24px; font-weight:700}
+  header h1 .accent{color:var(--rood)}
+  header .sub{color:var(--tekst-zacht); font-size:13px}
+  header .knoppen{margin-left:auto; display:flex; gap:8px}
+  .knop-klein{
+    background:none; border:1px solid var(--lijn); color:var(--tekst-zacht);
+    border-radius:6px; padding:5px 10px; font:inherit; font-size:13px; cursor:pointer;
+  }
+  .knop-klein:hover{border-color:var(--rood); color:var(--tekst)}
+
+  /* ── Indeling ─────────────────────── */
+  .raam{flex:1; display:flex; min-height:0; max-width:1100px; width:100%; margin:0 auto}
+  aside{
+    width:230px; flex-shrink:0; border-right:1px solid var(--lijn);
+    padding:16px 14px; overflow-y:auto;
+  }
+  aside h2{font-size:16px; color:var(--rood); margin-bottom:10px}
+  .veldje{margin-bottom:12px}
+  .veldje label{display:block; font-size:12px; color:var(--tekst-zacht); margin-bottom:3px}
+  .veldje input,.veldje select{
+    width:100%; background:var(--paneel); border:1px solid var(--lijn); color:var(--tekst);
+    border-radius:6px; padding:7px 8px; font:inherit; font-size:14px;
+  }
+  .veldje input:focus,.veldje select:focus,textarea:focus,button:focus-visible{
+    outline:2px solid var(--rood); outline-offset:1px;
+  }
+  aside .hint{font-size:12px; color:var(--tekst-zacht); margin-top:8px}
+
+  main{flex:1; display:flex; flex-direction:column; min-width:0}
+  #berichten{flex:1; overflow-y:auto; padding:18px 18px 8px; scroll-behavior:smooth}
+
+  .bericht{max-width:92%; margin-bottom:14px}
+  .bericht.trainer{margin-left:auto}
+  .bericht .bel{
+    border-radius:var(--radius); padding:10px 14px;
+  }
+  .bericht.trainer .bel{background:var(--rood-donker); color:#fff; border-bottom-right-radius:3px}
+  .bericht.council .bel{background:var(--paneel); border:1px solid var(--lijn); border-bottom-left-radius:3px}
+  .bericht .wie{font-size:11px; color:var(--tekst-zacht); margin:0 4px 3px; text-transform:uppercase; letter-spacing:.06em}
+  .bericht.trainer .wie{text-align:right}
+
+  /* council-tekst opmaak */
+  .bel h3{font-family:'Saira Condensed',sans-serif; text-transform:uppercase; letter-spacing:.03em;
+    font-size:17px; color:var(--rood); margin:14px 0 4px}
+  .bel h4{font-size:15px; margin:10px 0 3px}
+  .bel p{margin:6px 0}
+  .bel ul,.bel ol{margin:6px 0 6px 20px}
+  .bel li{margin:2px 0}
+  .bel strong{color:#fff}
+  .bel code{background:var(--paneel-licht); border-radius:4px; padding:1px 5px; font-size:13px}
+  .bel pre{background:#101014; border:1px solid var(--lijn); border-radius:8px; padding:10px;
+    overflow-x:auto; font-size:12px; margin:8px 0}
+
+  /* lege staat */
+  .leeg{margin:auto; max-width:520px; text-align:center; padding:30px 16px; color:var(--tekst-zacht)}
+  .leeg h2{font-size:26px; color:var(--tekst); margin-bottom:6px}
+  .leeg .chips{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:16px}
+  .chip{background:var(--paneel); border:1px solid var(--lijn); color:var(--tekst);
+    border-radius:18px; padding:7px 13px; font:inherit; font-size:13px; cursor:pointer; text-align:left}
+  .chip:hover{border-color:var(--rood)}
+
+  /* invoerbalk */
+  #invoerbalk{border-top:1px solid var(--lijn); padding:12px 18px 14px; background:var(--zwart)}
+  #invoerrij{display:flex; gap:10px; align-items:flex-end}
+  textarea{
+    flex:1; resize:none; background:var(--paneel); border:1px solid var(--lijn);
+    border-radius:var(--radius); color:var(--tekst); font:inherit; padding:10px 12px;
+    max-height:140px; min-height:44px;
+  }
+  #verstuur{
+    background:var(--rood); border:none; color:#fff; border-radius:var(--radius);
+    padding:0 20px; height:44px; font-family:'Saira Condensed',sans-serif; font-size:17px;
+    text-transform:uppercase; letter-spacing:.05em; cursor:pointer;
+  }
+  #verstuur:disabled{opacity:.45; cursor:default}
+  .foutmelding{color:#ff8d9a; font-size:13px; margin-top:6px}
+
+  /* ── Tactiekbord ─────────────────── */
+  .tactiekbord{margin:10px 0; border:1px solid var(--lijn); border-radius:8px; overflow:hidden; background:#101014}
+  .tactiekbord .kop{display:flex; align-items:center; gap:10px; padding:8px 10px; border-bottom:1px solid var(--lijn)}
+  .tactiekbord .kop .titel{font-family:'Saira Condensed',sans-serif; text-transform:uppercase;
+    letter-spacing:.05em; font-size:15px; color:var(--rood)}
+  .tactiekbord canvas{display:block; width:100%; height:auto}
+  .tb-controls{display:flex; align-items:center; gap:6px; padding:8px 10px; flex-wrap:wrap}
+  .tb-knop{background:var(--paneel-licht); border:1px solid var(--lijn); color:var(--tekst);
+    border-radius:6px; min-width:34px; height:30px; font:inherit; font-size:14px; cursor:pointer}
+  .tb-knop:hover{border-color:var(--rood)}
+  .tb-knop.primair{background:var(--rood); border-color:var(--rood); color:#fff; min-width:46px}
+  .tb-fase{font-size:13px; color:var(--tekst-zacht); margin-left:4px; flex:1; min-width:140px}
+  .tb-toelichting{padding:0 10px 8px; font-size:13px; color:var(--tekst-zacht)}
+  .tb-legenda{padding:0 10px 10px; font-size:12px; color:var(--tekst-zacht); display:flex; gap:14px; flex-wrap:wrap}
+  .stip{display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:5px; vertical-align:-1px}
+
+  /* ── Toegangscode overlay ────────── */
+  #poort{position:fixed; inset:0; background:rgba(10,10,12,.9); display:flex;
+    align-items:center; justify-content:center; z-index:50}
+  #poort .kaart{background:var(--paneel); border:1px solid var(--lijn); border-top:4px solid var(--rood);
+    border-radius:var(--radius); padding:26px; width:min(360px,90vw)}
+  #poort h2{font-size:22px; margin-bottom:4px}
+  #poort p{color:var(--tekst-zacht); font-size:13px; margin-bottom:14px}
+  #poort input{width:100%; margin-bottom:10px}
+  #poort .veldje{margin:0 0 10px}
+  #poort button{width:100%; background:var(--rood); border:none; color:#fff; height:42px;
+    border-radius:8px; font-family:'Saira Condensed',sans-serif; font-size:17px;
+    text-transform:uppercase; letter-spacing:.05em; cursor:pointer}
+
+  /* mobiel */
+  #groepKnop{display:none}
+  @media (max-width:760px){
+    .raam{flex-direction:column}
+    aside{width:100%; border-right:none; border-bottom:1px solid var(--lijn); display:none; padding:12px 16px}
+    aside.open{display:block}
+    #groepKnop{display:inline-block}
+    .bericht{max-width:100%}
+  }
+  @media (prefers-reduced-motion: reduce){
+    #berichten{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Trainerchat <span class="accent">GHV Achilles</span></h1>
+  <span class="sub">vier deskundigen, één antwoord — met tactiekbord</span>
+  <div class="knoppen">
+    <button class="knop-klein" id="groepKnop">Jouw groep</button>
+    <button class="knop-klein" id="nieuwGesprek">Nieuw gesprek</button>
+  </div>
+</header>
+
+<div class="raam">
+  <aside id="zijbalk" aria-label="Groepsinstellingen">
+    <h2>Jouw groep</h2>
+    <div class="veldje">
+      <label for="g-aantal">Aantal spelers</label>
+      <input id="g-aantal" type="number" min="1" max="40" placeholder="bijv. 10">
+    </div>
+    <div class="veldje">
+      <label for="g-leeftijd">Leeftijdscategorie</label>
+      <select id="g-leeftijd">
+        <option value="">— kies —</option>
+        <option>F-jeugd</option><option>E-jeugd</option>
+        <option>D-jeugd</option><option>C-jeugd</option>
+      </select>
+    </div>
+    <div class="veldje">
+      <label for="g-niveau">Niveau</label>
+      <select id="g-niveau">
+        <option value="">— kies —</option>
+        <option>beginnend</option><option>gemiddeld</option><option>gevorderd</option>
+      </select>
+    </div>
+    <div class="veldje">
+      <label for="g-samenstelling">Samenstelling</label>
+      <select id="g-samenstelling">
+        <option value="">— kies —</option>
+        <option>gemengd</option><option>jongens</option><option>meisjes</option>
+      </select>
+    </div>
+    <p class="hint">Deze gegevens gaan automatisch mee met elke vraag, zodat het antwoord bij jouw groep past.</p>
+  </aside>
+
+  <main>
+    <div id="berichten" aria-live="polite">
+      <div class="leeg" id="leegScherm">
+        <h2>Vraag het de council</h2>
+        <p>Vier stemmen denken mee: didactiek, spelervaring, de Achilles-spelvisie en jouw groep. Elke oefening komt met een afspeelbaar tactiekbord.</p>
+        <div class="chips">
+          <button class="chip">Hoe leer ik een gemengde groep dat handbal een contactsport is?</button>
+          <button class="chip">Geef een warming-up met veel balcontacten voor de F-jeugd</button>
+          <button class="chip">Oefening voor de sprongworp, opbouw in drie stapjes</button>
+          <button class="chip">Hoe train ik samenspel zonder dat de beste spelers alles doen?</button>
+        </div>
+      </div>
+    </div>
+    <div id="invoerbalk">
+      <div id="invoerrij">
+        <textarea id="vraag" rows="1" placeholder="Stel je trainersvraag…" aria-label="Je vraag"></textarea>
+        <button id="verstuur">Vraag</button>
+      </div>
+      <div class="foutmelding" id="fout" hidden></div>
+    </div>
+  </main>
+</div>
+
+<div id="poort" hidden>
+  <div class="kaart">
+    <h2 class="display">Trainers­toegang</h2>
+    <p>Vul de toegangscode in die je van de jeugdcommissie hebt gekregen.</p>
+    <div class="veldje"><input id="poortCode" type="password" placeholder="Toegangscode" aria-label="Toegangscode"></div>
+    <button id="poortKnop">Naar de chat</button>
+    <p class="foutmelding" id="poortFout" hidden style="margin-top:8px">Onjuiste code, probeer opnieuw.</p>
+  </div>
+</div>
+
+<script>
+"use strict";
+/* ════════════════ Hulpfuncties ════════════════ */
+const $ = (sel) => document.querySelector(sel);
+const esc = (s) => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+
+/* Lichte markdown-weergave (genoeg voor council-antwoorden) */
+function maakHtml(tekst){
+  // codeblokken eruit halen en als placeholder terugzetten
+  const blokken = [];
+  tekst = tekst.replace(/```(\w*)\n?([\s\S]*?)(```|$)/g, (m, taal, code) => {
+    blokken.push({taal:(taal||"").toLowerCase(), code});
+    return "\u0000BLOK" + (blokken.length-1) + "\u0000";
+  });
+  let html = esc(tekst);
+  html = html
+    .replace(/^####? *(.+)$/gm, "<h4>$1</h4>")
+    .replace(/^###? *(.+)$/gm, "<h3>$1</h3>")
+    .replace(/^# *(.+)$/gm, "<h3>$1</h3>")
+    .replace(/\*\*([^*\n]+)\*\*/g, "<strong>$1</strong>")
+    .replace(/(^|\s)\*([^*\n]+)\*(?=\s|[.,:;!?]|$)/g, "$1<em>$2</em>")
+    .replace(/`([^`\n]+)`/g, "<code>$1</code>");
+  // lijsten
+  html = html.replace(/((?:^[-•] .*(?:\n|$))+)/gm, (m) =>
+    "<ul>" + m.trim().split(/\n/).map(r => "<li>"+r.replace(/^[-•] /,"")+"</li>").join("") + "</ul>");
+  html = html.replace(/((?:^\d+[.)] .*(?:\n|$))+)/gm, (m) =>
+    "<ol>" + m.trim().split(/\n/).map(r => "<li>"+r.replace(/^\d+[.)] /,"")+"</li>").join("") + "</ol>");
+  // paragrafen
+  html = html.split(/\n{2,}/).map(b => /^<(h3|h4|ul|ol)/.test(b.trim()) ? b : "<p>"+b.replace(/\n/g,"<br>")+"</p>").join("");
+  // blokken terugzetten
+  html = html.replace(/\u0000BLOK(\d+)\u0000/g, (m, i) => {
+    const b = blokken[+i];
+    const data = probeerTactiek(b.code);
+    if (data) return '<div class="tb-slot" data-tb="'+esc(encodeURIComponent(JSON.stringify(data)))+'"></div>';
+    return "<pre><code>"+esc(b.code)+"</code></pre>";
+  });
+  return html;
+}
+
+function probeerTactiek(code){
+  try{
+    const d = JSON.parse(code);
+    if (d && d.veld && Array.isArray(d.fases) && d.fases.length) return d;
+  }catch(e){}
+  return null;
+}
+
+/* ════════════════ Tactiekbord ════════════════ */
+class Tactiekbord{
+  constructor(container, data){
+    this.data = data;
+    this.veld = { L: data.veld.lengte_m || 30, B: data.veld.breedte_m || 20, D: data.veld.doelgebied_m || 6 };
+    this.pad = 1.4; // meter rand rond het veld (voor de doelen)
+    this.snelheid = 1;
+    this.bouwUi(container);
+    this.bouwTijdlijn();
+    this.t = 0; this.speelt = false; this.laatste = null;
+    const rustig = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    this.resize();
+    new ResizeObserver(() => this.resize()).observe(container);
+    this.teken();
+    if (!rustig) this.start();
+  }
+
+  bouwUi(container){
+    container.innerHTML =
+      '<div class="kop"><span class="titel">Tactiekbord</span></div>' +
+      '<canvas></canvas>' +
+      '<div class="tb-controls">' +
+        '<button class="tb-knop primair" data-actie="speel" aria-label="Afspelen of pauzeren">▶</button>' +
+        '<button class="tb-knop" data-actie="herstart" aria-label="Opnieuw">⟲</button>' +
+        '<button class="tb-knop" data-actie="vorige" aria-label="Vorige fase">⏮</button>' +
+        '<button class="tb-knop" data-actie="volgende" aria-label="Volgende fase">⏭</button>' +
+        '<select class="tb-knop" data-actie="tempo" aria-label="Snelheid">' +
+          '<option value="0.5">0,5×</option><option value="1" selected>1×</option><option value="1.5">1,5×</option>' +
+        '</select>' +
+        '<span class="tb-fase"></span>' +
+      '</div>' +
+      '<div class="tb-toelichting"></div>' +
+      '<div class="tb-legenda"></div>';
+    this.canvas = container.querySelector("canvas");
+    this.ctx = this.canvas.getContext("2d");
+    this.faseLabel = container.querySelector(".tb-fase");
+    this.toelichting = container.querySelector(".tb-toelichting");
+    this.speelKnop = container.querySelector('[data-actie="speel"]');
+    container.querySelector(".tb-controls").addEventListener("click", (e) => {
+      const a = e.target.closest("[data-actie]"); if (!a) return;
+      if (a.dataset.actie === "speel") this.speelt ? this.pauzeer() : this.start();
+      if (a.dataset.actie === "herstart"){ this.t = 0; this.start(); }
+      if (a.dataset.actie === "vorige") this.naarFase(this.faseBijTijd(this.t).index - 1);
+      if (a.dataset.actie === "volgende") this.naarFase(this.faseBijTijd(this.t).index + 1);
+    });
+    container.querySelector('[data-actie="tempo"]').addEventListener("change", (e) => {
+      this.snelheid = parseFloat(e.target.value);
+    });
+    // legenda
+    const labels = new Map();
+    for (const f of this.data.fases) for (const s of (f.spelers||[]))
+      if (!labels.has(s.id)) labels.set(s.id, {team:s.team, label:s.label||""});
+    const leg = container.querySelector(".tb-legenda");
+    leg.innerHTML = [...labels.entries()].map(([id,v]) =>
+      '<span><span class="stip" style="background:'+(v.team==="aanval"?"#d7263d":"#2b2b30")+';border:1.5px solid #fff"></span>' +
+      esc(id)+(v.label?" — "+esc(v.label):"")+"</span>").join("") +
+      '<span><span class="stip" style="background:#f2b705"></span>bal</span>';
+  }
+
+  /* Tijdlijn: per fase eerst (vanaf fase 2) een korte overgang naar de
+     beginopstelling, daarna de looplijnen één voor één. */
+  bouwTijdlijn(){
+    this.segmenten = []; // {van,tot,faseIndex, soort, ...}
+    let t = 0;
+    let posities = null; // Map id -> {x,y}; bal {x,y,bij}
+    this.startStanden = [];
+    this.data.fases.forEach((fase, fi) => {
+      const doelPos = new Map();
+      (fase.spelers||[]).forEach(s => doelPos.set(s.id, {x:s.x, y:s.y}));
+      let balDoel = fase.bal ? {x:fase.bal.x, y:fase.bal.y} : null;
+      if (!balDoel){
+        const drager = (fase.spelers||[]).find(s => s.heeft_bal);
+        balDoel = drager ? {x:drager.x, y:drager.y} : (posities ? posities.balPos : {x:this.veld.L/2,y:this.veld.B/2});
+      }
+      if (posities){ // overgang van vorige eindstand naar deze beginopstelling
+        this.segmenten.push({van:t, tot:t+0.7, faseIndex:fi, soort:"overgang",
+          vanStand:this.kloon(posities), naarStand:{spelers:doelPos, balPos:balDoel}});
+        t += 0.7;
+      }
+      const stand = {spelers:new Map(doelPos), balPos:{...balDoel}};
+      this.startStanden[fi] = {tijd:t, stand:this.kloon(stand)};
+      const lijnen = fase.looplijnen || [];
+      const faseDuur = Math.max(fase.duur_sec || 2, lijnen.length * 0.8) || 2;
+      if (!lijnen.length){
+        this.segmenten.push({van:t, tot:t+faseDuur, faseIndex:fi, soort:"stil", stand:this.kloon(stand)});
+        t += faseDuur;
+      } else {
+        const stap = faseDuur / lijnen.length;
+        for (const lijn of lijnen){
+          const vanStand = this.kloon(stand);
+          // eindstand van deze beweging berekenen
+          if (lijn.type === "pass"){
+            stand.balPos = {x:lijn.naar.x, y:lijn.naar.y};
+          } else {
+            const p = stand.spelers.get(lijn.speler);
+            const droegBal = p && this.dichtbij(stand.balPos, p);
+            if (p){ stand.spelers.set(lijn.speler, {x:lijn.naar.x, y:lijn.naar.y});
+              if (droegBal) stand.balPos = {x:lijn.naar.x, y:lijn.naar.y}; }
+          }
+          this.segmenten.push({van:t, tot:t+stap, faseIndex:fi, soort:lijn.type||"loop",
+            speler:lijn.speler, vanStand, naarStand:this.kloon(stand)});
+          t += stap;
+        }
+      }
+      posities = this.kloon(stand);
+    });
+    this.totaal = t;
+  }
+  kloon(stand){ return {spelers:new Map([...stand.spelers].map(([k,v])=>[k,{...v}])), balPos:{...stand.balPos}}; }
+  dichtbij(a,b){ return Math.hypot(a.x-b.x, a.y-b.y) < 1.0; }
+
+  faseBijTijd(t){
+    let seg = this.segmenten.find(s => t >= s.van && t < s.tot) || this.segmenten[this.segmenten.length-1];
+    return {index: seg.faseIndex, seg};
+  }
+  naarFase(i){
+    i = Math.max(0, Math.min(this.data.fases.length-1, i));
+    this.t = this.startStanden[i] ? this.startStanden[i].tijd : 0;
+    this.pauzeer(); this.teken();
+  }
+  start(){
+    if (this.t >= this.totaal) this.t = 0;
+    this.speelt = true; this.speelKnop.textContent = "⏸";
+    this.laatste = performance.now();
+    const stap = (nu) => {
+      if (!this.speelt) return;
+      this.t += ((nu - this.laatste)/1000) * this.snelheid;
+      this.laatste = nu;
+      if (this.t >= this.totaal){ this.t = this.totaal; this.pauzeer(); }
+      this.teken();
+      if (this.speelt) requestAnimationFrame(stap);
+    };
+    requestAnimationFrame(stap);
+  }
+  pauzeer(){ this.speelt = false; this.speelKnop.textContent = "▶"; }
+
+  resize(){
+    const w = this.canvas.parentElement.clientWidth || 600;
+    const veldBreed = this.veld.L + this.pad*2, veldHoog = this.veld.B + this.pad*2;
+    const h = Math.round(w * veldHoog/veldBreed);
+    const dpr = window.devicePixelRatio || 1;
+    this.canvas.width = Math.round(w*dpr); this.canvas.height = Math.round(h*dpr);
+    this.canvas.style.height = h+"px";
+    this.schaal = (w*dpr)/veldBreed;
+    this.teken();
+  }
+  X(x){ return (x + this.pad) * this.schaal; }
+  Y(y){ return (y + this.pad) * this.schaal; }
+  M(m){ return m * this.schaal; }
+
+  huidigeStand(){
+    const {seg} = this.faseBijTijd(Math.min(this.t, this.totaal - 0.0001));
+    if (seg.soort === "stil") return seg.stand;
+    const f = Math.max(0, Math.min(1, (this.t - seg.van)/(seg.tot - seg.van)));
+    const e = f<.5 ? 2*f*f : 1-Math.pow(-2*f+2,2)/2; // easing
+    const uit = this.kloon(seg.vanStand);
+    for (const [id, p] of seg.naarStand.spelers){
+      const v = seg.vanStand.spelers.get(id) || p;
+      uit.spelers.set(id, {x: v.x+(p.x-v.x)*e, y: v.y+(p.y-v.y)*e});
+    }
+    const bv = seg.vanStand.balPos, bn = seg.naarStand.balPos;
+    uit.balPos = {x: bv.x+(bn.x-bv.x)*e, y: bv.y+(bn.y-bv.y)*e};
+    return uit;
+  }
+
+  teken(){
+    const ctx = this.ctx, {L,B,D} = this.veld;
+    ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
+    // zaalvloer
+    ctx.fillStyle = "#1b1b20";
+    ctx.fillRect(0,0,this.canvas.width,this.canvas.height);
+    ctx.fillStyle = "#d9b98c";
+    ctx.fillRect(this.X(0), this.Y(0), this.M(L), this.M(B));
+    // plankjes
+    ctx.strokeStyle = "rgba(120,85,40,.18)"; ctx.lineWidth = 1;
+    for (let x=0; x<=L; x+=1.5){
+      ctx.beginPath(); ctx.moveTo(this.X(x), this.Y(0)); ctx.lineTo(this.X(x), this.Y(B)); ctx.stroke();
+    }
+    // doelgebieden (donkerder vloerdeel)
+    ctx.fillStyle = "#c8a371";
+    this.doelgebiedPad(ctx, 0, D); ctx.fill();
+    this.doelgebiedPad(ctx, L, D); ctx.fill();
+    // lijnen
+    ctx.strokeStyle = "#fff"; ctx.lineWidth = Math.max(2, this.M(0.08));
+    ctx.strokeRect(this.X(0), this.Y(0), this.M(L), this.M(B));
+    ctx.beginPath(); ctx.moveTo(this.X(L/2), this.Y(0)); ctx.lineTo(this.X(L/2), this.Y(B)); ctx.stroke();
+    this.doelgebiedPad(ctx, 0, D); ctx.stroke();
+    this.doelgebiedPad(ctx, L, D); ctx.stroke();
+    // 9m (gestippeld)
+    ctx.save(); ctx.setLineDash([this.M(0.4), this.M(0.3)]);
+    this.doelgebiedPad(ctx, 0, Math.min(D+3, L/2-1)); ctx.stroke();
+    this.doelgebiedPad(ctx, L, Math.min(D+3, L/2-1)); ctx.stroke();
+    ctx.restore();
+    // doelen (3 m breed)
+    ctx.fillStyle = "#d7263d";
+    ctx.fillRect(this.X(0)-this.M(0.9), this.Y(B/2-1.5), this.M(0.9), this.M(3));
+    ctx.fillRect(this.X(L), this.Y(B/2-1.5), this.M(0.9), this.M(3));
+
+    // geplande lijnen van de huidige fase (licht)
+    const {index, seg} = this.faseBijTijd(Math.min(this.t, this.totaal-0.0001));
+    const fase = this.data.fases[index];
+    const start = this.startStanden[index] ? this.startStanden[index].stand : null;
+    if (fase && fase.looplijnen && start){
+      const cursor = this.kloon(start);
+      for (const lijn of fase.looplijnen){
+        let van;
+        if (lijn.type === "pass"){ van = {...cursor.balPos}; cursor.balPos = {...lijn.naar}; }
+        else { van = cursor.spelers.get(lijn.speler) || lijn.naar;
+               van = {...van};
+               const droeg = this.dichtbij(cursor.balPos, van);
+               cursor.spelers.set(lijn.speler, {...lijn.naar});
+               if (droeg) cursor.balPos = {...lijn.naar}; }
+        this.pijl(ctx, van, lijn.naar, lijn.type);
+      }
+    }
+
+    // spelers + bal
+    const stand = this.huidigeStand();
+    const teams = new Map();
+    for (const f of this.data.fases) for (const s of (f.spelers||[])) if (!teams.has(s.id)) teams.set(s.id, s.team);
+    for (const [id, p] of stand.spelers){
+      const team = teams.get(id);
+      ctx.beginPath(); ctx.arc(this.X(p.x), this.Y(p.y), this.M(0.62), 0, Math.PI*2);
+      ctx.fillStyle = team === "aanval" ? "#d7263d" : "#26262d"; ctx.fill();
+      ctx.lineWidth = Math.max(1.5, this.M(0.07)); ctx.strokeStyle = "#fff"; ctx.stroke();
+      ctx.fillStyle = "#fff";
+      ctx.font = "700 " + Math.max(10, this.M(0.55)) + "px 'Saira Condensed',sans-serif";
+      ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      ctx.fillText(id, this.X(p.x), this.Y(p.y)+this.M(0.03));
+    }
+    // bal (los of bij speler een tikje opzij)
+    let bx = stand.balPos.x, by = stand.balPos.y;
+    for (const [,p] of stand.spelers){ if (this.dichtbij(stand.balPos, p)){ bx = p.x+0.55; by = p.y-0.55; break; } }
+    ctx.beginPath(); ctx.arc(this.X(bx), this.Y(by), this.M(0.28), 0, Math.PI*2);
+    ctx.fillStyle = "#f2b705"; ctx.fill();
+    ctx.lineWidth = Math.max(1, this.M(0.05)); ctx.strokeStyle = "#7a5c00"; ctx.stroke();
+
+    // teksten
+    if (fase){
+      this.faseLabel.textContent = "Fase " + (index+1) + "/" + this.data.fases.length + " — " + (fase.naam || "");
+      this.toelichting.textContent = fase.toelichting || "";
+    }
+  }
+
+  /* doelgebiedvorm: kwartcirkels rond de palen + recht stuk, doel 3 m breed */
+  doelgebiedPad(ctx, doelX, r){
+    const links = doelX === 0, B = this.veld.B;
+    const p1y = B/2 - 1.5, p2y = B/2 + 1.5;
+    ctx.beginPath();
+    if (links){
+      ctx.moveTo(this.X(0), this.Y(p1y - r));
+      ctx.arc(this.X(0), this.Y(p1y), this.M(r), -Math.PI/2, 0);
+      ctx.lineTo(this.X(r), this.Y(p2y));
+      ctx.arc(this.X(0), this.Y(p2y), this.M(r), 0, Math.PI/2);
+    } else {
+      ctx.moveTo(this.X(this.veld.L), this.Y(p1y - r));
+      ctx.arc(this.X(this.veld.L), this.Y(p1y), this.M(r), -Math.PI/2, -Math.PI, true);
+      ctx.lineTo(this.X(this.veld.L - r), this.Y(p2y));
+      ctx.arc(this.X(this.veld.L), this.Y(p2y), this.M(r), Math.PI, Math.PI/2, true);
+    }
+  }
+
+  pijl(ctx, van, naar, type){
+    ctx.save();
+    ctx.strokeStyle = type === "pass" ? "rgba(122,92,0,.85)" : "rgba(60,60,70,.55)";
+    ctx.lineWidth = Math.max(1.5, this.M(0.08));
+    if (type === "loop") ctx.setLineDash([this.M(0.5), this.M(0.35)]);
+    if (type === "dribbel") ctx.setLineDash([this.M(0.15), this.M(0.25)]);
+    ctx.beginPath(); ctx.moveTo(this.X(van.x), this.Y(van.y)); ctx.lineTo(this.X(naar.x), this.Y(naar.y)); ctx.stroke();
+    // pijlpunt
+    const hoek = Math.atan2(naar.y - van.y, naar.x - van.x), k = 0.5;
+    ctx.setLineDash([]);
+    ctx.beginPath();
+    ctx.moveTo(this.X(naar.x), this.Y(naar.y));
+    ctx.lineTo(this.X(naar.x - k*Math.cos(hoek - 0.45)), this.Y(naar.y - k*Math.sin(hoek - 0.45)));
+    ctx.moveTo(this.X(naar.x), this.Y(naar.y));
+    ctx.lineTo(this.X(naar.x - k*Math.cos(hoek + 0.45)), this.Y(naar.y - k*Math.sin(hoek + 0.45)));
+    ctx.stroke();
+    ctx.restore();
+  }
+}
+
+function activeerTactiekborden(scope){
+  scope.querySelectorAll(".tb-slot").forEach(slot => {
+    try{
+      const data = JSON.parse(decodeURIComponent(slot.dataset.tb));
+      const div = document.createElement("div");
+      div.className = "tactiekbord";
+      slot.replaceWith(div);
+      new Tactiekbord(div, data);
+    }catch(e){ console.error("Tactiekbord-fout:", e); }
+  });
+}
+
+/* ════════════════ Chat-logica ════════════════ */
+const berichten = []; // {role, content}
+let bezig = false;
+
+function leesGroep(){
+  return {
+    aantal: $("#g-aantal").value.trim(),
+    leeftijd: $("#g-leeftijd").value,
+    niveau: $("#g-niveau").value,
+    samenstelling: $("#g-samenstelling").value,
+  };
+}
+function bewaarGroep(){ localStorage.setItem("achilles_groep", JSON.stringify(leesGroep())); }
+function laadGroep(){
+  try{
+    const g = JSON.parse(localStorage.getItem("achilles_groep") || "{}");
+    if (g.aantal) $("#g-aantal").value = g.aantal;
+    if (g.leeftijd) $("#g-leeftijd").value = g.leeftijd;
+    if (g.niveau) $("#g-niveau").value = g.niveau;
+    if (g.samenstelling) $("#g-samenstelling").value = g.samenstelling;
+  }catch(e){}
+}
+["#g-aantal","#g-leeftijd","#g-niveau","#g-samenstelling"].forEach(s => $(s).addEventListener("change", bewaarGroep));
+
+function voegBerichtToe(rol){
+  $("#leegScherm") && $("#leegScherm").remove();
+  const wrap = document.createElement("div");
+  wrap.className = "bericht " + (rol === "user" ? "trainer" : "council");
+  wrap.innerHTML = '<div class="wie">' + (rol === "user" ? "Trainer" : "Council") + '</div><div class="bel"></div>';
+  $("#berichten").appendChild(wrap);
+  return wrap.querySelector(".bel");
+}
+function scrollOmlaag(){ const b = $("#berichten"); b.scrollTop = b.scrollHeight; }
+
+async function verstuur(tekst){
+  if (bezig || !tekst.trim()) return;
+  bezig = true; $("#verstuur").disabled = true; $("#fout").hidden = true;
+  berichten.push({role:"user", content:tekst.trim()});
+  voegBerichtToe("user").textContent = tekst.trim();
+  const bel = voegBerichtToe("assistant");
+  bel.innerHTML = "<p><em>De council overlegt…</em></p>";
+  scrollOmlaag();
+
+  let volledig = "";
+  try{
+    const resp = await fetch("api/chat", {
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+        "X-Toegangscode": localStorage.getItem("achilles_code") || "",
+      },
+      body: JSON.stringify({ messages: berichten, groep: leesGroep() }),
+    });
+    if (resp.status === 401){ toonPoort(); throw new Error("Toegangscode vereist."); }
+    if (resp.status === 429) throw new Error("Even rustig aan — het maximum aantal vragen is bereikt. Probeer het over een kwartier opnieuw.");
+    if (!resp.ok || !resp.body) throw new Error("De assistent is even niet bereikbaar.");
+
+    const reader = resp.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = "", laatsteRender = 0;
+    while (true){
+      const {done, value} = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, {stream:true});
+      let idx;
+      while ((idx = buffer.indexOf("\n\n")) !== -1){
+        const regel = buffer.slice(0, idx); buffer = buffer.slice(idx + 2);
+        if (!regel.startsWith("data:")) continue;
+        let ev; try{ ev = JSON.parse(regel.slice(5)); }catch(e){ continue; }
+        if (ev.type === "tekst") volledig += ev.tekst;
+        if (ev.type === "error") throw new Error(ev.error);
+      }
+      const nu = performance.now();
+      if (nu - laatsteRender > 150){ // niet elke delta volledig her-renderen
+        laatsteRender = nu;
+        bel.innerHTML = maakHtml(volledig + " ▌");
+        scrollOmlaag();
+      }
+    }
+    bel.innerHTML = maakHtml(volledig);
+    activeerTactiekborden(bel);
+    berichten.push({role:"assistant", content:volledig});
+    scrollOmlaag();
+  }catch(err){
+    if (!volledig) bel.closest(".bericht").remove();
+    else { bel.innerHTML = maakHtml(volledig); berichten.push({role:"assistant", content:volledig}); }
+    $("#fout").textContent = err.message || "Er ging iets mis.";
+    $("#fout").hidden = false;
+    if (berichten[berichten.length-1] && berichten[berichten.length-1].role === "user" && !volledig) berichten.pop();
+  }finally{
+    bezig = false; $("#verstuur").disabled = false; $("#vraag").focus();
+  }
+}
+
+$("#verstuur").addEventListener("click", () => { const t = $("#vraag").value; $("#vraag").value=""; pasHoogteAan(); verstuur(t); });
+$("#vraag").addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey){ e.preventDefault(); $("#verstuur").click(); }
+});
+function pasHoogteAan(){ const t = $("#vraag"); t.style.height = "auto"; t.style.height = Math.min(t.scrollHeight, 140) + "px"; }
+$("#vraag").addEventListener("input", pasHoogteAan);
+
+document.querySelectorAll(".chip").forEach(c => c.addEventListener("click", () => verstuur(c.textContent)));
+$("#nieuwGesprek").addEventListener("click", () => location.reload());
+$("#groepKnop").addEventListener("click", () => $("#zijbalk").classList.toggle("open"));
+
+/* ════════════════ Toegangscode ════════════════ */
+function toonPoort(){ $("#poort").hidden = false; $("#poortCode").focus(); }
+async function checkToegang(code){
+  try{
+    const r = await fetch("api/toegang", {method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({code})});
+    return await r.json();
+  }catch(e){ return {vereist:false, ok:true}; }
+}
+$("#poortKnop").addEventListener("click", async () => {
+  const code = $("#poortCode").value.trim();
+  const uit = await checkToegang(code);
+  if (uit.ok){ localStorage.setItem("achilles_code", code); $("#poort").hidden = true; $("#vraag").focus(); }
+  else $("#poortFout").hidden = false;
+});
+$("#poortCode").addEventListener("keydown", (e) => { if (e.key === "Enter") $("#poortKnop").click(); });
+
+(async function init(){
+  laadGroep();
+  const uit = await checkToegang(localStorage.getItem("achilles_code") || "");
+  if (uit.vereist && !uit.ok) toonPoort();
+})();
+</script>
+</body>
+</html>
