@@ -109,6 +109,7 @@
 
   /* ── Tactiekbord ─────────────────── */
   .tactiekbord{margin:10px 0; border:1px solid var(--lijn); border-radius:8px; overflow:hidden; background:#101014}
+  .tb-bezig{margin:10px 0; padding:13px 16px; border:1px dashed var(--lijn); border-radius:8px; color:var(--tekst-zacht); font-size:14px; background:#101014}
   .tactiekbord .kop{display:flex; align-items:center; gap:10px; padding:8px 10px; border-bottom:1px solid var(--lijn)}
   .tactiekbord .kop .titel{font-family:'Saira Condensed',sans-serif; text-transform:uppercase;
     letter-spacing:.05em; font-size:15px; color:var(--rood)}
@@ -234,7 +235,7 @@ const $ = (sel) => document.querySelector(sel);
 const esc = (s) => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 
 /* Lichte markdown-weergave (genoeg voor council-antwoorden) */
-function maakHtml(tekst){
+function maakHtml(tekst, streaming){
   // codeblokken eruit halen en als placeholder terugzetten
   const blokken = [];
   tekst = tekst.replace(/```(\w*)\n?([\s\S]*?)(```|$)/g, (m, taal, code) => {
@@ -259,6 +260,8 @@ function maakHtml(tekst){
   // blokken terugzetten
   html = html.replace(/\u0000BLOK(\d+)\u0000/g, (m, i) => {
     const b = blokken[+i];
+    if (streaming && b.taal === "json")
+      return '<div class="tb-bezig">🎬 Tactiekbord wordt opgebouwd…</div>';
     const data = probeerTactiek(b.code);
     if (data) return '<div class="tb-slot" data-tb="'+esc(encodeURIComponent(JSON.stringify(data)))+'"></div>';
     return "<pre><code>"+esc(b.code)+"</code></pre>";
@@ -658,7 +661,7 @@ async function verstuur(tekst){
       const nu = performance.now();
       if (nu - laatsteRender > 150){ // niet elke delta volledig her-renderen
         laatsteRender = nu;
-        bel.innerHTML = maakHtml(volledig + " ▌");
+        bel.innerHTML = maakHtml(volledig + " ▌", true);
         scrollOmlaag();
       }
     }
