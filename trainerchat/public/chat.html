@@ -198,7 +198,7 @@
   <main>
     <div id="berichten" aria-live="polite">
       <div class="leeg" id="leegScherm">
-        <h2>Vraag het de council</h2>
+        <h2>Vraag het je supportteam</h2>
         <p>Vier stemmen denken mee: didactiek, spelervaring, de Achilles-spelvisie en jouw groep. Elke oefening komt met een afspeelbaar tactiekbord.</p>
         <div class="chips">
           <button class="chip">Hoe leer ik een gemengde groep dat handbal een contactsport is?</button>
@@ -614,7 +614,7 @@ function voegBerichtToe(rol){
   $("#leegScherm") && $("#leegScherm").remove();
   const wrap = document.createElement("div");
   wrap.className = "bericht " + (rol === "user" ? "trainer" : "council");
-  wrap.innerHTML = '<div class="wie">' + (rol === "user" ? "Trainer" : "Council") + '</div><div class="bel"></div>';
+  wrap.innerHTML = '<div class="wie">' + (rol === "user" ? "Trainer" : "Supportteam") + '</div><div class="bel"></div>';
   $("#berichten").appendChild(wrap);
   return wrap.querySelector(".bel");
 }
@@ -626,7 +626,7 @@ async function verstuur(tekst){
   berichten.push({role:"user", content:tekst.trim()});
   voegBerichtToe("user").textContent = tekst.trim();
   const bel = voegBerichtToe("assistant");
-  bel.innerHTML = "<p><em>De council overlegt…</em></p>";
+  bel.innerHTML = "<p><em>Je supportteam denkt mee…</em></p>";
   scrollOmlaag();
 
   let volledig = "";
