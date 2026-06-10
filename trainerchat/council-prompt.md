@@ -90,6 +90,12 @@ OUTPUT-FORMAT — per oefening exact deze drie onderdelen
      (OMSCHRIJVING) hoeveel er tegelijk spelen en wie er wacht. Tot ~16 in beeld.
    - VERSPREID de spelers: houd ze minstens 2 meter uit elkaar (anders overlappen
      de stippen tot één). Benut de breedte (y van 2 tot 18) én de lengte van het veld.
+   - SPEELRUIMTE: het doelgebied (de 6m-cirkel rond elk doel) is VERBODEN voor
+     veldspelers — alleen de keeper staat daarin. Zet aanval en verdediging ALTIJD
+     búiten de 6m. Bij een aanval op het rechterdoel (x=30) loopt de 6m-zone grofweg
+     van x=24 tot 30: verdedigers op de 6m-lijn (x≈23–24), aanvallers daarbuiten
+     (x≈18–23, backs richting 9m op x≈21), hoekspelers breed (y≈3 en y≈17), keeper
+     in het doel (x≈29, y≈10). Spiegel dit voor het linkerdoel (x=0): 6m-zone x≈0–6.
    - Geef DUIDELIJKE, ZICHTBARE bewegingen: looplijnen van minstens enkele meters.
      Elke speler die beweegt krijgt een looplijn. Gebruik meerdere fases
      (opstelling → actie) zodat de beweging stap voor stap te volgen is.
