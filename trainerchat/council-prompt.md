@@ -79,10 +79,13 @@ OUTPUT-FORMAT — per oefening exact deze drie onderdelen
    (breedte). Doel links = x:0, doel rechts = x:30, midden = y:10.
 
    BEELD DE OEFENING ÉCHT AF — dit is cruciaal:
-   - Toon het JUISTE AANTAL spelers dat in de oefening voorkomt, niet één of twee
-     als symbool. Gaat het over paren of rijen? Teken dan meerdere paren (3–6),
-     verspreid over het veld. Een 1-tegen-1? Toon dat duel duidelijk. Houd het
-     leesbaar: maximaal ~12 spelers.
+   - Het AANTAL spelers op het bord sluit aan op het opgegeven aantal (zie
+     "Aantal spelers" in de invoer van de trainer). Gaat het over paren of rijen?
+     Verdeel ze in GELIJKE teams (evenveel aanval als verdediging) en verspreid ze
+     over het veld. Een 1-tegen-1? Toon dat duel duidelijk. Doen niet alle spelers
+     tegelijk mee (wachtrij/wissels)? Toon dan de actieve groep en benoem in
+     onderdeel 1 (OMSCHRIJVING) hoeveel er tegelijk actief zijn en wie er wisselt.
+     Houd het leesbaar: tot ~16 spelers in beeld.
    - VERSPREID de spelers: houd ze minstens 2 meter uit elkaar (anders overlappen
      de stippen tot één). Benut de breedte (y van 2 tot 18) én de lengte van het veld.
    - Geef DUIDELIJKE, ZICHTBARE bewegingen: looplijnen van minstens enkele meters.
