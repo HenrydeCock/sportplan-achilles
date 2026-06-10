@@ -69,7 +69,10 @@ Verzin geen andere bronnen of links.
 OUTPUT-FORMAT — per oefening exact deze drie onderdelen
 ══════════════════════════════════════════════════════════════════
 1. OMSCHRIJVING — naam, doel, opstelling, verloop, materiaal, en hoe je
-   op- of afbouwt (makkelijker/moeilijker).
+   op- of afbouwt (makkelijker/moeilijker). Leg óók de ORGANISATIE uit: hoeveel
+   spelers tegelijk actief zijn, wat de rest doet (wachtrij, ballen rapen, volgende
+   groep), en HOE de oefening DOORLOOPT — de rotatie en wisselmomenten — zodat de
+   trainer ziet hoe het met de hele groep verloopt.
 2. WAAR LET JE OP (trainer) — wat je wél en níét wilt zien, de meest gemaakte
    fout, en HOE je het overbrengt naar deze leeftijd (Plaatje–Praatje–Daadje,
    in kindertaal).
@@ -79,15 +82,15 @@ OUTPUT-FORMAT — per oefening exact deze drie onderdelen
    (breedte). Doel links = x:0, doel rechts = x:30, midden = y:10.
 
    BEELD DE OEFENING ÉCHT AF — dit is cruciaal:
-   - Het bord toont het OPGEGEVEN AANTAL spelers (zie "Aantal spelers" in de
-     invoer), zo veel als er tegelijk actief zijn. Doet iedereen tegelijk mee
-     (paren, duels, rijen)? Toon ze dan ALLEMAAL — geef GEEN voorbeeld-subset.
-     Reken het letterlijk uit: 14 spelers in paren = 7 paren = 7 aanval + 7
-     verdediging = 14 stippen. 12 spelers = 6 paren, enzovoort. Plaats ze allemaal,
-     gespreid over het veld in gelijke teams.
-     Alleen als de oefening écht met een wachtrij/wissels werkt (bijv. 1-tegen-1
-     naar het doel), toon je de actieve spelers én benoem je in onderdeel 1
-     (OMSCHRIJVING) hoeveel er tegelijk spelen en wie er wacht. Tot ~16 in beeld.
+   - Toon op het bord ALLEEN de spelers die in de getekende situatie tegelijk
+     actief zijn — niet per se de hele groep, en GEEN reserve-, wacht- of
+     ballenraper-stippen op het veld.
+     • Doet iedereen tegelijk mee (paren, duels, tikspelen)? Toon ze dan allemaal
+       in gelijke teams, gespreid over het veld. 14 spelers in paren = 7 paren.
+     • Spelvorm met een doel (aanval–verdediging, schieten, doorbreken)? Dan speelt
+       maar een deel tegelijk: toon alleen die actieve groep overzichtelijk
+       (bijv. 3 aanval + 3 verdediging + 1 keeper). Wachtenden, ballenrapers of een
+       volgende groep horen NIET op het veld — die beschrijf je in onderdeel 1.
    - VERSPREID de spelers: houd ze minstens 2 meter uit elkaar (anders overlappen
      de stippen tot één). Benut de breedte (y van 2 tot 18) én de lengte van het veld.
    - SPEELRUIMTE: het doelgebied (de 6m-cirkel rond elk doel) is VERBODEN voor
