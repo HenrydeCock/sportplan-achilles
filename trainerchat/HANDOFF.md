@@ -31,7 +31,7 @@ Alle oefeningen-indexen zijn JSON-arrays met per item o.a.: `title`, `url`, leef
 `server.js` bouwt per bron een compacte tekstregel (`title | url | tags | niveau | labels`)
 en plakt die als blok aan de systeemprompt. Nieuwe bronnen moeten **hetzelfde patroon** volgen.
 
-- `bronnen/asm-oefeningen.json` — 50 ASM-bewegingsoefeningen (algemeen bewegen). **gitignored, server-side.**
+- `bronnen/asm-oefeningen.json` — 162 ASM-bewegingsoefeningen: 50 gecureerd+rijk (bewaard in `asm_poc_50_oefeningen.json`) + 112 uit de ASM-gallery-export (`asm_gallery_poc_500_metadata.json`), gefilterd op handball_relevance≥middel + tags, ontdubbeld. **gitignored, server-side.** Herbouwen: `node scripts/build-asm-extra.mjs`. ⚠️ De 112 zijn kaart-niveau-metadata (geen `age_band`/`why_match`); voor échte schaal (1000en) is een retrieval-voorfilter nodig i.p.v. alles in de prompt plakken.
 - `bronnen/yoursportplanner-handbal.json` — 50 handbaloefeningen. **gitignored, server-side.**
 - `bronnen/nhv-trainingen.json` — ~410 complete NHV-jeugdtrainingen (F/E/D), geïndexeerd uit de PDF's. **gitignored, server-side.** De PDF's zelf staan in `trainerchat/trainingen/` op de VM en worden via nginx gehost (zie Deployen), zodat elke training een echte `url` heeft.
 - `bronnen/*.pdf` + `Spelregels-*.docx` — NHV-samenvattingen + spelregels; **gedistilleerd in de prompt** (de bestanden zelf hoeven niet naar de VM).
