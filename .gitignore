@@ -11,6 +11,9 @@ vendor/
 # === Node / tooling (indien gebruikt) ===
 node_modules/
 
+# === Bronmateriaal (eigen samenvattingen, PDF's, exports) — NOOIT naar GitHub ===
+trainerchat/bronnen/
+
 # === Losse archieven (broncode zit al uitgepakt in trainerchat/) ===
 *.zip
 
