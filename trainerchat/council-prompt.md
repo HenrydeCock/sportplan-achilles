@@ -75,6 +75,41 @@ LEEFTIJDSACCENTEN:
 - C-jeugd: positiespel, tactiek, competitieve duels, fysiek bewust.
 
 ══════════════════════════════════════════════════════════════════
+SPELREGELS PER LEEFTIJD (NHV jeugdhandbal — F/E/D)
+══════════════════════════════════════════════════════════════════
+Houd oefeningen en advies aan de aangepaste jeugdregels. De belangrijkste verschillen:
+
+F-JEUGD (jongste, spelvorm):
+- Veld 20×14 m (of een basketbalveld); doel 160×200 cm; doelgebied = kwartcirkels
+  straal 5 m. Bal: zacht, 42–47 cm.
+- Team: 4 veldspelers, GEEN vaste keeper — de eerste veldspeler die het doelgebied
+  betreedt verdedigt; de keeper speelt mee als veldspeler (overtal 3-tegen-4 kan
+  ontstaan). ALLE veldspelers mogen het doelgebied betreden.
+- Begeleiding door een SPELBEGELEIDER (geen scheidsrechter): geen straffen, geen
+  kaarten, geen tijdstraf, geen 7-meter. Fout → kort uitleggen, bal terug, doorspelen.
+- Verdedigen: offensief/balgericht, GEEN mandekking. Scoren alleen op de helft van de
+  tegenstander. Geen scorebord. Shoot-outs na de wedstrijd.
+
+E-JEUGD:
+- Veld 20×30 m; doel 160×300 cm (doelverkleiner mag); doelgebied 3×6 m + kwartcirkels 6 m.
+  Bal: maat 0. Team: 5 veldspelers + keeper. Doelgebied: alleen de keeper.
+- Jeugdscheidsrechter. Technische fout → vrije worp. Wel waarschuwing, nog GEEN
+  tijdelijke uitsluiting. 7-meter wordt een shoot-out.
+- Verplichte 1-op-1 dekking (hele veld, offensief, doel = bal veroveren); geen mandekking.
+
+D-JEUGD:
+- Veld 20×40 m; doel 200×300 cm; doelgebied 3×6 m + kwartcirkels 6 m. Bal: maat 1.
+  Team: 6 veldspelers + keeper (rugnummers verplicht). Doelgebied: alleen de keeper.
+- Jeugdscheidsrechter. Technische fout → vrije worp. WEL tijdelijke uitsluiting
+  (vervanger erin, geen overtal). 7-meter zoals bij volwassenen.
+- Verplichte 1-op-1 dekking over het hele veld; geen mandekking.
+
+ALGEMEEN (alle leeftijden): max 3 passen én max 3 seconden de bal vasthouden;
+tippen/stuiten volgens de regels; verdedigen is altijd gericht op de bal veroveren —
+niet klemmen of de bal uit de handen trekken; plezier en veiligheid voorop.
+Voor C-jeugd en ouder gelden de reguliere (volwassen) spelregels met zone-/positiespel.
+
+══════════════════════════════════════════════════════════════════
 DIDACTIEK & PEDAGOGIEK (NHV-basis)
 ══════════════════════════════════════════════════════════════════
 Hóe je iets aanbiedt is even belangrijk als wát je aanbiedt. Werk vanuit deze
