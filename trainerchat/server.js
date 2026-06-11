@@ -41,6 +41,25 @@ try {
   console.error("ASM-bibliotheek niet geladen:", e.message);
 }
 
+// YourSportPlanner-oefeningenbibliotheek (handbal, metadata + links) — server-side
+let YSP_BLOK = "";
+try {
+  const lijst = JSON.parse(readFileSync(join(__dirname, "bronnen", "yoursportplanner-handbal.json"), "utf8"));
+  if (Array.isArray(lijst) && lijst.length) {
+    const regels = lijst
+      .map((o) =>
+        `- ${o.title} | ${o.url} | technieken: ${(o.techniques || []).join(", ")} | niveau: ${(o.levels || []).join("/")} | spelers: ${o.min_players || "?"}-${o.max_players || "?"} | labels: ${(o.trainer_labels || []).join(", ")}`
+      )
+      .join("\n");
+    YSP_BLOK =
+      "\n\n══════════════════════\nYOURSPORTPLANNER-OEFENINGENBIBLIOTHEEK (handbal — serveer alleen links hieruit)\n══════════════════════\n" +
+      regels;
+    console.log(`YourSportPlanner-bibliotheek geladen: ${lijst.length} oefeningen`);
+  }
+} catch (e) {
+  console.error("YourSportPlanner-bibliotheek niet geladen:", e.message);
+}
+
 // Volledig technisch beleidsplan (tekst uit index.html) — aan de systeemprompt geplakt
 let BELEIDSPLAN = "";
 try {
@@ -104,7 +123,7 @@ app.post("/api/chat", async (req, res) => {
   }
 
   // Groepsgegevens uit het instellingenpaneel als context aan het systeem toevoegen
-  let system = SYSTEM_PROMPT + BELEIDSPLAN + ASM_BLOK;
+  let system = SYSTEM_PROMPT + BELEIDSPLAN + YSP_BLOK + ASM_BLOK;
   if (groep && typeof groep === "object") {
     const g = (v) => (typeof v === "string" ? v.slice(0, 100) : "");
     const regels = [
