@@ -25,7 +25,7 @@ const SYSTEM_PROMPT = readFileSync(join(__dirname, "council-prompt.md"), "utf8")
 // ASM-oefeningenbibliotheek (metadata + links) — wordt aan de systeemprompt geplakt
 let ASM_BLOK = "";
 try {
-  const lijst = JSON.parse(readFileSync(join(__dirname, "asm-oefeningen.json"), "utf8"));
+  const lijst = JSON.parse(readFileSync(join(__dirname, "bronnen", "asm-oefeningen.json"), "utf8"));
   if (Array.isArray(lijst) && lijst.length) {
     const regels = lijst
       .map((o) =>
@@ -39,6 +39,20 @@ try {
   }
 } catch (e) {
   console.error("ASM-bibliotheek niet geladen:", e.message);
+}
+
+// Volledig technisch beleidsplan (tekst uit index.html) — aan de systeemprompt geplakt
+let BELEIDSPLAN = "";
+try {
+  const t = readFileSync(join(__dirname, "beleidsplan.txt"), "utf8").trim();
+  if (t) {
+    BELEIDSPLAN =
+      "\n\n══════════════════════\nVOLLEDIG TECHNISCH BELEIDSPLAN (GHV Achilles) — leidend\n══════════════════════\n" +
+      t;
+    console.log(`Beleidsplan geladen: ${t.length} tekens`);
+  }
+} catch (e) {
+  console.error("Beleidsplan niet geladen:", e.message);
 }
 
 const app = express();
@@ -90,7 +104,7 @@ app.post("/api/chat", async (req, res) => {
   }
 
   // Groepsgegevens uit het instellingenpaneel als context aan het systeem toevoegen
-  let system = SYSTEM_PROMPT + ASM_BLOK;
+  let system = SYSTEM_PROMPT + BELEIDSPLAN + ASM_BLOK;
   if (groep && typeof groep === "object") {
     const g = (v) => (typeof v === "string" ? v.slice(0, 100) : "");
     const regels = [
