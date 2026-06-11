@@ -22,6 +22,25 @@ if (!API_KEY) {
 
 const SYSTEM_PROMPT = readFileSync(join(__dirname, "council-prompt.md"), "utf8");
 
+// ASM-oefeningenbibliotheek (metadata + links) — wordt aan de systeemprompt geplakt
+let ASM_BLOK = "";
+try {
+  const lijst = JSON.parse(readFileSync(join(__dirname, "asm-oefeningen.json"), "utf8"));
+  if (Array.isArray(lijst) && lijst.length) {
+    const regels = lijst
+      .map((o) =>
+        `- ${o.title} | ${o.url} | doel: ${o.primary_goal || ""} | tags: ${(o.asm_tags || []).join(", ")} | labels: ${(o.trainer_labels || []).join(", ")} | leeftijd: ${(o.age_band || []).join("/")} | ${o.duration || ""}`
+      )
+      .join("\n");
+    ASM_BLOK =
+      "\n\n══════════════════════\nASM-OEFENINGENBIBLIOTHEEK (echte oefeningen — serveer alleen links hieruit)\n══════════════════════\n" +
+      regels;
+    console.log(`ASM-bibliotheek geladen: ${lijst.length} oefeningen`);
+  }
+} catch (e) {
+  console.error("ASM-bibliotheek niet geladen:", e.message);
+}
+
 const app = express();
 app.set("trust proxy", 1); // achter nginx
 app.use(express.json({ limit: "200kb" }));
@@ -71,7 +90,7 @@ app.post("/api/chat", async (req, res) => {
   }
 
   // Groepsgegevens uit het instellingenpaneel als context aan het systeem toevoegen
-  let system = SYSTEM_PROMPT;
+  let system = SYSTEM_PROMPT + ASM_BLOK;
   if (groep && typeof groep === "object") {
     const g = (v) => (typeof v === "string" ? v.slice(0, 100) : "");
     const regels = [
