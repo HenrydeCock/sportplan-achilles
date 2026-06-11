@@ -33,7 +33,9 @@ en plakt die als blok aan de systeemprompt. Nieuwe bronnen moeten **hetzelfde pa
 
 - `bronnen/asm-oefeningen.json` — 50 ASM-bewegingsoefeningen (algemeen bewegen). **gitignored, server-side.**
 - `bronnen/yoursportplanner-handbal.json` — 50 handbaloefeningen. **gitignored, server-side.**
+- `bronnen/nhv-trainingen.json` — ~410 complete NHV-jeugdtrainingen (F/E/D), geïndexeerd uit de PDF's. **gitignored, server-side.** De PDF's zelf staan in `trainerchat/trainingen/` op de VM en worden via nginx gehost (zie Deployen), zodat elke training een echte `url` heeft.
 - `bronnen/*.pdf` + `Spelregels-*.docx` — NHV-samenvattingen + spelregels; **gedistilleerd in de prompt** (de bestanden zelf hoeven niet naar de VM).
+- **Indexeer-script:** `scripts/index-nhv.mjs` (Node, geen npm-deps). Per training-PDF: `pdftotext` → OpenAI (`gpt-5.2`) normaliseert naar hetzelfde schema → `bronnen/nhv-trainingen.json`. Resumebaar, parallel (`NHV_CONCURRENCY`, default 6). Gebruik: `NHV_INDEX_MODEL=gpt-5.2 node scripts/index-nhv.mjs trainingen --out bronnen/nhv-trainingen.json`.
 
 ## Beveiliging
 - `.env` (OpenAI-sleutel) en **alle bronnen-data** staan in `.gitignore` → nooit in de publieke git.
@@ -47,6 +49,7 @@ en plakt die als blok aan de systeemprompt. Nieuwe bronnen moeten **hetzelfde pa
   - alleen `chat.html` → geen restart, browser **hard refresh** (Ctrl+Shift+R)
 - **Data** (de gitignored json's in `bronnen/`): handmatig naar de VM, want gitignored:
   `scp "<lokaal pad>" info@ai-tools:/home/info/sportplan-achilles/trainerchat/bronnen/`
+- **NHV-trainings-PDF's** (gehost, ~410 stuks): staan in `trainerchat/trainingen/` op de VM (plat, namen genormaliseerd naar koppeltekens). nginx serveert ze statisch achter dezelfde basic-auth via een **`location ^~ /trainerchat/trainingen/`-blok** (alias naar die map) in `/etc/nginx/sites-available/sportplan-achilles` — staat vóór het `^~ /trainerchat/`-proxyblok zodat de langere prefix wint. Backup: `…-achilles.bak.nhv`. Na config-wijziging: `sudo nginx -t && sudo systemctl reload nginx`. URL-vorm: `https://sportplan-achilles.nl/trainerchat/trainingen/<bestandsnaam>.pdf`.
 - Logs: `sudo journalctl -u achilles-chat -n 20 --no-pager` → zoek "… geladen".
 
 ## Wat werkt (live & geverifieerd)
